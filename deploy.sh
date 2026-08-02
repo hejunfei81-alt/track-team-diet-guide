@@ -7,10 +7,16 @@
 
 set -e
 
-# 本机代理（Lucky/Clash 等走这个端口，push 需要它）
-export HTTPS_PROXY=http://127.0.0.1:7897
-export HTTP_PROXY=http://127.0.0.1:7897
-export ALL_PROXY=http://127.0.0.1:7897
+# 自适应代理：检测本机代理端口，有就自动用（Lucky/Clash 常用 7897/7890/10809）；没有就直连
+for P in 7897 7890 10809 1080; do
+  if curl -s -o /dev/null --max-time 2 -x "http://127.0.0.1:$P" https://github.com 2>/dev/null; then
+    echo "→ 检测到本机代理 127.0.0.1:$P，走代理推送"
+    export HTTPS_PROXY="http://127.0.0.1:$P"
+    export HTTP_PROXY="http://127.0.0.1:$P"
+    export ALL_PROXY="http://127.0.0.1:$P"
+    break
+  fi
+done
 
 # 提交说明：有参数用参数，没有用时间戳
 MSG="${1:-更新于 $(date '+%Y-%m-%d %H:%M')}"
