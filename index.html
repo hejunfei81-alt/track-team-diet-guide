@@ -119,6 +119,12 @@ body{
 }
 .targets b{color:var(--cyan);margin-right:2px}
 .targets b+p,.targets b+br{display:inline}
+.sex-tip{
+  margin-top:12px;background:linear-gradient(90deg,rgba(177,151,252,.10),transparent);
+  border:1px solid rgba(177,151,252,.3);border-radius:10px;padding:11px 14px;
+  font-size:13px;color:var(--text);line-height:1.6;
+}
+.sex-tip b{color:#b197fc}
 
 /* ---------- 板块二：食物库 ---------- */
 .toolbar{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
@@ -460,6 +466,13 @@ footer small{display:block;margin-top:6px;color:#6b7484}
     <div class="panel">
       <div class="panel-title">🎯 我的目标设定</div>
       <div class="p-row">
+        <label>性别</label>
+        <div class="seg" id="sexSeg">
+          <button data-sex="male" onclick="setSex('male')">♂ 男</button>
+          <button data-sex="female" onclick="setSex('female')">♀ 女</button>
+        </div>
+      </div>
+      <div class="p-row">
         <label>体重</label>
         <input type="number" id="weightIn" min="30" max="160" oninput="setWeight(this.value)" onfocus="this.select()">
         <span style="color:var(--dim);font-size:13px">kg</span>
@@ -470,6 +483,7 @@ footer small{display:block;margin-top:6px;color:#6b7484}
         </div>
       </div>
       <div class="targets" id="targets"></div>
+      <div class="sex-tip" id="sexTip"></div>
     </div>
   </section>
 
@@ -809,12 +823,19 @@ const EVENTS={sprint:"短跑/跳跃/跨栏（速度爆发组）",endurance:"中�
 const GOALS={maintain:{n:"维持体重",k:[32,36],c:[4,5]},
              gain:{n:"增肌",k:[38,42],c:[5,6]},
              cut:{n:"减脂",k:[26,30],c:[3,4]}};
+/* 性别系数：女性能量需求按体重约为男性 70-85%（文献：总能量低但按 g/kg 宏观营养素相近）
+   蛋白/碳水按体重 g/kg 男女相近，故系数不调；热量 k 女性 ×0.82 */
+const SEXK={male:1,female:0.82};
 /* 蛋白质系数按项目组区分：速度爆发/力量 1.6-2.2，耐力 1.2-1.7（NSCA/ISSN） */
 const PCOEF={sprint:{maintain:1.7,gain:2.1,cut:2.2},
              endurance:{maintain:1.4,gain:1.7,cut:1.8},
              throw:{maintain:1.8,gain:2.2,cut:2.2}};
 function pcoef(){return (PCOEF[state.event]||PCOEF.sprint)[state.goal]}
 function proteinGoal(){return Math.round(state.weight*pcoef())}
+const SEX_TIPS={
+  male:'🧬 <b>男性专属提醒</b>：绝对能量消耗高于女性（肌肉量多、RMR 更高）。大训练量期注意热量吃够，别低估需求——低能量可用性（LEA）同样会拖累表现。',
+  female:'🧬 <b>女性专属提醒</b>：铁（RDA 18mg/天，运动员缺铁率高）、钙（1000mg+/天）是重点；碳水别吃太少，警惕能量不足（女运动员三联征）。规律训练 + 低碳水 = 铁和骨都容易出问题。'
+};
 /* 建议级别：good=建议多吃, mod=适量吃, bad=不要吃 */
 function adviceOf(f){
   if(f.cat==='bad'||(f.cat==='dine'&&f.flag==='bad'))return 'bad';
@@ -1003,6 +1024,7 @@ let state={
   event:store.get('ev',''),
   cat:'',
   search:'',
+  sex:store.get('sex','male'),
   goal:store.get('goal','maintain'),
   weight:parseFloat(store.get('weight',''))||65,
   eaten:(()=>{try{return JSON.parse(store.get('eaten','[]'))}catch(e){return []}})(),
@@ -1025,6 +1047,11 @@ function setEvent(ev){
   }else b.classList.remove('show');
   renderFoods();
 }
+function setSex(s){
+  state.sex=s;store.set('sex',s);
+  document.querySelectorAll('#sexSeg button').forEach(b=>b.classList.toggle('on',b.dataset.sex===s));
+  updateTargets();
+}
 function setGoal(g){
   state.goal=g;store.set('goal',g);
   document.querySelectorAll('#goalSeg button').forEach(b=>b.classList.toggle('on',b.dataset.goal===g));
@@ -1037,13 +1064,16 @@ function setWeight(v){
 }
 function updateTargets(){
   const w=state.weight,g=GOALS[state.goal];
-  const rng=(a,b)=>Math.round(w*a)+'–'+Math.round(w*b);
+  const sk=SEXK[state.sex]||1;
+  const rng=(a,b)=>Math.round(w*a*sk)+'–'+Math.round(w*b*sk);
   $('weightIn').value=w;
   $('targets').innerHTML=
-    '按 <b>'+w+'kg · '+g.n+'</b> 计算　'
+    '按 <b>'+w+'kg · '+(state.sex==='female'?'♀女':'♂男')+' · '+g.n+'</b> 计算　'
     +'<b>蛋白</b>约 '+proteinGoal()+' g/天　'
     +'<b>热量</b>'+rng(g.k[0],g.k[1])+' kcal/天　'
     +'<b>碳水</b>'+rng(g.c[0],g.c[1])+' g/天';
+  const tip=$('sexTip');
+  tip.innerHTML=SEX_TIPS[state.sex]||'';
   updateTrack();
 }
 
@@ -1359,7 +1389,7 @@ function renderPlan(P,tp,tc,tk){
     meals.forEach(m=>m.items.forEach(it=>{const k=it.g/100;tp+=it.f.p*k;tc+=it.f.c*k;tk+=it.f.kcal*k;}));
     P=proteinGoal();
   }
-  out.innerHTML='<div class="mp-plan-ttl">📅 你的食谱 · '+state.weight+'kg · '+GOALS[state.goal].n+(state.event?' · '+EVENTS[state.event]:'')+'</div>'
+  out.innerHTML='<div class="mp-plan-ttl">📅 你的食谱 · '+state.weight+'kg · '+(state.sex==='female'?'♀女':'♂男')+' · '+GOALS[state.goal].n+(state.event?' · '+EVENTS[state.event]:'')+'</div>'
     +meals.map((m,i)=>{
         const mp=Math.round(m.items.reduce((s,it)=>s+it.f.p*it.g/100,0));
         return '<div class="mp-meal"><span class="tm">'+m.name+'</span><div class="body">'
@@ -1498,6 +1528,7 @@ function saveMealEdit(i){
 /* ================= 初始化 ================= */
 renderChips();
 setEvent(state.event);
+setSex(state.sex);
 setGoal(state.goal);
 setWeight(state.weight);
 renderRecipe();
