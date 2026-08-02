@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0c10">
+<title>高校田径队 · 队内饮食指导手册</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0c10;
+  --card:#12151c;
+  --card2:#191d26;
+  --border:#242a36;
+  --text:#e9edf4;
+  --dim:#98a2b5;
+  --accent:#ff6a1a;
+  --accent2:#ffb400;
+  --cyan:#2ad6c3;
+  --green:#2fd77a;  --green-bg:rgba(47,215,122,.07);
+  --yellow:#f0c04c; --yellow-bg:rgba(240,192,76,.07);
+  --red:#ff5d5d;    --red-bg:rgba(255,93,93,.08);
+  --radius:14px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:84px;
+}
+
+/* ---------- 顶部导航 ---------- */
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,12,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1040px;margin:0 auto;padding:9px 14px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav a{flex-shrink:0;padding:4px 13px;border:1px solid var(--border);border-radius:999px;color:var(--dim);font-size:12.5px;text-decoration:none;transition:.2s}
+.nav a:hover{color:#fff;border-color:var(--accent)}
+
+.container{max-width:1040px;margin:0 auto;padding:22px 16px 40px}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  position:relative;overflow:hidden;padding:46px 0 32px;
+  background:
+    radial-gradient(900px 300px at 15% -80px, rgba(255,106,26,.15), transparent 60%),
+    radial-gradient(700px 260px at 90% -60px, rgba(42,214,195,.08), transparent 60%);
+}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:14px;opacity:.8;background:repeating-linear-gradient(45deg, rgba(255,106,26,.35) 0 18px, transparent 18px 36px);-webkit-mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent)}
+.hero h1{font-size:clamp(30px,6vw,46px);font-weight:900;letter-spacing:.5px;line-height:1.15;background:linear-gradient(90deg,#fff 30%,var(--accent) 70%,var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .tag{margin-top:14px;display:inline-block;color:#0a0c10;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:900;font-size:13.5px;padding:4px 12px;border-radius:6px;letter-spacing:1px}
+.hero .meta{margin-top:10px;color:var(--dim);font-size:13px}
+
+/* ---------- 导语 ---------- */
+.intro{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 22px;margin-bottom:30px}
+.intro p{font-size:15px}
+.intro strong{color:var(--accent)}
+
+/* ---------- 板块卡片 ---------- */
+.sec{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 20px;margin-bottom:28px;position:relative;scroll-margin-top:64px}
+.sec::before{content:"";position:absolute;top:0;left:20px;right:20px;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+.s1{--accent:#ff8c3a}
+.s2{--accent:var(--green)}
+.s3{--accent:var(--yellow)}
+.s4{--accent:var(--red)}
+.s5{--accent:var(--cyan)}
+.s6{--accent:#ffa94d}
+.s7{--accent:#34d399}
+.s8{--accent:#b197fc}
+.s9{--accent:#8b93a7}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sec-num{min-width:38px;height:38px;padding:0 9px;border-radius:9px;display:grid;place-items:center;font-weight:900;font-size:17px;color:#0a0c10;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.sec-title{font-size:clamp(19px,3.5vw,24px);font-weight:900;letter-spacing:.5px}
+.sec-sub{margin:6px 0 18px 50px;color:var(--dim);font-size:13px}
+@media(max-width:600px){.sec-sub{margin-left:46px}}
+.grid{display:grid;gap:14px}
+@media(min-width:820px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- 板块一：项目侧重 + 目标设定 ---------- */
+.ev-grid{display:grid;gap:12px;margin-bottom:14px}
+@media(min-width:820px){.ev-grid{grid-template-columns:repeat(3,1fr)}}
+.event{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.2s;position:relative}
+.event:hover{border-color:var(--dim);transform:translateY(-1px)}
+.event.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 6px 24px rgba(255,106,26,.12)}
+.event .check{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;font-size:12px;color:transparent;transition:.2s}
+.event.sel .check{background:var(--accent);border-color:var(--accent);color:#0a0c10}
+.event h3{font-size:16px;font-weight:800}
+.event .line{margin:4px 0 10px;font-size:12px;color:var(--accent);font-weight:700}
+.event .tag{display:inline-block;margin-bottom:8px;font-size:11px;color:var(--dim);border:1px solid var(--border);border-radius:999px;padding:1px 9px}
+.macro{padding:7px 0;border-bottom:1px dashed var(--border);font-size:13px}
+.macro:last-child{border-bottom:none}
+.macro .top{display:flex;justify-content:space-between;align-items:center;font-weight:800}
+.macro .stars{color:var(--accent);letter-spacing:2px}
+.macro p{margin-top:2px;color:var(--dim);font-size:12.5px}
+.banner{display:none;align-items:center;gap:10px;flex-wrap:wrap;background:linear-gradient(90deg,rgba(255,106,26,.12),transparent);border:1px solid rgba(255,106,26,.35);border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:14px}
+.banner.show{display:flex}
+.banner b{color:var(--accent)}
+.banner button{background:transparent;border:1px solid var(--border);color:var(--dim);border-radius:999px;padding:3px 12px;font-size:12px;cursor:pointer;margin-left:auto}
+.banner button:hover{color:#fff;border-color:var(--dim)}
+
+/* 目标设定面板 */
+.panel{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.panel-title{font-size:15px;font-weight:900;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.panel-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.p-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.p-row label{font-size:13px;color:var(--dim);font-weight:800}
+.p-row input{
+  width:86px;background:var(--bg);border:1px solid var(--border);border-radius:9px;
+  color:var(--text);font-size:16px;font-weight:800;padding:8px 10px;outline:none;text-align:center;
+}
+.p-row input:focus{border-color:var(--accent)}
+.seg{display:flex;gap:6px;margin-left:auto}
+.seg button{padding:6px 14px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--dim);font-size:13px;font-weight:800;cursor:pointer;transition:.2s}
+.seg button:hover{color:#fff}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:#0a0c10}
+.targets{
+  display:flex;gap:8px;flex-wrap:wrap;
+  background:linear-gradient(90deg,rgba(42,214,195,.08),transparent);
+  border:1px solid rgba(42,214,195,.3);border-radius:10px;padding:10px 14px;font-size:13px;
+}
+.targets b{color:var(--cyan);margin-right:2px}
+.targets b+p,.targets b+br{display:inline}
+
+/* ---------- 板块二：食物库 ---------- */
+.toolbar{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.search{display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:9px 14px}
+.search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:5px 13px;border-radius:999px;border:1px solid var(--border);background:var(--card2);color:var(--dim);font-size:12.5px;cursor:pointer;transition:.2s}
+.chip:hover{color:#fff}
+.chip.on{background:var(--green);border-color:var(--green);color:#0a0c10;font-weight:800}
+.chip.on.red{background:var(--red);border-color:var(--red)}
+.chip.on.yellow{background:var(--yellow);border-color:var(--yellow)}
+.chip.on.cyan{background:var(--cyan);border-color:var(--cyan)}
+.chip.on.orange{background:var(--accent);border-color:var(--accent)}
+.food-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(152px,1fr))}
+.food{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:.2s;position:relative}
+.food:hover{border-color:var(--dim);transform:translateY(-2px)}
+.food.prio{border-color:var(--accent);background:linear-gradient(180deg,rgba(255,106,26,.10),var(--card2));box-shadow:0 0 0 1px rgba(255,106,26,.4)}
+.food.bad{border-color:rgba(255,93,93,.45);background:linear-gradient(180deg,rgba(255,93,93,.10),var(--card2))}
+.food.snack{border-color:rgba(240,192,76,.45)}
+.food.good{border-color:rgba(47,215,122,.45)}
+.food.eaten{opacity:.55}
+.food .emoji{font-size:30px;line-height:1.2}
+.food b{font-size:14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-right:20px}
+.food .badge{font-size:10px;font-weight:900;border-radius:4px;padding:1px 5px;color:#0a0c10}
+.food .badge.prio{background:var(--accent)}
+.food .badge.snack{background:var(--yellow)}
+.food .badge.good{background:var(--green)}
+.food .badge.bad{background:var(--red);color:#fff}
+.food p{color:var(--dim);font-size:12px}
+.food .plus{position:absolute;top:9px;right:9px;width:22px;height:22px;border-radius:6px;background:var(--border);color:var(--dim);display:grid;place-items:center;font-size:14px;font-weight:900;cursor:pointer}
+.food .plus:hover{background:var(--green);color:#0a0c10}
+.food.eaten .plus{background:var(--green);color:#0a0c10}
+.hint{color:var(--dim);font-size:12px;margin-top:12px}
+.hint b{color:var(--green)}
+.count{color:var(--dim);font-size:12px;text-align:right;margin-top:8px}
+.antifood{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px 15px;cursor:pointer;transition:.2s}
+.antifood:hover{border-color:var(--dim);transform:translateY(-2px)}
+.antifood .emoji{font-size:26px;line-height:1.2}
+.antifood b{font-size:14px;display:block;margin:2px 0 4px}
+.antifood .how{color:#34d399;font-size:12px;font-weight:800;margin-bottom:2px}
+.antifood .why{color:var(--dim);font-size:12px}
+
+/* ---------- 板块三/四 ---------- */
+.warn{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed var(--border)}
+.warn:last-child{border-bottom:none}
+.warn .emoji{font-size:24px;flex-shrink:0;line-height:1.35}
+.warn b{font-size:14px;display:block}
+.warn p{color:var(--dim);font-size:13px;margin-top:2px}
+.warn-y p::before{content:"少吃原因 · ";color:var(--yellow);font-weight:800}
+.warn-r{background:var(--red-bg);border:1px solid rgba(255,93,93,.22);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.warn-r:last-child{margin-bottom:0}
+.warn-r p::before{content:"禁止原因 · ";color:var(--red);font-weight:800}
+
+/* ---------- 板块五：分时段 ---------- */
+.time{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:.2s}
+.time:hover{border-color:var(--dim)}
+.time h3{font-size:14px;font-weight:800;color:var(--cyan);margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
+.time h3::after{content:"＋";color:var(--dim);font-size:13px}
+.time.open h3::after{content:"－"}
+.time p{color:var(--text);font-size:13.5px}
+.time .more{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.time.open .more{max-height:220px}
+.time .more p{margin-top:6px;color:var(--dim);font-size:13px;border-left:2px solid var(--cyan);padding-left:10px}
+
+/* ---------- 板块六：目标食谱 ---------- */
+.rtabs{display:flex;gap:8px;margin-bottom:14px}
+.rtab{flex:1;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--dim);font-size:14px;font-weight:900;cursor:pointer;transition:.2s}
+.rtab:hover{color:#fff}
+.rtab.on.gain{background:var(--green);border-color:var(--green);color:#0a0c10}
+.rtab.on.cut{background:var(--yellow);border-color:var(--yellow);color:#0a0c10}
+.r-ttl{font-size:13px;color:var(--dim);margin-bottom:12px}
+.meal{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
+.meal .tm{flex-shrink:0;color:var(--dim);font-size:12px;width:40px;padding-top:2px;font-weight:800}
+.meal .lbl{color:var(--green);font-weight:800;font-size:12px}
+.meal .lbl.cut{color:var(--yellow)}
+.meal b{font-size:13.5px}
+.meal p{color:var(--dim);font-size:12.5px;margin-top:2px}
+.meal .prot{margin-left:auto;flex-shrink:0;color:var(--cyan);font-size:12px;font-weight:800;white-space:nowrap}
+/* 我的食材生成 */
+.mypanel{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:18px}
+.mp-title{font-size:15px;font-weight:900;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.mp-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.mp-hint{color:var(--dim);font-size:12.5px;margin-bottom:10px}
+.mp-search{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin-bottom:10px}
+.mp-search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:14px}
+.mp-results{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;min-height:20px}
+.mp-chip{padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--dim);font-size:12.5px;cursor:pointer;transition:.2s}
+.mp-chip:hover{color:#fff;border-color:var(--dim)}
+.mp-chip.add{color:var(--green);border-color:rgba(47,215,122,.4)}
+.mp-selected{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.mp-sel{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--green);color:var(--text);border-radius:999px;padding:4px 8px 4px 12px;font-size:13px}
+.mp-sel b{cursor:pointer;color:var(--red);font-weight:900;font-size:14px;padding:0 3px}
+.mp-sel b:hover{color:#ff8a8a}
+.mp-actions{display:flex;gap:10px;margin:10px 0 6px}
+.mp-btn{flex:1;border-radius:10px;border:1px solid var(--green);background:var(--green);color:#0a0c10;font-size:14px;font-weight:900;padding:11px;cursor:pointer;transition:.2s}
+.mp-btn:hover{filter:brightness(1.12)}
+.mp-btn.ghost{background:transparent;color:var(--dim);border-color:var(--border)}
+.mp-btn.small{flex:none;padding:7px 14px;font-size:13px;border-radius:8px}
+.mp-err{color:var(--red);background:var(--red-bg);border:1px solid rgba(255,93,93,.35);border-radius:10px;padding:12px 14px;font-size:13px;margin-top:8px}
+.mp-plan-ttl{font-size:15px;font-weight:900;color:var(--green);margin:12px 0 10px}
+.mp-meal{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:9px;display:flex;gap:10px;align-items:flex-start}
+.mp-meal .tm{flex-shrink:0;color:var(--cyan);font-weight:800;font-size:12.5px;width:60px;padding-top:2px}
+.mp-meal .body{flex:1;min-width:0}
+.mp-item{color:var(--text);font-size:13.5px;font-weight:700}
+.mp-item em{color:var(--dim);font-weight:400;font-style:normal}
+.mp-item+.mp-item{margin-left:10px}
+.mp-meal .prot{flex-shrink:0;color:var(--green);font-size:12px;font-weight:800;white-space:nowrap;padding-top:2px}
+.mp-total{background:linear-gradient(90deg,rgba(47,215,122,.1),transparent);border:1px solid rgba(47,215,122,.3);border-radius:10px;padding:10px 14px;font-size:13px;margin-top:10px}
+.mp-total b{color:var(--green)}
+.mp-tip{color:var(--dim);font-size:12px;margin-top:8px}
+.mp-custom{display:none;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:8px}
+.mp-cf-title{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:8px}
+.mp-cf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px}
+.mp-cf-grid input{background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;padding:8px 10px;outline:none}
+.mp-cf-grid input:focus{border-color:var(--accent)}
+.mp-cf-actions{display:flex;gap:8px;margin-top:2px}
+.mp-edit{margin-left:8px;flex-shrink:0;background:transparent;border:1px solid var(--border);color:var(--dim);border-radius:8px;padding:3px 9px;font-size:12px;cursor:pointer}
+.mp-edit:hover{color:#fff;border-color:var(--dim)}
+.em-item{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px dashed var(--border)}
+.em-emoji{font-size:20px;flex-shrink:0}
+.em-name{flex:1;font-size:14px;font-weight:800}
+.em-grams{width:72px;height:34px;text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:15px;font-weight:800;outline:none}
+.em-grams:focus{border-color:var(--accent)}
+.em-g{color:var(--dim);font-size:12px}
+.em-del{width:26px;height:26px;border-radius:7px;border:1px solid var(--border);background:var(--card2);color:var(--red);font-size:13px;cursor:pointer;display:grid;place-items:center}
+.em-del:hover{background:var(--red-bg);border-color:var(--red)}
+.em-empty{color:var(--dim);font-size:13px;padding:12px 4px}
+.em-addbar{margin-top:12px}
+.em-addbar input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--text);font-size:13px;padding:9px 12px;outline:none}
+.em-addbar input:focus{border-color:var(--accent)}
+.em-search-results{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.em-add{padding:5px 11px;border-radius:999px;border:1px solid var(--green);background:var(--green-bg);color:var(--green);font-size:12.5px;cursor:pointer}
+.em-add:hover{background:var(--green);color:#0a0c10}
+.em-nomatch{color:var(--dim);font-size:12px}
+.mp-book{margin-top:12px;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+.mp-book-ttl{font-size:13px;font-weight:800;color:var(--cyan);margin-bottom:8px}
+.mp-book-item{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.mp-book-load{flex:1;text-align:left;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;cursor:pointer}
+.mp-book-load:hover{border-color:var(--cyan)}
+.mp-book-del{width:26px;height:26px;border-radius:7px;border:1px solid var(--border);background:var(--card2);color:var(--red);font-size:13px;cursor:pointer}
+.mp-book-del:hover{background:var(--red-bg);border-color:var(--red)}
+.mp-tools{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.mp-tool{padding:6px 14px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--dim);font-size:13px;font-weight:800;cursor:pointer;transition:.2s}
+.mp-tool:hover{color:#fff;border-color:var(--dim)}
+.mp-tool.ghost{color:var(--dim)}
+.mp-tool-info{color:var(--dim);font-size:12px;margin-left:auto}
+.strategy{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.strategy h3{font-size:15px;font-weight:800;margin-bottom:10px}
+.strategy.keep h3{color:var(--green)}
+.strategy.cut h3{color:var(--yellow)}
+.strategy ul{list-style:none}
+.strategy li{font-size:13.5px;padding:5px 0;padding-left:18px;position:relative}
+.strategy li::before{content:"—";position:absolute;left:0;color:var(--dim)}
+
+/* ---------- 警示框 ---------- */
+.alert{background:var(--red-bg);border:1px solid rgba(255,93,93,.32);border-radius:12px;padding:16px 18px}
+.alert h4{color:var(--red);font-weight:900;font-size:15px;margin-bottom:8px;display:flex;gap:8px;align-items:center}
+.alert ul{list-style:none}
+.alert li{font-size:13.5px;padding:4px 0;padding-left:20px;position:relative}
+.alert li::before{content:"!";position:absolute;left:0;color:var(--red);font-weight:900}
+
+/* ---------- 板块七：补剂 ---------- */
+.group-label{display:flex;align-items:center;gap:10px;margin:12px 0 10px;font-size:14px;font-weight:800;color:#b197fc}
+.group-label::after{content:"";flex:1;height:1px;background:var(--border)}
+.sup{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:15px 16px}
+.sup h4{font-size:14px;font-weight:800;margin-bottom:5px}
+.sup p{color:var(--dim);font-size:13px}
+.nope{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--border)}
+.nope:last-child{border-bottom:none}
+.nope .x{flex-shrink:0;width:22px;height:22px;border-radius:6px;background:var(--red-bg);color:var(--red);border:1px solid rgba(255,93,93,.35);display:grid;place-items:center;font-weight:900;font-size:12px}
+.nope b{font-size:13.5px}
+.nope p{color:var(--dim);font-size:12.5px;margin-top:1px}
+
+/* ---------- 板块八：误区 ---------- */
+.myth{display:flex;gap:14px;padding:13px 0;border-bottom:1px dashed var(--border)}
+.myth:last-child{border-bottom:none}
+.myth .badge{width:26px;height:26px;border-radius:8px;flex-shrink:0;display:grid;place-items:center;font-weight:900;font-size:13px}
+.myth .wrong{background:var(--red-bg);color:var(--red);border:1px solid rgba(255,93,93,.32)}
+.myth .right{background:var(--green-bg);color:var(--green);border:1px solid rgba(47,215,122,.32)}
+.myth b{display:block;font-size:14px}
+.myth p{color:var(--dim);font-size:13px}
+
+/* ---------- 页脚 ---------- */
+footer{text-align:center;color:var(--dim);font-size:12.5px;padding:24px 0 10px;border-top:1px solid var(--border);margin-top:10px}
+footer small{display:block;margin-top:6px;color:#6b7484}
+
+/* ---------- 底部打卡栏 ---------- */
+.trackbar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:rgba(12,14,19,.94);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
+.track-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.track-inner .t{font-size:13px;font-weight:800}
+.track-inner .t span{color:var(--green)}
+.track-inner .t em{color:var(--dim);font-style:normal;font-weight:400;font-size:12px}
+.track-inner .pbar{flex:1;min-width:120px;height:8px;background:var(--border);border-radius:99px;overflow:hidden}
+.track-inner .pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),#7df7b5);border-radius:99px;transition:width .4s}
+.track-inner .pbar span{color:var(--dim);font-size:11px;margin-left:6px}
+.track-inner button{background:transparent;border:1px solid var(--border);color:var(--dim);border-radius:999px;padding:3px 12px;font-size:12px;cursor:pointer}
+.track-inner button:hover{color:#fff;border-color:var(--dim)}
+
+/* ---------- 弹窗 ---------- */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(4,6,9,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.overlay.show{display:flex}
+.modal{width:100%;max-width:480px;max-height:86vh;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 20px;position:relative;animation:pop .22s ease}
+@keyframes pop{from{transform:translateY(14px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+.modal .close{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:9px;background:var(--border);color:var(--dim);display:grid;place-items:center;cursor:pointer;font-size:15px}
+.modal .close:hover{color:#fff}
+.m-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-right:30px}
+.m-head .emoji{font-size:38px;line-height:1}
+.m-head b{font-size:20px;font-weight:900}
+.m-head .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.m-tag{font-size:11px;font-weight:800;border-radius:4px;padding:1px 7px}
+.m-wh{font-size:12px;color:var(--dim);margin-bottom:4px}
+.m-warn{background:var(--red-bg);border:1px solid rgba(255,93,93,.35);border-radius:10px;padding:11px 13px;margin-bottom:14px}
+.m-warn b{color:var(--red);font-size:13px}
+.nrv{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.nrv-row .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.nrv-row .top b{font-size:14px}
+.nrv-row .top i{font-style:normal;color:var(--dim)}
+.nrv-row .top i em{color:#fff;font-style:normal;font-weight:800;font-size:13px}
+.nrv-bar{height:7px;background:var(--border);border-radius:99px;overflow:hidden}
+.nrv-bar i{display:block;height:100%;border-radius:99px;width:0;transition:width .5s ease}
+.c-energy i{background:var(--accent)}
+.c-p i{background:var(--green)}
+.c-c i{background:var(--cyan)}
+.c-f i{background:var(--yellow)}
+.m-tip{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-top:16px}
+.m-tip b{color:var(--green);font-size:13px}
+.m-tip p{color:var(--dim);font-size:12.5px;margin-top:3px}
+.m-btns{display:flex;gap:10px;margin-top:16px}
+.m-btn{flex:1;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:14px;font-weight:800;padding:11px;cursor:pointer}
+.m-btn.act{background:var(--green);border-color:var(--green);color:#0a0c10}
+.m-btn.ghost{color:var(--dim);background:transparent}
+.m-btn:hover{filter:brightness(1.15)}
+.tut{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.tut .step{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:13px 15px}
+.tut .step h5{font-size:13.5px;font-weight:800;color:var(--accent);margin-bottom:5px}
+.tut .step p{color:var(--dim);font-size:13px}
+.tut .step .ex{display:flex;gap:12px;margin-top:9px;align-items:center;flex-wrap:wrap}
+.tut .pill{font-size:11.5px;border-radius:6px;padding:3px 9px;font-weight:800;border:1px solid var(--border);color:var(--dim)}
+.tut .pill.hi{color:var(--green);border-color:var(--green)}
+.tut .pill.lo{color:var(--red);border-color:var(--red)}
+.p-sub{color:var(--dim);font-size:12px;margin-top:2px}
+.p-presets{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.p-btn{
+  display:flex;align-items:center;justify-content:space-between;width:100%;
+  padding:11px 14px;border-radius:10px;border:1px solid var(--border);
+  background:var(--card2);color:var(--text);font-size:15px;font-weight:800;cursor:pointer;transition:.2s;
+}
+.p-btn span{color:var(--dim);font-weight:400;font-size:13px}
+.p-btn:hover{border-color:var(--dim)}
+.p-btn.on{background:var(--green);border-color:var(--green);color:#0a0c10}
+.p-btn.on span{color:#0a0c10}
+.p-stepper{display:flex;align-items:center;gap:10px;margin-top:14px}
+.p-stepper .step{
+  width:44px;height:44px;border-radius:10px;border:1px solid var(--border);
+  background:var(--card2);color:var(--text);font-size:22px;font-weight:900;cursor:pointer;
+}
+.p-stepper .step:hover{background:var(--card)}
+.p-stepper input{
+  flex:1;height:44px;text-align:center;font-size:20px;font-weight:900;
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);outline:none;
+}
+.p-stepper input:focus{border-color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#sec1">项目侧重</a>
+    <a href="#sec2">食物库</a>
+    <a href="#sec3">尽量少吃</a>
+    <a href="#sec4">禁止食用</a>
+    <a href="#sec5">分时段</a>
+    <a href="#sec6">目标食谱</a>
+    <a href="#sec7">消炎恢复</a>
+    <a href="#sec8">补剂</a>
+    <a href="#sec9">误区</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <header class="hero">
+    <h1>把每一餐，<br>当成一次训练</h1>
+    <span class="tag">高校田径队 · 队内官方饮食指导手册</span>
+    <p class="meta">覆盖 速度爆发组（短跑·跳跃·跨栏）/ 耐力组（中长跑·长跑）/ 力量组（投掷）· 全体队员强制阅读</p>
+  </header>
+
+  <section class="intro">
+    <p><strong>饮食不是后勤问题，是训练的一部分。</strong><br>
+    吃对：爆发力更狠、恢复更快、伤病更少、成绩更稳。<br>
+    吃错：练再多也是白练。<br>
+    今天起，把每一餐当成一次训练来执行——<strong>不准偷懒，不准糊弄。</strong></p>
+  </section>
+
+  <!-- 板块一：项目侧重 + 目标设定 -->
+  <section class="sec s1" id="sec1">
+    <div class="sec-head">
+      <span class="sec-num">1</span>
+      <h2 class="sec-title">项目饮食侧重</h2>
+    </div>
+    <p class="sec-sub">按运动生理学能量代谢系统分为 速度爆发组 / 耐力组 / 力量组。第①步点你的项目，第②步填体重选目标——页面会算好每日蛋白/热量/碳水，并标出优先食物。</p>
+
+    <div class="ev-grid">
+      <div class="event" data-event="sprint" onclick="setEvent('sprint')">
+        <span class="check">✓</span>
+        <h3>⚡ 短跑 / 跳跃 / 跨栏</h3>
+        <p class="line">爆发靠碳水，力量靠蛋白</p>
+        <span class="tag">速度爆发组 · 磷酸原+糖酵解</span>
+        <div class="macro"><div class="top"><span>碳水</span><span class="stars">★★★★☆</span></div><p>高强度爆发训练的输出保障，4–7g/kg/天</p></div>
+        <div class="macro"><div class="top"><span>蛋白质</span><span class="stars">★★★★☆</span></div><p>爆发力与肌肉弹性，1.6–2.2g/kg/天吃够</p></div>
+        <div class="macro"><div class="top"><span>脂肪</span><span class="stars">★★☆☆☆</span></div><p>控制体脂保持轻盈，跳跃项目对体重敏感</p></div>
+      </div>
+      <div class="event" data-event="endurance" onclick="setEvent('endurance')">
+        <span class="check">✓</span>
+        <h3>🏃 中长跑 / 长跑</h3>
+        <p class="line">糖原储备 = 成绩单</p>
+        <span class="tag">耐力组 · 有氧氧化</span>
+        <div class="macro"><div class="top"><span>碳水</span><span class="stars">★★★★★</span></div><p>糖原决定成绩，6–10g/kg/天，训练前后必补</p></div>
+        <div class="macro"><div class="top"><span>蛋白质</span><span class="stars">★★★☆☆</span></div><p>支撑恢复，1.2–1.7g/kg/天</p></div>
+        <div class="macro"><div class="top"><span>脂肪</span><span class="stars">★★★☆☆</span></div><p>长距离供能占比高，别压太低</p></div>
+      </div>
+      <div class="event" data-event="throw" onclick="setEvent('throw')">
+        <span class="check">✓</span>
+        <h3>🏋️ 投掷</h3>
+        <p class="line">肌肉量 = 出手速度</p>
+        <span class="tag">力量组 · 最大力量</span>
+        <div class="macro"><div class="top"><span>碳水</span><span class="stars">★★★☆☆</span></div><p>保证力量训练强度与恢复，4–7g/kg/天</p></div>
+        <div class="macro"><div class="top"><span>蛋白质</span><span class="stars">★★★★★</span></div><p>肌肉合成第一优先，2.0g/kg/天+</p></div>
+        <div class="macro"><div class="top"><span>脂肪</span><span class="stars">★★★☆☆</span></div><p>可适当放宽，维持体重与热量</p></div>
+      </div>
+    </div>
+
+    <div class="banner" id="banner">
+      <span id="bannerTxt"></span>
+      <button onclick="setEvent('')">取消选择</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">🎯 我的目标设定</div>
+      <div class="p-row">
+        <label>体重</label>
+        <input type="number" id="weightIn" min="30" max="160" oninput="setWeight(this.value)" onfocus="this.select()">
+        <span style="color:var(--dim);font-size:13px">kg</span>
+        <div class="seg" id="goalSeg">
+          <button data-goal="maintain" onclick="setGoal('maintain')">维持体重</button>
+          <button data-goal="gain" onclick="setGoal('gain')">增肌</button>
+          <button data-goal="cut" onclick="setGoal('cut')">减脂</button>
+        </div>
+      </div>
+      <div class="targets" id="targets"></div>
+    </div>
+  </section>
+
+  <!-- 板块二：食物库 -->
+  <section class="sec s2" id="sec2">
+    <div class="sec-head">
+      <span class="sec-num">2</span>
+      <h2 class="sec-title">食物库</h2>
+    </div>
+    <p class="sec-sub">129 种食物：队内常吃 + 外食攻略 + 消炎食材。点任意食物看 NRV 营养表，点 ＋ 记进今日餐盘。黄=适量，红=避雷。</p>
+
+    <div class="toolbar">
+      <div class="search">
+        <span>🔍</span>
+        <input type="search" id="searchInput" placeholder="搜食物…（如：鸡胸、香蕉、蛋白棒）" oninput="onSearch(this.value)">
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="food-grid" id="foodGrid"></div>
+    <p class="count" id="foodCount"></p>
+
+    <p class="hint">💡 不知道 NRV 是什么？<b style="cursor:pointer" onclick="openTutorial()">点这里看 30 秒教程</b>。只看结果，不猜术语。</p>
+  </section>
+
+  <!-- 板块三：尽量少吃 -->
+  <section class="sec s3" id="sec3">
+    <div class="sec-head">
+      <span class="sec-num">3</span>
+      <h2 class="sec-title">尽量少吃</h2>
+    </div>
+    <p class="sec-sub">偶尔解馋可以，常吃拖后腿。一周最多一次，别骗自己。</p>
+    <div class="warn-list">
+      <div class="warn warn-y"><span class="emoji">🍟</span><div><b>炸鸡 · 薯条 · 炸串</b><p>高脂油炸，消化慢，练起来又沉又困</p></div></div>
+      <div class="warn warn-y"><span class="emoji">🧋</span><div><b>奶茶 · 甜饮料</b><p>高糖冲垮血糖，训练没劲、下午犯困</p></div></div>
+      <div class="warn warn-y"><span class="emoji">🍜</span><div><b>泡面 · 辣条 · 薯片</b><p>高钠高添加剂，水肿、拖慢恢复</p></div></div>
+      <div class="warn warn-y"><span class="emoji">🌭</span><div><b>香肠 · 烤肠 · 腊肉</b><p>加工肉制品，钠和亚硝酸盐偏高</p></div></div>
+      <div class="warn warn-y"><span class="emoji">🍪</span><div><b>威化 · 曲奇 · 蛋黄派</b><p>糖油炸弹，含反式脂肪风险</p></div></div>
+      <div class="warn warn-y"><span class="emoji">☕</span><div><b>浓咖啡 · 乱喝功能饮料</b><p>过量提神剂破坏睡眠，恢复大打折扣</p></div></div>
+    </div>
+  </section>
+
+  <!-- 板块四：禁止食用 -->
+  <section class="sec s4" id="sec4">
+    <div class="sec-head">
+      <span class="sec-num">4</span>
+      <h2 class="sec-title">禁止食用</h2>
+    </div>
+    <p class="sec-sub">红线清单。碰一次毁一周状态，长期毁职业生涯。没有商量。</p>
+    <div class="warn-list">
+      <div class="warn warn-r"><span class="emoji">🍺</span><div><b>含酒精饮品</b><p>抑制肌肉合成、降低睾酮，恢复大打折扣</p></div></div>
+      <div class="warn warn-r"><span class="emoji">🥤</span><div><b>碳酸饮料当水喝</b><p>大量磷影响钙吸收，长期伤骨骼</p></div></div>
+      <div class="warn warn-r"><span class="emoji">💊</span><div><b>"三无"保健品 / 来源不明增肌粉</b><p>可能含违禁成分，一口毁掉职业生涯</p></div></div>
+      <div class="warn warn-r"><span class="emoji">⚠️</span><div><b>变质 · 久放隔夜食物</b><p>食物中毒能毁掉整个赛期</p></div></div>
+      <div class="warn warn-r"><span class="emoji">🧈</span><div><b>人造奶油 · 氢化油食品</b><p>反式脂肪，长期损伤血管与代谢</p></div></div>
+      <div class="warn warn-r"><span class="emoji">💉</span><div><b>任何激素类 · 违禁成分制品</b><p>毁内分泌毁职业生涯，碰了就滚出队伍</p></div></div>
+    </div>
+  </section>
+
+  <!-- 板块五：分时段 -->
+  <section class="sec s5" id="sec5">
+    <div class="sec-head">
+      <span class="sec-num">5</span>
+      <h2 class="sec-title">分时段饮食规则</h2>
+    </div>
+    <p class="sec-sub">什么时候吃，比吃什么更讲究。点卡片看实操细节。</p>
+    <div class="grid grid-2" style="gap:10px">
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🌅 晨训前</h3><p>喝半杯水 + 半根香蕉或一片面包垫底。</p><div class="more"><p>晨跑先别空腹上大强度，低血糖又伤胃。醒了先补水，15 分钟后再垫两口碳水。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🍚 训练前 1–2 小时</h3><p>以易消化碳水为主，七分饱。</p><div class="more"><p>面条、香蕉、全麦面包都行。别碰高油高脂——消化慢，练着恶心、状态掉。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🍌 训练前 30 分钟</h3><p>香蕉半根 / 一片面包垫底。</p><div class="more"><p>空腹上大强度容易低血糖，速度课直接垮。垫一口碳水，精神头完全不一样。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>💧 训练中</h3><p>长距离大汗时小口补电解质水。</p><div class="more"><p>短训补水就够，别硬灌运动饮料——糖太多，喝了犯困。长时间耐力训练才需要补糖补电解质。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🥛 训练后 30 分钟内</h3><p>碳水 + 蛋白一起吃，黄金窗口。</p><div class="more"><p>牛奶/乳清 + 香蕉/面包，蛋白补 20–30g。错过这个点，恢复肉眼可见地变慢。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🍳 休息日</h3><p>三餐照常，蛋白质不能断。</p><div class="more"><p>别拿"今天不练"当胡吃海塞的借口。肌肉修复在休息日，蛋白吃不够等于白练一周。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>📈 赛前 3 天</h3><p>开始逐步加碳水，饮食清淡。</p><div class="more"><p>米饭、面、意面往上加，肉照吃。从今天起戒外卖炸物，让肠胃适应干净饮食。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🍚 赛前 1 天</h3><p>高碳水储备，饮食清淡。</p><div class="more"><p>不碰陌生食物、不碰辛辣——肠胃是赛场的一部分。晚上好好睡，别熬夜啃夜宵。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🏁 比赛当日</h3><p>赛前 3 小时吃完正餐。</p><div class="more"><p>赛前 1 小时只吃香蕉/面包这类好消化的，赛前 30 分钟小口补水。上场前肚子不能空，也不能胀。</p></div></div>
+      <div class="time" onclick="this.classList.toggle('open')"><h3>🌙 夜宵（晚训后）</h3><p>小份蛋白 + 少量碳水。</p><div class="more"><p>牛奶/酸奶 + 鸡蛋就够。拒绝油炸和烧烤——大半夜的油脂全存进腰上。</p></div></div>
+    </div>
+  </section>
+
+  <!-- 板块六：目标食谱 -->
+  <section class="sec s6" id="sec6">
+    <div class="sec-head">
+      <span class="sec-num">6</span>
+      <h2 class="sec-title">目标食谱：增肌 × 减脂</h2>
+    </div>
+    <p class="sec-sub">先选目标，再看对应食谱。减脂要减脂肪，不是减肌肉、减成绩；增肌靠干净训练餐，不靠垃圾食品。</p>
+
+    <!-- 我的食材生成食谱 -->
+    <div class="mypanel">
+      <div class="mp-title">🧺 用我的食材生成食谱</div>
+      <p class="mp-hint">把你手头有的食物加进来，按你的项目 + 体重 + 目标自动排出一日食谱。库里有 129 种，找不到就自己录一个。</p>
+      <div class="mp-tools">
+        <button class="mp-tool" onclick="selectAllFoods()">✓ 一键全选全部食材</button>
+        <button class="mp-tool ghost" onclick="clearMyFoods()">清空食材</button>
+        <span class="mp-tool-info" id="mpSelCount"></span>
+      </div>
+      <div class="mp-search">
+        <span>🔍</span>
+        <input type="search" id="mpSearch" placeholder="搜食材…（鸡胸、米饭、西兰花、煲仔饭）" oninput="onMySearch(this.value)">
+      </div>
+      <div class="mp-results" id="mpResults">
+        <p class="mp-hint" style="margin-bottom:0">↑ 输入食材名称，从食物库挑。</p>
+      </div>
+      <div class="mp-selected" id="mpSelected"></div>
+      <div class="mp-custom" id="mpCustom">
+        <div class="mp-cf-title">自定义食材（填每 100g 营养值）</div>
+        <div class="mp-cf-grid">
+          <input id="cfName" placeholder="名称 · 例：食堂糖醋里脊">
+          <input id="cfEmoji" placeholder="图标 · 可不填">
+          <input id="cfKcal" type="number" placeholder="能量 kcal">
+          <input id="cfP" type="number" placeholder="蛋白 g">
+          <input id="cfC" type="number" placeholder="碳水 g">
+          <input id="cfF" type="number" placeholder="脂肪 g">
+        </div>
+        <div class="mp-cf-actions">
+          <button class="mp-btn small" onclick="saveCustom()">✓ 保存并加入食材</button>
+          <button class="mp-btn small ghost" onclick="hideCustom()">取消</button>
+        </div>
+      </div>
+      <div class="mp-actions">
+        <button class="mp-btn" onclick="generateMyPlan()">🍽 生成我的食谱</button>
+      </div>
+      <div id="mpPlan"></div>
+    </div>
+
+    <div class="rtabs">
+      <button class="rtab on gain" data-r="gain" onclick="setRecipe('gain')">💪 增肌食谱</button>
+      <button class="rtab cut" data-r="cut" onclick="setRecipe('cut')">🔥 减脂食谱</button>
+    </div>
+    <div id="recipeBox"></div>
+
+    <div style="margin:16px 0 10px;font-size:14px;font-weight:800;color:var(--accent)">⚖️ 增肌 / 减脂通用策略</div>
+    <div class="grid grid-2">
+      <div class="strategy keep">
+        <h3>维持 / 增肌队员</h3>
+        <ul>
+          <li>按训练量正常吃，碳水、蛋白质给足，不刻意少吃</li>
+          <li>增肌 = 干净热量盈余 + 大重量训练，不是狂吃零食</li>
+          <li>看每周体重趋势，别被一天的水分波动带节奏</li>
+          <li>赛前阶段保持日常模式，不临时加戏</li>
+        </ul>
+      </div>
+      <div class="strategy cut">
+        <h3>需要降体脂队员</h3>
+        <ul>
+          <li>温和热量缺口（约 -300~-500 kcal/天），绝不极端</li>
+          <li>蛋白质只增不减，保住肌肉才是保住成绩</li>
+          <li>碳水总量控制，但训练前后必须补，别断碳</li>
+          <li>蒸煮少油代替油炸外卖，选择干净的烹饪</li>
+          <li>每周称重 + 量腰围，看趋势，不盯单日数字</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert" style="margin-top:16px">
+      <h4>⚠ 红线警告</h4>
+      <ul>
+        <li>极端节食 = 自毁运动能力</li>
+        <li>断碳水、只吃水煮菜、饿着训练——掉的是水分和肌肉，成绩和免疫力一起崩</li>
+        <li>减脂永远是慢功夫，一周掉 0.5–1kg 是上限，稳着来</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 板块七：消炎恢复食物 -->
+  <section class="sec s7" id="sec7">
+    <div class="sec-head">
+      <span class="sec-num">7</span>
+      <h2 class="sec-title">消炎恢复食物</h2>
+    </div>
+    <p class="sec-sub">慢性炎症是伤病的温床，消炎食物 = 恢复的加法。点卡片看 NRV，把这些加进日常餐盘。</p>
+    <div class="grid grid-3" style="gap:10px">
+      <div class="antifood" onclick="openFood('salmon')">
+        <span class="emoji">🐟</span><b>深海鱼</b>
+        <p class="how">一周 2–3 次 · 三文鱼 / 沙丁鱼</p>
+        <p class="why">Omega-3 天然抗炎，减训练后肌肉酸痛</p>
+      </div>
+      <div class="antifood" onclick="openFood('oliveoil')">
+        <span class="emoji">🫒</span><b>橄榄油</b>
+        <p class="how">凉拌 / 低温炒，替代部分炒菜油</p>
+        <p class="why">单不饱和脂肪酸，抗炎顺带护血管</p>
+      </div>
+      <div class="antifood" onclick="openFood('walnut')">
+        <span class="emoji">🌰</span><b>核桃 / 亚麻籽</b>
+        <p class="how">每天一小把</p>
+        <p class="why">植物 Omega-3，护关节抗炎症</p>
+      </div>
+      <div class="antifood" onclick="openFood('turmeric')">
+        <span class="emoji">🧡</span><b>姜黄</b>
+        <p class="how">炖菜 / 咖喱里放，配黑胡椒吸收翻倍</p>
+        <p class="why">姜黄素缓解肌肉酸痛，日常随手加</p>
+      </div>
+      <div class="antifood" onclick="openFood('ginger')">
+        <span class="emoji">🫚</span><b>生姜</b>
+        <p class="how">炒菜 / 泡水喝</p>
+        <p class="why">减轻运动后肌肉酸痛，随手可用</p>
+      </div>
+      <div class="antifood" onclick="openFood('garlic')">
+        <span class="emoji">🧄</span><b>大蒜</b>
+        <p class="how">切碎再下锅，香味抗炎双拿</p>
+        <p class="why">大蒜素抗炎抗氧化，还能下饭</p>
+      </div>
+      <div class="antifood" onclick="openFood('greentea')">
+        <span class="emoji">🍵</span><b>绿茶</b>
+        <p class="how">每天 1–2 杯，不加糖</p>
+        <p class="why">茶多酚抗氧化，替代奶茶的第一步</p>
+      </div>
+      <div class="antifood" onclick="openFood('blueberry')">
+        <span class="emoji">🫐</span><b>莓果</b>
+        <p class="how">蓝莓 / 草莓，每天一小把</p>
+        <p class="why">花青素抗氧化，练后吃恢复快</p>
+      </div>
+      <div class="antifood" onclick="openFood('cherry')">
+        <span class="emoji">🍒</span><b>樱桃</b>
+        <p class="how">练后一小把当加餐</p>
+        <p class="why">有研究支持能减轻运动后肌肉酸痛</p>
+      </div>
+      <div class="antifood" onclick="openFood('broccoli')">
+        <span class="emoji">🥦</span><b>十字花科蔬菜</b>
+        <p class="how">西兰花 / 白菜，每天一盘</p>
+        <p class="why">萝卜硫素抗炎，配训练餐不挑嘴</p>
+      </div>
+      <div class="antifood" onclick="openFood('tomato')">
+        <span class="emoji">🍅</span><b>西红柿</b>
+        <p class="how">做熟吃，茄红素吸收更好</p>
+        <p class="why">茄红素抗炎抗氧化，番茄炒蛋就是好菜</p>
+      </div>
+      <div class="antifood" onclick="openFood('pineapple')">
+        <span class="emoji">🍍</span><b>菠萝 / 木瓜</b>
+        <p class="how">练后水果，别当正餐</p>
+        <p class="why">天然蛋白酶助消化、促消肿</p>
+      </div>
+    </div>
+    <div class="m-tip" style="margin-top:14px"><b>记住</b><p>消炎食物 ≠ 替代冰敷、拉伸和休息。先管好恢复基本功，再靠吃锦上添花。</p></div>
+  </section>
+
+  <!-- 板块八：补剂 -->
+  <section class="sec s8" id="sec8">
+    <div class="sec-head">
+      <span class="sec-num">8</span>
+      <h2 class="sec-title">运动补剂简易科普</h2>
+    </div>
+    <p class="sec-sub">按国际运动营养学会（ISSN）、IOC 共识的 A/B/C 证据等级排序。先吃好饭，再谈补剂。</p>
+
+    <div class="group-label" style="color:var(--green)">A 类 · 证据最强（ISSN/IOC 明确支持，值得优先）</div>
+    <div class="grid grid-2" style="gap:10px">
+      <div class="sup"><h4>🥤 咖啡因</h4><p><b style="color:var(--green)">A 类 · 耐力+爆发</b><br>3–6 mg/kg，赛前 30–60 分钟，提升爆发力和耐力表现。下午别喝，影响睡眠。</p></div>
+      <div class="sup"><h4>💪 肌酸</h4><p><b style="color:var(--green)">A 类 · 力量+爆发</b><br>3–5 g/天，短期可冲 20 g/天×5–7 天。最有把握的力量类补剂，肌肉增重是水不是脂肪。</p></div>
+      <div class="sup"><h4>⚡ β-丙氨酸</h4><p><b style="color:var(--green)">A 类 · 短时高强度</b><br>2–5 g/天，分次服。60–240 秒高强度项目（400米以上）提升肌肽缓冲酸，有刺痒感正常。</p></div>
+      <div class="sup"><h4>🥛 蛋白质粉（乳清/酪蛋白/大豆）</h4><p><b style="color:var(--green)">A 类 · 恢复</b><br>练后 20–40 g，适合日常肉没吃够的人。属于"吃饭的补充"，不是必须。</p></div>
+      <div class="sup"><h4>🧪 甜菜汁</h4><p><b style="color:var(--green)">A 类 · 耐力+摄氧</b><br>300–500 mg 硝酸盐/天，有氧耐力项目有证据支持，连用数周效果更稳。血压偏低者慎用。</p></div>
+      <div class="sup"><h4>🧂 碳酸氢钠</h4><p><b style="color:var(--green)">A 类 · 抗酸缓冲</b><br>0.2–0.3 g/kg，赛前 60–90 分钟。1–4 分钟全力项目（400–800米）可延缓酸疲劳，胃肠道反应大，先试。</p></div>
+    </div>
+
+    <div class="group-label" style="color:var(--yellow)">B 类 · 条件支持（看情况用）</div>
+    <div class="grid grid-2" style="gap:10px">
+      <div class="sup"><h4>☀️ 维生素 D</h4><p><b style="color:var(--yellow)">B 类 · 日常保养</b><br>日晒不足者普遍偏低，补它保骨骼、护免疫。按需服用，别自己加量。</p></div>
+      <div class="sup"><h4>🐟 鱼油 / Omega-3</h4><p><b style="color:var(--yellow)">B 类 · 消炎恢复</b><br>每周 2–3 次深海鱼即可，鱼油作为补充。抗炎，配合消炎食物板块一起用。</p></div>
+      <div class="sup"><h4>🦴 氨糖软骨素</h4><p><b style="color:var(--yellow)">B 类 · 关节保养</b><br>膝盖、踝关节有磨损感的队员可长期吃。见效慢，坚持才有意义。</p></div>
+      <div class="sup"><h4>⚙️ 亮氨酸</h4><p><b style="color:var(--yellow)">B 类 · 蛋白合成触发</b><br>配合蛋白质一起用，单独吃意义不大。多吃肉蛋奶就行。</p></div>
+      <div class="sup"><h4>🧲 铁</h4><p><b style="color:var(--yellow)">B 类 · 仅缺铁人群</b><br>缺铁性贫血才补（尤其长跑、女队员），先查血再说，别乱补。</p></div>
+      <div class="sup"><h4>🍃 锌</h4><p><b style="color:var(--yellow)">B 类 · 免疫+恢复</b><br>运动员常见偏低，不足时补。过量反而伤吸收，按需。</p></div>
+    </div>
+
+    <div class="group-label" style="color:var(--dim)">C 类 · 证据弱 / 看个体（不优先）</div>
+    <div class="grid grid-2" style="gap:10px">
+      <div class="sup"><h4>🍶 支链氨基酸 BCAA</h4><p><b style="color:var(--dim)">C 类 · 可被蛋白替代</b><br>练后乳清/食物蛋白已含足量 BCAA，单独补基本是智商税。</p></div>
+      <div class="sup"><h4>🌿 左旋肉碱</h4><p><b style="color:var(--dim)">C 类 · 基本无效</b><br>减脂帮助有限，白花钱。</p></div>
+      <div class="sup"><h4>🔥 燃脂类（CLA/绿咖啡等）</h4><p><b style="color:var(--dim)">C 类 · 证据不足</b><br>减脂靠热量缺口，别指望这些。</p></div>
+      <div class="sup"><h4>💧 电解质片</h4><p><b style="color:var(--dim)">C 类 · 看情况</b><br>长时间大出汗或热天训练才需要，平时白水就够。</p></div>
+    </div>
+
+    <div class="group-label" style="color:var(--red)">🚫 避雷清单（伤害远大于收益）</div>
+    <div>
+      <div class="nope"><span class="x">✗</span><div><b>暴汗服 / 燃脂腰带</b><p>掉的是水分不是脂肪，还容易脱水中暑</p></div></div>
+      <div class="nope"><span class="x">✗</span><div><b>网红"排油胶囊"</b><p>拉肚子伤肠胃，不少还违规</p></div></div>
+      <div class="nope"><span class="x">✗</span><div><b>任何激素 / 睾酮类</b><p>违法，毁内分泌毁职业生涯，碰了就滚出队伍</p></div></div>
+      <div class="nope"><span class="x">✗</span><div><b>三无蛋白粉 / 增肌粉</b><p>成分不明，可能含违禁成分，一口毁掉职业生涯</p></div></div>
+    </div>
+
+    <div class="alert" style="margin-top:14px">
+      <h4>⚠ 重要提醒</h4>
+      <ul>
+        <li>补剂只是饮食的辅助工具，永远替代不了天然食物。先吃好饭，再谈补剂。</li>
+        <li>禁止盲目叠加、大剂量服用——超量不涨成绩，只涨肝肾负担。</li>
+        <li>赛前或服用前先问队医 / 教练，来源不明的产品一概不碰。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 板块九：误区 -->
+  <section class="sec s9" id="sec9">
+    <div class="sec-head">
+      <span class="sec-num">9</span>
+      <h2 class="sec-title">常见饮食误区</h2>
+    </div>
+    <p class="sec-sub">纠正认知，比多吃一口更重要。</p>
+    <div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"不吃主食瘦得快"</b><p>碳水是运动燃料。断碳训练直接拉胯，成绩掉得比体重快。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"练完不能吃饭，吃了就胖"</b><p>练后 30–60 分钟正是补充窗口，空腹硬熬更伤恢复。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"减脂就要少吃肉"</b><p>蛋白质保肌肉，减脂期反而要吃够。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"出汗多，灌瓶碳酸饮料就补回来了"</b><p>补水 + 电解质才是正解，碳酸饮料越喝越渴。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"鸡蛋只吃蛋白，蛋黄扔掉"</b><p>蛋黄含健康脂肪和多种维生素，正常人吃全蛋没问题。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"补剂吃越多，长得越快"</b><p>超量只增肝肾负担。科学的量 + 正常饮食才是关键。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"赛前狂吃一顿攒能量"</b><p>能量靠平时和赛前 1 天储备，赛前大餐只会上场犯困。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"光吃蛋白质就能长肌肉"</b><p>碳水 + 蛋白质协同才长肉，缺碳水等于白练。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"零食热量不高，多吃没事"</b><p>零食是热量+糖+盐的空包，吃零食会挤占训练餐的份额。</p></div></div>
+    </div>
+  </section>
+
+  <footer>
+    高校田径队 · 队内饮食指导手册<br>
+    先吃好饭，再谈成绩。
+    <small>营养数据参考《中国食物成分表》· 项目营养参考运动生理学（第6版）· NSCA / ACSM 运动营养指南 · ISSN 运动营养立场声明 · IOC 运动员补剂共识。按每 100g 可食部计算，克重请按实际份量折算。本地页面，无需联网。</small>
+  </footer>
+</div>
+
+<!-- 底部餐盘栏 -->
+<div class="trackbar">
+  <div class="track-inner">
+    <div class="t">今日餐盘 · <span id="tCount">0</span> 样<em>　蛋白 <span id="tP">0</span>/<span id="tGoal">0</span>g · 热量 <span id="tK">0</span> kcal</em></div>
+    <div class="pbar"><i id="pFill" style="width:0%"></i><span id="pPct">0%</span></div>
+    <button onclick="resetTrack()">重置</button>
+  </div>
+</div>
+
+<!-- 弹窗容器 -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+/* ================= 常量 ================= */
+const NRV={kcal:2000,p:60,c:300,f:60};
+const EVENTS={sprint:"短跑/跳跃/跨栏（速度爆发组）",endurance:"中长跑/长跑（耐力组）",throw:"投掷（力量组）"};
+const GOALS={maintain:{n:"维持体重",k:[32,36],c:[4,5]},
+             gain:{n:"增肌",k:[38,42],c:[5,6]},
+             cut:{n:"减脂",k:[26,30],c:[3,4]}};
+/* 蛋白质系数按项目组区分：速度爆发/力量 1.6-2.2，耐力 1.2-1.7（NSCA/ISSN） */
+const PCOEF={sprint:{maintain:1.7,gain:2.1,cut:2.2},
+             endurance:{maintain:1.4,gain:1.7,cut:1.8},
+             throw:{maintain:1.8,gain:2.2,cut:2.2}};
+function pcoef(){return (PCOEF[state.event]||PCOEF.sprint)[state.goal]}
+function proteinGoal(){return Math.round(state.weight*pcoef())}
+const CATS=[
+  {id:'',name:'全部',cls:''},
+  {id:'dine',name:'🍜 外食·攻略',cls:''},
+  {id:'carb',name:'🍚 碳水',cls:'orange'},
+  {id:'protein',name:'🥚 蛋白',cls:''},
+  {id:'fat',name:'🥑 脂肪',cls:'yellow'},
+  {id:'veg',name:'🥦 蔬果',cls:''},
+  {id:'snack',name:'🍿 零食·适量',cls:'yellow'},
+  {id:'bad',name:'🚫 零食·避雷',cls:'red'}
+];
+
+/* ================= 食物数据（99 种） ================= */
+const FOODS=[
+/* —— 优质碳水 18 —— */
+{id:'rice',name:'米饭',emoji:'🍚',cat:'carb',kcal:116,p:2.6,c:25.9,f:0.3,tip:'训练主食，补糖原第一选择',prio:['endurance']},
+{id:'brownrice',name:'糙米饭',emoji:'🍚',cat:'carb',kcal:111,p:2.6,c:23,f:0.9,tip:'粗粮扛饿，慢碳续航久',prio:['endurance']},
+{id:'oats',name:'燕麦',emoji:'🥣',cat:'carb',kcal:367,p:15,c:61.6,f:6.7,tip:'早餐赛前扛饿，血糖稳不犯困',prio:['endurance']},
+{id:'quinoa',name:'藜麦',emoji:'🌾',cat:'carb',kcal:368,p:14.1,c:64.2,f:6.1,tip:'少见的全蛋白谷物'},
+{id:'millet',name:'小米',emoji:'🍚',cat:'carb',kcal:361,p:9,c:72.8,f:3.1,tip:'养胃易消化'},
+{id:'sweetpotato',name:'红薯',emoji:'🍠',cat:'carb',kcal:86,p:1.6,c:20.1,f:0.2,tip:'粗粮，升糖慢'},
+{id:'purplepotato',name:'紫薯',emoji:'🍠',cat:'carb',kcal:82,p:2.3,c:17.6,f:0.1,tip:'花青素抗氧化'},
+{id:'yam',name:'山药',emoji:'🍠',cat:'carb',kcal:57,p:1.9,c:12.4,f:0.2,tip:'护肠胃'},
+{id:'taro',name:'芋头',emoji:'🍠',cat:'carb',kcal:79,p:2.2,c:17.5,f:0.2,tip:'粗粮'},
+{id:'corn',name:'玉米',emoji:'🌽',cat:'carb',kcal:112,p:4,c:22.8,f:1.2,tip:'便携粗粮，随手补给'},
+{id:'potato',name:'土豆',emoji:'🥔',cat:'carb',kcal:77,p:2,c:17.2,f:0.2,tip:'高钾，练后恢复肌肉电活动'},
+{id:'pumpkin',name:'南瓜',emoji:'🎃',cat:'carb',kcal:22,p:0.7,c:5.3,f:0.1,tip:'低热量'},
+{id:'banana',name:'香蕉',emoji:'🍌',cat:'carb',kcal:93,p:1.4,c:22,f:0.2,tip:'练前练后万能能量块',prio:['sprint','endurance']},
+{id:'bread',name:'全麦面包',emoji:'🍞',cat:'carb',kcal:246,p:8.5,c:43.1,f:3.5,tip:'练前1-2小时快速备餐',prio:['sprint','endurance']},
+{id:'mantou',name:'馒头',emoji:'🍞',cat:'carb',kcal:223,p:7,c:47,f:1.1,tip:'中式主食'},
+{id:'pasta',name:'意大利面',emoji:'🍝',cat:'carb',kcal:158,p:5.8,c:30.9,f:0.9,tip:'比赛日碳水大餐主力',prio:['endurance','throw']},
+{id:'buckwheat',name:'荞麦面',emoji:'🍜',cat:'carb',kcal:340,p:11.3,c:70.2,f:2.7,tip:'慢碳，糖原储备',prio:['endurance']},
+{id:'noodles',name:'面条（煮）',emoji:'🍜',cat:'carb',kcal:110,p:3.6,c:22.5,f:0.4,tip:'练前练后都行'},
+/* —— 优质蛋白 21 —— */
+{id:'egg',name:'鸡蛋',emoji:'🥚',cat:'protein',kcal:144,p:13.3,c:2.8,f:8.8,tip:'性价比最高的完全蛋白',prio:['sprint','throw']},
+{id:'eggwhite',name:'鸡蛋清',emoji:'🥚',cat:'protein',kcal:48,p:11.6,c:1.1,f:0.1,tip:'超低脂蛋白，练后补',prio:['endurance']},
+{id:'chicken',name:'鸡胸肉',emoji:'🍗',cat:'protein',kcal:165,p:31,c:0,f:3.6,tip:'低脂高蛋白，修复肌肉涨力量',prio:['sprint','throw']},
+{id:'chickenleg',name:'去皮鸡腿',emoji:'🍗',cat:'protein',kcal:181,p:24.6,c:0,f:7.8,tip:'比鸡胸香，蛋白照样够',prio:['throw']},
+{id:'beef',name:'瘦牛肉',emoji:'🥩',cat:'protein',kcal:106,p:20.2,c:1.2,f:2.3,tip:'蛋白加铁，防贫血抗疲劳',prio:['throw']},
+{id:'beefshank',name:'牛腱子',emoji:'🥩',cat:'protein',kcal:98,p:20,c:1.7,f:1.6,tip:'低脂口感好',prio:['throw']},
+{id:'porkloin',name:'猪里脊',emoji:'🥓',cat:'protein',kcal:155,p:20.2,c:0,f:7.9,tip:'便宜高蛋白'},
+{id:'duckbreast',name:'鸭胸',emoji:'🦆',cat:'protein',kcal:90,p:15,c:0,f:3.2,tip:'低脂禽肉'},
+{id:'salmon',name:'三文鱼',emoji:'🐟',cat:'protein',kcal:139,p:17.2,c:0,f:7.8,tip:'高蛋白还补Omega-3，抗炎助恢复',prio:['throw']},
+{id:'cod',name:'鳕鱼',emoji:'🐟',cat:'protein',kcal:88,p:20.4,c:0.5,f:0.5,tip:'极低脂，练后友好'},
+{id:'sole',name:'龙利鱼',emoji:'🐟',cat:'protein',kcal:105,p:18.5,c:0,f:3.1,tip:'没刺好入口'},
+{id:'tuna',name:'金枪鱼（水浸）',emoji:'🐠',cat:'protein',kcal:116,p:25.5,c:0,f:0.8,tip:'罐头方便，蛋白快充',prio:['sprint','throw']},
+{id:'shrimp',name:'虾仁',emoji:'🍤',cat:'protein',kcal:93,p:18.6,c:2.8,f:0.8,tip:'低脂高蛋白，练后恢复友好',prio:['endurance']},
+{id:'tofu',name:'豆腐',emoji:'🍲',cat:'protein',kcal:105,p:12.2,c:3.4,f:5.3,tip:'植物蛋白，便宜又好消化',prio:['endurance']},
+{id:'milk',name:'牛奶',emoji:'🥛',cat:'protein',kcal:54,p:3,c:3.4,f:3.2,tip:'补蛋白又补钙，护骨骼',prio:['sprint','throw']},
+{id:'yogurt',name:'无糖酸奶',emoji:'🥛',cat:'protein',kcal:63,p:3.5,c:4.5,f:2.7,tip:'夜宵解馋，还补蛋白',prio:['endurance']},
+{id:'greek',name:'希腊酸奶',emoji:'🥛',cat:'protein',kcal:130,p:10.3,c:3.9,f:8.6,tip:'高蛋白酸奶',prio:['throw']},
+{id:'whey',name:'乳清蛋白粉',emoji:'🥤',cat:'protein',kcal:400,p:75,c:8,f:6,tip:'练后补蛋白最快一档',prio:['sprint','throw']},
+{id:'edamame',name:'毛豆',emoji:'🫛',cat:'protein',kcal:131,p:13.1,c:10.5,f:5,tip:'下酒零嘴改成蛋白补给'},
+{id:'chickpea',name:'鹰嘴豆',emoji:'🫘',cat:'protein',kcal:364,p:19,c:61,f:6,tip:'植物蛋白主食'},
+{id:'tofudry',name:'低脂豆干',emoji:'🥡',cat:'protein',kcal:140,p:14,c:4,f:5,tip:'便携蛋白，加餐好选'},
+/* —— 健康脂肪 8 —— */
+{id:'walnut',name:'核桃',emoji:'🌰',cat:'fat',kcal:646,p:14.9,c:19.1,f:58.8,tip:'一小把补能量，护关节',prio:['throw']},
+{id:'almond',name:'杏仁',emoji:'🌰',cat:'fat',kcal:578,p:21.2,c:21.6,f:50.6,tip:'维生素E大户'},
+{id:'cashew',name:'腰果',emoji:'🥜',cat:'fat',kcal:559,p:17.3,c:41.6,f:43.9,tip:'能量密集'},
+{id:'peanuts',name:'花生',emoji:'🥜',cat:'fat',kcal:574,p:24.8,c:21.7,f:44.3,tip:'便宜又顶饿'},
+{id:'pb',name:'花生酱',emoji:'🥜',cat:'fat',kcal:588,p:25.1,c:13.1,f:50.4,tip:'增肌口粮，抹面包',prio:['throw']},
+{id:'avocado',name:'牛油果',emoji:'🥑',cat:'fat',kcal:160,p:2,c:8.5,f:14.7,tip:'优质脂肪，关节恢复期友好',prio:['throw']},
+{id:'oliveoil',name:'橄榄油',emoji:'🫒',cat:'fat',kcal:899,p:0,c:0,f:99.9,tip:'抗炎，烹饪主力油',prio:['throw']},
+{id:'darkchoc',name:'黑巧克力85%',emoji:'🍫',cat:'fat',kcal:598,p:7.8,c:45.9,f:42.6,tip:'练前小块提神供能',prio:['throw']},
+/* —— 蔬菜水果 23 —— */
+{id:'broccoli',name:'西兰花',emoji:'🥦',cat:'veg',kcal:36,p:4.1,c:4.3,f:0.6,tip:'维生素矿物质，抗疲劳'},
+{id:'spinach',name:'菠菜',emoji:'🥬',cat:'veg',kcal:28,p:2.6,c:4.5,f:0.3,tip:'补铁补叶酸，别挑食'},
+{id:'carrot',name:'胡萝卜',emoji:'🥕',cat:'veg',kcal:39,p:1,c:9.6,f:0.2,tip:'随手补维生素A'},
+{id:'tomato',name:'番茄',emoji:'🍅',cat:'veg',kcal:20,p:0.9,c:4,f:0.2,tip:'低热量，随便吃'},
+{id:'cherrytomato',name:'圣女果',emoji:'🍅',cat:'veg',kcal:22,p:1,c:3.9,f:0.2,tip:'低热量解馋'},
+{id:'cucumber',name:'黄瓜',emoji:'🥒',cat:'veg',kcal:16,p:0.8,c:2.9,f:0.2,tip:'低热量，饿了随便吃'},
+{id:'lettuce',name:'生菜',emoji:'🥬',cat:'veg',kcal:16,p:1.3,c:2,f:0.4,tip:'水煮蘸酱都行'},
+{id:'cabbage',name:'白菜',emoji:'🥬',cat:'veg',kcal:20,p:1.5,c:3.2,f:0.2,tip:'便宜大碗'},
+{id:'celery',name:'芹菜',emoji:'🥬',cat:'veg',kcal:22,p:0.8,c:4.5,f:0.2,tip:'低热量'},
+{id:'mushroom',name:'口蘑',emoji:'🍄',cat:'veg',kcal:20,p:3.5,c:3,f:0.5,tip:'蔬菜里的蛋白担当'},
+{id:'woodear',name:'木耳（鲜）',emoji:'🍄',cat:'veg',kcal:27,p:1.5,c:6,f:0.2,tip:'膳食纤维'},
+{id:'asparagus',name:'芦笋',emoji:'🥒',cat:'veg',kcal:19,p:2.2,c:3.4,f:0.1,tip:'低热量'},
+{id:'greenpepper',name:'青椒',emoji:'🫑',cat:'veg',kcal:26,p:1.3,c:5.4,f:0.3,tip:'维C补手'},
+{id:'orange',name:'橙子',emoji:'🍊',cat:'veg',kcal:48,p:0.8,c:11.1,f:0.2,tip:'补维C，促恢复'},
+{id:'apple',name:'苹果',emoji:'🍎',cat:'veg',kcal:53,p:0.4,c:13.7,f:0.2,tip:'日常随手吃，果胶护肠胃'},
+{id:'blueberry',name:'蓝莓',emoji:'🫐',cat:'veg',kcal:57,p:0.7,c:14.5,f:0.3,tip:'抗氧化，练后恢复快',prio:['sprint','endurance']},
+{id:'strawberry',name:'草莓',emoji:'🍓',cat:'veg',kcal:32,p:1,c:7.1,f:0.2,tip:'低糖水果，减脂友好'},
+{id:'kiwi',name:'猕猴桃',emoji:'🥝',cat:'veg',kcal:61,p:1.1,c:14.5,f:0.5,tip:'维C大户，抗疲劳'},
+{id:'grape',name:'葡萄',emoji:'🍇',cat:'veg',kcal:45,p:0.4,c:10.3,f:0.3,tip:'当加餐，别当正餐'},
+{id:'watermelon',name:'西瓜',emoji:'🍉',cat:'veg',kcal:26,p:0.6,c:6.8,f:0.1,tip:'水分足，别一次抱半个'},
+{id:'cherry',name:'樱桃',emoji:'🍒',cat:'veg',kcal:46,p:1.1,c:10.2,f:0.2,tip:'低热量水果'},
+{id:'pear',name:'梨',emoji:'🍐',cat:'veg',kcal:51,p:0.4,c:13.3,f:0.2,tip:'润嗓'},
+{id:'pomelo',name:'柚子',emoji:'🍊',cat:'veg',kcal:42,p:0.8,c:9.5,f:0.2,tip:'低糖，解腻'},
+/* —— 零食 · 适量 9 —— */
+{id:'dailynuts',name:'每日坚果一包',emoji:'🥜',cat:'snack',kcal:550,p:15,c:35,f:40,tip:'适量：一小包封顶，别续袋'},
+{id:'proteinbar',name:'蛋白棒',emoji:'🍫',cat:'snack',kcal:350,p:30,c:35,f:10,tip:'适量：练后当补剂吃，别当零食'},
+{id:'seaweed',name:'海苔（原味）',emoji:'🍘',cat:'snack',kcal:330,p:45,c:32,f:5,tip:'适量：买低盐版，别整包扫'},
+{id:'beefjerky',name:'低盐牛肉干',emoji:'🥩',cat:'snack',kcal:409,p:40,c:12,f:20,tip:'适量：应急蛋白，看配料表选低糖低盐'},
+{id:'ricecrack',name:'全麦苏打饼干',emoji:'🍘',cat:'snack',kcal:395,p:10,c:72,f:5,tip:'适量：两三片解馋，一包就超标'},
+{id:'sparkling',name:'无糖气泡水',emoji:'🍾',cat:'snack',kcal:0,p:0,c:0,f:0,tip:'适量：解馋不增重，最安全的快乐水'},
+{id:'raisins',name:'葡萄干（少量）',emoji:'🍇',cat:'snack',kcal:344,p:3,c:79,f:0.5,tip:'适量：一把是上限，别整包'},
+{id:'driedstraw',name:'冻干草莓',emoji:'🍓',cat:'snack',kcal:340,p:5,c:80,f:2,tip:'适量：低脂脆脆，解馋可以'},
+{id:'almondmilk',name:'无糖杏仁奶',emoji:'🥛',cat:'snack',kcal:20,p:0.8,c:0.5,f:1.5,tip:'适量：夜宵垫胃，别当水喝'},
+/* —— 零食 · 避雷 20 —— */
+{id:'chips',name:'薯片',emoji:'🍟',cat:'bad',kcal:548,p:6,c:55,f:33,tip:'避雷：高钠+可能反式脂肪，一包毁一天'},
+{id:'latiao',name:'辣条',emoji:'🥵',cat:'bad',kcal:430,p:12,c:40,f:25,tip:'避雷：高盐高油高添加剂，伤肠胃'},
+{id:'cupnoodle',name:'泡面',emoji:'🍜',cat:'bad',kcal:472,p:10,c:61,f:22,tip:'避雷：钠超一天摄入，别当训练餐'},
+{id:'soda',name:'碳酸饮料',emoji:'🥤',cat:'bad',kcal:43,p:0,c:10.6,f:0,tip:'避雷：空热量+磷伤钙，越喝越渴'},
+{id:'milktea',name:'全糖奶茶',emoji:'🧋',cat:'bad',kcal:90,p:1.5,c:15,f:3,tip:'避雷：一杯≈400kcal+50g糖，血糖坐过山车'},
+{id:'preserved',name:'蜜饯话梅',emoji:'🍬',cat:'bad',kcal:321,p:1,c:80,f:1,tip:'避雷：高糖高钠，吃几颗就超标'},
+{id:'whitechoc',name:'白巧克力',emoji:'🍫',cat:'bad',kcal:539,p:6,c:59,f:32,tip:'避雷：纯糖纯油，没营养'},
+{id:'yandanpai',name:'蛋黄派',emoji:'🍰',cat:'bad',kcal:460,p:5,c:60,f:22,tip:'避雷：反式脂肪风险'},
+{id:'waffle',name:'威化饼干',emoji:'🍪',cat:'bad',kcal:540,p:6,c:60,f:30,tip:'避雷：糖油炸弹'},
+{id:'icecream',name:'奶油冰淇淋',emoji:'🍦',cat:'bad',kcal:207,p:3,c:24,f:11,tip:'避雷：训练后别吃，长肉最快'},
+{id:'friedchicken',name:'炸鸡',emoji:'🍗',cat:'bad',kcal:279,p:20,c:5,f:21,tip:'避雷：高脂油炸，消化慢'},
+{id:'fries',name:'薯条',emoji:'🍟',cat:'bad',kcal:298,p:3.6,c:41,f:15,tip:'避雷：反式脂肪+高盐'},
+{id:'sausage',name:'烤肠',emoji:'🌭',cat:'bad',kcal:508,p:15,c:10,f:46,tip:'避雷：高钠加工肉'},
+{id:'mooncake',name:'月饼',emoji:'🥮',cat:'bad',kcal:410,p:8,c:55,f:18,tip:'避雷：高糖高油，一块顶一顿饭'},
+{id:'creamcake',name:'奶油蛋糕',emoji:'🎂',cat:'bad',kcal:348,p:4,c:40,f:20,tip:'避雷：糖油混合'},
+{id:'softcandy',name:'果味软糖',emoji:'🍬',cat:'bad',kcal:400,p:0,c:95,f:0,tip:'避雷：纯糖，一点营养没有'},
+{id:'yutiao',name:'油条',emoji:'🥖',cat:'bad',kcal:388,p:7,c:50,f:17,tip:'避雷：油炸淀粉'},
+{id:'friedchop',name:'炸鸡排',emoji:'🍤',cat:'bad',kcal:320,p:18,c:20,f:18,tip:'避雷：高脂高盐'},
+{id:'shaqima',name:'沙琪玛',emoji:'🍮',cat:'bad',kcal:434,p:5,c:62,f:19,tip:'避雷：油炸糖块'},
+{id:'cookie',name:'曲奇饼干',emoji:'🍪',cat:'bad',kcal:546,p:7,c:62,f:29,tip:'避雷：黄油糖，高热量'},
+/* —— 消炎恢复食材 8 —— */
+{id:'sardine',name:'沙丁鱼(罐)',emoji:'🐟',cat:'protein',kcal:208,p:24.6,c:0,f:11.5,tip:'Omega-3大户，每周2次，配饭补蛋白'},
+{id:'flaxseed',name:'亚麻籽',emoji:'🌰',cat:'fat',kcal:534,p:18.3,c:28.9,f:42.2,tip:'植物Omega-3，撒酸奶燕麦里'},
+{id:'turmeric',name:'姜黄',emoji:'🧡',cat:'veg',kcal:310,p:8,c:65,f:10,tip:'配黑胡椒吸收翻倍，炖菜咖喱放'},
+{id:'ginger',name:'生姜',emoji:'🫚',cat:'veg',kcal:41,p:1.8,c:10,f:0.7,tip:'减轻运动后肌肉酸痛，炒菜泡水'},
+{id:'garlic',name:'大蒜',emoji:'🧄',cat:'veg',kcal:128,p:6.4,c:27,f:0.5,tip:'大蒜素抗炎抗氧化，切碎下锅'},
+{id:'greentea',name:'绿茶',emoji:'🍵',cat:'veg',kcal:1,p:0,c:0.2,f:0,tip:'茶多酚抗氧化，每天1-2杯别加糖'},
+{id:'pineapple',name:'菠萝',emoji:'🍍',cat:'veg',kcal:44,p:0.5,c:10.8,f:0.1,tip:'菠萝蛋白酶助消化，练后水果'},
+{id:'papaya',name:'木瓜',emoji:'🍈',cat:'veg',kcal:29,p:0.5,c:6.9,f:0.2,tip:'木瓜蛋白酶帮助恢复，别当药'},
+/* —— 外食攻略 22 —— */
+{id:'lrbeef',name:'兰州牛肉面',emoji:'🍜',cat:'dine',flag:'good',kcal:120,p:5,c:20,f:2,tip:'选清汤少辣油，面+牛肉+青菜，蛋白碳水都稳'},
+{id:'malatang',name:'麻辣烫·自选菜',emoji:'🍲',cat:'dine',flag:'good',kcal:90,p:8,c:8,f:2,tip:'万能外食：多夹青菜豆制品瘦肉，选清汤别喝汤，少麻酱'},
+{id:'shaxian',name:'沙县·蒸饺鸡腿饭',emoji:'🥟',cat:'dine',flag:'good',kcal:200,p:10,c:24,f:7,tip:'皮薄馅有肉，配份青菜更稳'},
+{id:'changfen',name:'肠粉',emoji:'🥢',cat:'dine',flag:'good',kcal:110,p:4,c:20,f:2,tip:'低油碳水，练前吃好消化，酱少放'},
+{id:'huangmenji',name:'黄焖鸡米饭',emoji:'🍛',cat:'dine',flag:'good',kcal:180,p:12,c:18,f:6,tip:'鸡腿+土豆+饭，饭减半少喝汤'},
+{id:'boileddumpling',name:'水饺（菜肉）',emoji:'🥟',cat:'dine',flag:'good',kcal:220,p:9,c:27,f:8,tip:'12-15个配青菜是正餐，别配碳酸'},
+{id:'baozai',name:'煲仔饭',emoji:'🍲',cat:'dine',flag:'mod',kcal:210,p:9,c:26,f:8,tip:'锅巴香但油重，一周1次，腊味少加多加青菜'},
+{id:'gaijiao',name:'盖浇饭',emoji:'🍛',cat:'dine',flag:'mod',kcal:160,p:8,c:22,f:5,tip:'米饭量巨大，让老板少饭多菜，别把汤拌完'},
+{id:'bibimbap',name:'石锅拌饭',emoji:'🍚',cat:'dine',flag:'mod',kcal:170,p:7,c:25,f:5,tip:'酱料高糖，少放酱多加蔬菜'},
+{id:'guoqiao',name:'过桥米线',emoji:'🍜',cat:'dine',flag:'mod',kcal:110,p:4,c:18,f:3,tip:'主要是碳水，加点肉蛋，别喝汤'},
+{id:'luosifen',name:'螺蛳粉',emoji:'🍝',cat:'dine',flag:'mod',kcal:180,p:5,c:26,f:7,tip:'高盐高油，最多一周一次，汤别喝完'},
+{id:'chongqing',name:'重庆小面',emoji:'🍜',cat:'dine',flag:'mod',kcal:200,p:6,c:25,f:9,tip:'辣油爆表，选清汤微辣'},
+{id:'curryrice',name:'咖喱饭',emoji:'🍛',cat:'dine',flag:'mod',kcal:190,p:8,c:27,f:6,tip:'咖喱块高油，配白饭别配炸物'},
+{id:'bbqrice',name:'烤肉拌饭',emoji:'🍚',cat:'dine',flag:'mod',kcal:190,p:10,c:22,f:7,tip:'肉是蛋白，但酱多油大，酱减半'},
+{id:'roujiamo',name:'肉夹馍',emoji:'🥙',cat:'dine',flag:'mod',kcal:260,p:12,c:28,f:11,tip:'蛋白够但油大，当一餐行，别加烤肠'},
+{id:'grillburger',name:'烤鸡堡',emoji:'🍔',cat:'dine',flag:'mod',kcal:240,p:13,c:25,f:9,tip:'选烤不选炸，去酱，薯条换沙拉'},
+{id:'malaxiangguo',name:'麻辣香锅',emoji:'🌶️',cat:'dine',flag:'bad',kcal:230,p:10,c:15,f:15,tip:'重油重盐，一锅顶一天脂肪，赛期别碰'},
+{id:'maocai',name:'冒菜（红油版）',emoji:'🍲',cat:'dine',flag:'bad',kcal:210,p:9,c:12,f:15,tip:'红油汤底全是油，真想选清汤'},
+{id:'kaolengmian',name:'烤冷面',emoji:'🥞',cat:'dine',flag:'bad',kcal:220,p:7,c:30,f:9,tip:'甜面酱+油，隐形糖，很容易超标'},
+{id:'chinesefriedrice',name:'重油炒饭',emoji:'🍳',cat:'dine',flag:'bad',kcal:220,p:6,c:28,f:9,tip:'饭粒吸油，蛋炒饭也别天天吃'},
+{id:'jiangxiangbing',name:'手抓饼/酱香饼',emoji:'🫓',cat:'dine',flag:'bad',kcal:280,p:6,c:28,f:16,tip:'油煎+酱料，热量刺客'},
+{id:'choufu',name:'炸臭豆腐',emoji:'🧄',cat:'dine',flag:'bad',kcal:220,p:8,c:16,f:15,tip:'油炸+重酱，解馋可以别当饭'},
+];
+
+/* ================= 食谱 ================= */
+const RECIPES={
+gain:{cls:'gain',ttl:'💪 增肌食谱 · 约 3000–3400 kcal/天（70kg 参考）',
+  meals:[
+  ['07:30','早餐','燕麦60g + 牛奶300ml + 鸡蛋×2 + 香蕉×1','≈蛋白 30g'],
+  ['10:00','加餐','全麦面包×2片 + 花生酱1勺','≈蛋白 12g'],
+  ['12:30','午餐','米饭250g + 鸡胸150g + 西兰花1盘','≈蛋白 40g'],
+  ['15:30','训前','香蕉×1 或 全麦面包1片','≈蛋白 3g'],
+  ['17:30','训后','乳清蛋白1勺 + 面条1碗','≈蛋白 30g'],
+  ['19:30','晚餐','米饭200g + 瘦牛肉150g + 蔬菜','≈蛋白 35g'],
+  ['22:00','夜宵','无糖酸奶1杯 + 核桃一小把','≈蛋白 12g']]},
+cut:{cls:'cut',ttl:'🔥 减脂食谱 · 约 1800–2000 kcal/天（65kg 参考）',
+  meals:[
+  ['07:30','早餐','燕麦50g + 牛奶250ml + 鸡蛋×2','≈蛋白 27g'],
+  ['09:30','训前','香蕉×1（大强度训练日）','≈蛋白 2g'],
+  ['12:00','午餐','米饭150g + 鸡胸150g + 西兰花1盘','≈蛋白 36g'],
+  ['16:00','训后','乳清蛋白1勺 + 全麦面包1片','≈蛋白 29g'],
+  ['19:00','晚餐','糙米100g + 鱼/虾150g + 菠菜1盘','≈蛋白 32g'],
+  ['22:00','夜宵','无糖酸奶1杯','≈蛋白 7g']]}
+};
+let recipeMode='gain';
+
+/* ================= 状态 ================= */
+const store={get(k,d){try{return localStorage.getItem(k)||d}catch(e){return d}},
+            set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let state={
+  event:store.get('ev',''),
+  cat:'',
+  search:'',
+  goal:store.get('goal','maintain'),
+  weight:parseFloat(store.get('weight',''))||65,
+  eaten:(()=>{try{return JSON.parse(store.get('eaten','[]'))}catch(e){return []}})(),
+  custom:(()=>{try{return JSON.parse(store.get('custom','[]'))}catch(e){return []}})(),
+  plan:(()=>{try{return JSON.parse(store.get('plan','null'))}catch(e){return null}})(),
+};
+const $=id=>document.getElementById(id);
+
+/* ================= 板块一：项目 + 目标 ================= */
+function setEvent(ev){
+  state.event=ev;store.set('ev',ev);
+  document.querySelectorAll('.event').forEach(c=>c.classList.toggle('sel',c.dataset.event===ev));
+  const b=$('banner'),t=$('bannerTxt');
+  if(ev){
+    b.classList.add('show');
+    const m=ev==='sprint'?'首要营养素：碳水+蛋白质——爆发项目训练强度大，碳水保输出、蛋白保爆发力。'
+            :ev==='endurance'?'首要营养素：碳水（★★★★★）——糖原储备决定中长跑成绩，训练前后必须吃够。'
+            :'首要营养素：蛋白质（★★★★★）+ 适量脂肪——力量项目靠肌肉量，肉蛋管够。';
+    t.innerHTML='已选：<b>'+EVENTS[ev]+'</b>　'+m;
+  }else b.classList.remove('show');
+  renderFoods();
+}
+function setGoal(g){
+  state.goal=g;store.set('goal',g);
+  document.querySelectorAll('#goalSeg button').forEach(b=>b.classList.toggle('on',b.dataset.goal===g));
+  updateTargets();
+}
+function setWeight(v){
+  const w=parseFloat(v);
+  state.weight=(w>0&&w<=200)?w:65;store.set('weight',state.weight);
+  updateTargets();
+}
+function updateTargets(){
+  const w=state.weight,g=GOALS[state.goal];
+  const rng=(a,b)=>Math.round(w*a)+'–'+Math.round(w*b);
+  $('weightIn').value=w;
+  $('targets').innerHTML=
+    '按 <b>'+w+'kg · '+g.n+'</b> 计算　'
+    +'<b>蛋白</b>约 '+proteinGoal()+' g/天　'
+    +'<b>热量</b>'+rng(g.k[0],g.k[1])+' kcal/天　'
+    +'<b>碳水</b>'+rng(g.c[0],g.c[1])+' g/天';
+  updateTrack();
+}
+
+/* ================= 板块二：食物库 ================= */
+function renderChips(){
+  $('chips').innerHTML=CATS.map(c=>
+    '<span class="chip'+(state.cat===c.id?' on '+c.cls:'')+'" onclick="setCat(\''+c.id+'\')">'+c.name+'</span>').join('');
+}
+function setCat(c){state.cat=c;renderChips();renderFoods();}
+function onSearch(v){state.search=v.trim();renderFoods();}
+
+function nrv(v,ref){return Math.round(v/ref*100)}
+function cap(v){return Math.min(100,v)}
+
+function renderFoods(){
+  const term=state.search;
+  const list=FOODS.filter(f=>{
+    if(state.cat&&f.cat!==state.cat)return false;
+    if(term&&!f.name.includes(term)&&!f.tip.includes(term))return false;
+    return true;
+  });
+  const fmt=f=>{
+    const isPrio=state.event&&f.prio&&f.prio.includes(state.event);
+    const eaten=state.eaten.some(x=>x.id===f.id);
+    const dine=f.cat==='dine';
+    const flagCls=dine?(f.flag==='bad'?' bad':f.flag==='mod'?' snack':' good'):f.cat==='bad'?' bad':f.cat==='snack'?' snack':'';
+    const badge=isPrio?'<span class="badge prio">★优先</span>'
+      :f.cat==='bad'?'<span class="badge bad">避雷</span>'
+      :f.cat==='snack'?'<span class="badge snack">适量</span>'
+      :dine?(f.flag==='bad'?'<span class="badge bad">避雷</span>':f.flag==='mod'?'<span class="badge snack">适量</span>':'<span class="badge good">可选</span>')
+      :'';
+    const cls=(isPrio?' prio':'')+flagCls+(eaten?' eaten':'');
+    return '<div class="food'+cls+'" onclick="openFood(\''+f.id+'\')">'
+      +'<span class="emoji">'+f.emoji+'</span>'
+      +'<b>'+f.name+badge+'</b>'
+      +'<p>'+f.tip+'</p>'
+      +'<span class="plus" onclick="event.stopPropagation();openPortion(\''+f.id+'\')">'+(eaten?'✓':'＋')+'</span>'
+      +'</div>';
+  };
+  $('foodGrid').innerHTML=list.map(fmt).join('');
+  $('foodCount').textContent='共 '+FOODS.length+' 种 · 当前显示 '+list.length+' 种'+(state.event?' · 橙色边框=你的项目优先吃够':'');
+}
+
+const DEFAULTS={rice:150,brownrice:150,oats:45,quinoa:150,millet:150,sweetpotato:150,purplepotato:150,yam:150,taro:150,corn:150,potato:150,pumpkin:150,banana:120,bread:50,mantou:100,pasta:180,buckwheat:180,noodles:250,egg:50,eggwhite:80,chicken:150,chickenleg:150,beef:150,beefshank:150,porkloin:150,duckbreast:150,salmon:150,cod:150,sole:150,tuna:100,shrimp:120,tofu:150,milk:250,yogurt:200,greek:150,whey:30,edamame:100,chickpea:100,tofudry:100,walnut:20,almond:20,cashew:20,peanuts:20,pb:20,avocado:80,oliveoil:10,darkchoc:20,broccoli:150,spinach:150,carrot:100,tomato:150,cherrytomato:100,cucumber:150,lettuce:100,cabbage:150,celery:100,mushroom:100,woodear:100,asparagus:100,greenpepper:100,orange:150,apple:150,blueberry:80,strawberry:100,kiwi:80,grape:100,watermelon:200,cherry:100,pear:150,pomelo:150,sardine:60,flaxseed:10,turmeric:2,ginger:10,garlic:10,greentea:400,pineapple:150,papaya:150,dailynuts:25,proteinbar:50,seaweed:10,beefjerky:30,ricecrack:30,sparkling:350,raisins:20,driedstraw:30,almondmilk:250,chips:50,latiao:30,cupnoodle:75,soda:330,milktea:500,preserved:20,whitechoc:30,yandanpai:30,waffle:30,icecream:100,friedchicken:150,fries:100,sausage:100,mooncake:100,creamcake:100,softcandy:20,yutiao:60,friedchop:100,shaqima:50,cookie:30,lrbeef:400,malatang:400,shaxian:250,changfen:150,huangmenji:300,boileddumpling:250,baozai:300,gaijiao:400,bibimbap:300,guoqiao:350,luosifen:350,chongqing:250,curryrice:350,bbqrice:350,roujiamo:180,grillburger:180,malaxiangguo:300,maocai:300,kaolengmian:200,chinesefriedrice:300,jiangxiangbing:200,choufu:200};
+const DINE_PRESETS={lrbeef:{小:300,中:400,大:550},malatang:{小:300,中:400,大:500},shaxian:{小:200,中:250,大:300},changfen:{小:120,中:150,大:200},huangmenji:{小:250,中:300,大:400},boileddumpling:{小:200,中:250,大:300},baozai:{小:250,中:300,大:350},gaijiao:{小:350,中:400,大:500},bibimbap:{小:250,中:300,大:400},guoqiao:{小:300,中:350,大:450},luosifen:{小:300,中:350,大:400},chongqing:{小:200,中:250,大:300},curryrice:{小:300,中:350,大:400},bbqrice:{小:300,中:350,大:400},roujiamo:{小:150,中:180,大:200},grillburger:{小:150,中:180,大:220},malaxiangguo:{小:250,中:300,大:400},maocai:{小:250,中:300,大:400},kaolengmian:{小:150,中:200,大:250},chinesefriedrice:{小:250,中:300,大:400},jiangxiangbing:{小:150,中:200,大:250},choufu:{小:150,中:200,大:250}};
+
+/* ================= 今日餐盘 ================= */
+function addEaten(id,g){
+  const i=state.eaten.findIndex(x=>x.id===id);
+  if(i>=0)state.eaten.splice(i,1);
+  if(g>0)state.eaten.push({id,grams:g});
+  store.set('eaten',JSON.stringify(state.eaten));
+  renderFoods();updateTrack();
+}
+function openPortion(id){
+  const f=FOODS.find(x=>x.id===id);if(!f)return;
+  const ex=state.eaten.find(x=>x.id===id);
+  const cur=ex?ex.grams:0;
+  const presets=f.cat==='dine'?(DINE_PRESETS[id]||{小:250,中:350,大:450}):null;
+  const g=presets?'':Math.round(DEFAULTS[id]||100);
+  let html='<span class="close" onclick="closeModal()">✕</span>'
+    +'<div class="m-head"><span class="emoji">'+f.emoji+'</span><div><b>'+f.name+'</b><p class="p-sub">'+f.tip+'</p></div></div>';
+  html+=presets?'<div class="p-presets">'+Object.keys(presets).map(k=>'<button class="p-btn'+(cur===presets[k]?' on':'')+'" data-g="'+presets[k]+'" onclick="pickPortion(this,'+presets[k]+')">'+k+'<span>'+presets[k]+'g</span></button>').join('')+'</div>'
+    :'<div class="p-stepper"><button class="step" onclick="stepPortion(\''+id+'\',-10)">−</button><input type="number" id="pGrams" value="'+g+'" min="5" max="1000" step="5" onchange="setPortionInput(\''+id+'\',this.value)"><button class="step" onclick="stepPortion(\''+id+'\',10)">＋</button></div>';
+  html+='<div class="m-btns">'
+    +'<button class="m-btn '+(cur?'act':'')+'" id="pConfirm" onclick="confirmPortion(\''+id+'\')">'+(cur?'✓ 已计入餐盘（点一下取消）':'＋ 加入今日餐盘')+'</button>'
+    +'<button class="m-btn ghost" onclick="openFood(\''+id+'\')">NRV 营养表</button>'
+    +'</div>';
+  $('modal').innerHTML=html;
+  $('overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function pickPortion(btn,g){
+  document.querySelectorAll('.p-btn').forEach(b=>b.classList.toggle('on',b===btn));
+  $('pConfirm').textContent='＋ 加入今日餐盘';
+  $('pConfirm').classList.remove('act');
+  const iv=$('pGrams');if(iv)iv.value=g;
+}
+function stepPortion(id,d){
+  const inp=$('pGrams');let v=(parseFloat(inp.value)||0)+d;if(v<5)v=5;inp.value=v;
+}
+function setPortionInput(id,v){
+  const x=parseFloat(v)||0;if(x<5)$('pGrams').value=5;
+}
+function confirmPortion(id){
+  const presets=f=>f.cat==='dine'?(DINE_PRESETS[f.id]||{小:250,中:350,大:450}):null;
+  const f=FOODS.find(x=>x.id===id);
+  let g=0;
+  if(presets(f)){
+    const onBtn=document.querySelector('.p-btn.on');
+    g=onBtn?parseInt(onBtn.dataset.g,10):0;
+  }else{
+    const inp=$('pGrams');g=parseFloat(inp?inp.value:0)||0;
+  }
+  addEaten(id,g);
+  closeModal();
+}
+function resetTrack(){state.eaten=[];store.set('eaten','[]');renderFoods();updateTrack();}
+function updateTrack(){
+  let kcal=0,p=0;
+  state.eaten.forEach(e=>{
+    const f=FOODS.find(x=>x.id===e.id);if(!f)return;
+    const k=e.grams/100;kcal+=f.kcal*k;p+=f.p*k;
+  });
+  const goal=proteinGoal();
+  const pct=Math.min(100,Math.round(p/goal*100));
+  $('tCount').textContent=state.eaten.length;
+  $('tP').textContent=Math.round(p);
+  $('tGoal').textContent=goal;
+  $('tK').textContent=Math.round(kcal);
+  $('pFill').style.width=pct+'%';
+  $('pPct').textContent=pct+'%';
+}
+
+/* ================= NRV 弹窗 ================= */
+function openFood(id){
+  const f=FOODS.find(x=>x.id===id);if(!f)return;
+  const r=v=>v<1?v.toFixed(1):Math.round(v);
+  const tags=[];
+  if(nrv(f.p,NRV.p)>=20)tags.push(['高蛋白','var(--green)']);
+  if(nrv(f.c,NRV.c)>=15)tags.push(['高碳水','var(--cyan)']);
+  if(nrv(f.f,NRV.f)>=20)tags.push(['高脂肪','var(--yellow)']);
+  if(nrv(f.kcal,NRV.kcal)>=15)tags.push(['高能量','var(--accent)']);
+  const eaten=state.eaten.some(x=>x.id===f.id);
+  const tagHtml=tags.map(t=>'<span class="m-tag" style="color:'+t[1]+';border:1px solid '+t[1]+'">'+t[0]+'</span>').join('');
+  const isBad=f.cat==='bad'||(f.cat==='dine'&&f.flag==='bad');
+  const isMod=f.cat==='snack'||(f.cat==='dine'&&f.flag==='mod');
+  const warn=isBad
+    ?'<div class="m-warn"><b>🚫 避雷食物</b><p style="color:var(--dim);font-size:12.5px;margin-top:3px">这类吃了不涨成绩，只涨负担。偶尔解馋可以，别当日常。</p></div>'
+    :isMod
+    ?'<div class="m-warn" style="border-color:rgba(240,192,76,.4);background:var(--yellow-bg)"><b style="color:var(--yellow)">⚠ 适量吃</b><p style="color:var(--dim);font-size:12.5px;margin-top:3px">可以吃，但量要掐住：点餐选清淡做法，别回回点。</p></div>'
+    :f.cat==='dine'
+    ?'<div class="m-warn" style="border-color:rgba(47,215,122,.4);background:var(--green-bg)"><b style="color:var(--green)">✅ 可选外食</b><p style="color:var(--dim);font-size:12.5px;margin-top:3px">做法选对了就是合格的训练餐，注意别加太多酱和油。</p></div>'
+    :'';
+
+  $('modal').innerHTML=
+    '<span class="close" onclick="closeModal()">✕</span>'
+    +'<div class="m-head"><span class="emoji">'+f.emoji+'</span><div><b>'+f.name+'</b><div class="tags">'+tagHtml+'</div></div></div>'
+    +warn
+    +'<p class="m-wh">营养成分 · 每 100 克（g）可食部分 · NRV% 按国标参考值计算</p>'
+    +'<div class="nrv">'
+    +nrvRow('能量（千卡）',r(f.kcal)+' kcal',nrv(f.kcal,NRV.kcal),'c-energy')
+    +nrvRow('蛋白质',r(f.p)+' g',nrv(f.p,NRV.p),'c-p')
+    +nrvRow('碳水化合物',r(f.c)+' g',nrv(f.c,NRV.c),'c-c')
+    +nrvRow('脂肪',r(f.f)+' g',nrv(f.f,NRV.f),'c-f')
+    +'</div>'
+    +'<div class="m-tip"><b>'+(isBad?'不建议的理由':'吃法建议')+'</b><p>'+f.tip+'。想找同类？点底部"分类"筛选。</p></div>'
+    +'<div class="m-btns">'
+    +'<button class="m-btn '+(eaten?'act':'')+'" onclick="event.stopPropagation();openPortion(\''+f.id+'\')">'+(eaten?'✓ 已计入餐盘（点一下改份量）':'＋ 选择克重加入餐盘')+'</button>'
+    +'<button class="m-btn ghost" onclick="openTutorial()">怎么读 NRV？</button>'
+    +'</div>';
+  $('overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(()=>{document.querySelectorAll('.nrv-bar i').forEach(b=>b.style.width=b.dataset.w)});
+}
+function nrvRow(label,val,pct,cls){
+  return '<div class="nrv-row '+cls+'"><div class="top"><b>'+label+'</b><i><em>'+pct+'%</em> / '+val+'</i></div>'
+    +'<div class="nrv-bar '+cls+'"><i data-w="'+cap(pct)+'%" style="width:0%"></i></div></div>';
+}
+function closeModal(){
+  $('overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+/* ================= NRV 教程 ================= */
+function openTutorial(){
+  $('modal').innerHTML=
+    '<span class="close" onclick="closeModal()">✕</span>'
+    +'<div class="m-head"><span class="emoji">📖</span><div><b>30 秒读懂 NRV</b></div></div>'
+    +'<div class="tut">'
+    +'<div class="step"><h5>① NRV 是什么</h5><p>营养成分表里"NRV%" = 每 100g 食物中，某营养素占"普通人每日推荐摄入量"的百分比。</p></div>'
+    +'<div class="step"><h5>② 怎么读一个数</h5><p>NRV% ≥ 30% 叫"高"，≤ 5% 叫"低"，中间的看情况。</p>'
+    +'<div class="ex"><span class="pill hi">≥30% 高</span><span class="pill">5%–30% 中等</span><span class="pill lo">≤5% 低</span></div></div>'
+    +'<div class="step"><h5>③ 运动员重点看三行</h5><p>· 蛋白质：越高越好，全天要吃够 120%–200%<br>· 能量：别长期超标，也别断碳<br>· 脂肪：高脂肪≠坏，橄榄油、坚果就是好东西</p></div>'
+    +'<div class="step"><h5>④ 别被百分比吓到</h5><p>它是"占你一天需求的多少"，不是"好坏评分"。减脂期吃高能量食物照样能瘦，看你一天怎么分配。</p></div>'
+    +'<div class="step"><h5>⑤ 举个例子</h5><p>鸡蛋蛋白 NRV≈22%/100g，一个鸡蛋约 50g → 一只补 11%。一天 5–6 只蛋 + 肉 + 奶，蛋白就打满了。</p></div>'
+    +'</div>'
+    +'<div class="m-btns"><button class="m-btn ghost" onclick="closeModal()">知道了</button></div>';
+  $('overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+/* ================= 板块六：食谱 ================= */
+function setRecipe(m){recipeMode=m;renderRecipe();}
+function renderRecipe(){
+  document.querySelectorAll('.rtab').forEach(b=>b.classList.toggle('on',b.dataset.r===recipeMode));
+  const r=RECIPES[recipeMode];
+  $('recipeBox').innerHTML='<p class="r-ttl">'+r.ttl+'</p>'
+    +r.meals.map(m=>
+      '<div class="meal"><span class="tm">'+m[0]+'</span><div><span class="lbl '+r.cls+'">'+m[1]+'</span><p><b>'+m[2]+'</b></p></div><span class="prot">'+m[3]+'</span></div>').join('');
+}
+
+/* ================= 我的食材生成食谱 ================= */
+let myFoods=(()=>{
+  try{
+    const saved=JSON.parse(store.get('myFoods','[]'));
+    if(!Array.isArray(saved))return [];
+    /* 恢复时从库里补全营养值（防止库更新后旧数据残缺） */
+    return saved.map(s=>{
+      const base=FOODS.find(f=>f.id===s.id);
+      return base?{...base,custom:false}:s;
+    });
+  }catch(e){return []}
+})();
+function onMySearch(v){
+  const q=v.trim();
+  const box=$('mpResults');
+  if(!q){ box.innerHTML='<p class="mp-hint" style="margin-bottom:0">↑ 输入食材名称，从食物库挑。</p>'; return; }
+  const matches=FOODS.filter(f=>f.cat!=='bad'&&(f.name.includes(q)||f.tip.includes(q))).slice(0,10);
+  box.innerHTML=matches.length
+    ? matches.map(f=>'<button class="mp-chip" onclick="toggleMyFood(\''+f.id+'\')">'+f.emoji+' '+f.name+'</button>').join('')
+    : '<p class="mp-hint" style="margin:0">库里没有「'+q+'」，可以手动添加 ↓</p>'
+      +'<button class="mp-chip add" onclick="showCustom()">＋ 自定义添加</button>';
+}
+function toggleMyFood(id){
+  const i=myFoods.findIndex(x=>x.id===id);
+  if(i>=0){ myFoods.splice(i,1); renderMySelected(); saveMyFoods(); return; }
+  const f=FOODS.find(x=>x.id===id);
+  if(f)myFoods.push({...f});
+  renderMySelected();saveMyFoods();
+}
+function selectAllFoods(){
+  myFoods=FOODS.filter(f=>f.cat!=='bad').map(f=>({...f}));
+  renderMySelected();saveMyFoods();
+}
+function renderMySelected(){
+  $('mpSelected').innerHTML=myFoods.length
+    ? myFoods.map(f=>'<span class="mp-sel">'+f.emoji+' '+f.name+'<b onclick="toggleMyFood(\''+f.id+'\')">×</b></span>').join('')
+    : '';
+  const c=$('mpSelCount');
+  if(c)c.textContent=myFoods.length?('已选 '+myFoods.length+' 种'):'';
+}
+function clearMyFoods(){myFoods=[];renderMySelected();saveMyFoods();$('mpPlan').innerHTML='';}
+function showCustom(){$('mpCustom').style.display='block'}
+function hideCustom(){$('mpCustom').style.display='none'}
+function saveCustom(){
+  const name=$('cfName').value.trim();
+  const kcal=parseFloat($('cfKcal').value)||0, p=parseFloat($('cfP').value)||0, c=parseFloat($('cfC').value)||0, f=parseFloat($('cfF').value)||0;
+  if(!name||!p){ $('mpPlan').innerHTML='<div class="mp-err">⚠ 至少填名称和蛋白 g。</div>'; return; }
+  const emoji=$('cfEmoji').value.trim()||'🍽️';
+  const id='cf'+state.custom.length;
+  const obj={id,name,emoji,cat:p>=8?'protein':'veg',kcal,p,c,f,tip:'自定义食材',custom:true};
+  state.custom.push(obj);
+  store.set('custom',JSON.stringify(state.custom));
+  myFoods.push(obj);
+  renderMySelected();hideCustom();saveMyFoods();
+  ['cfName','cfEmoji','cfKcal','cfP','cfC','cfF'].forEach(x=>$(x).value='');
+  $('mpPlan').innerHTML='<div class="mp-tip">✓ 已加入「'+name+'」。再点「🍽 生成我的食谱」。</div>';
+}
+/* —— 离线算法版（四餐，持久化） —— */
+function saveMyFoods(){
+  store.set('myFoods',JSON.stringify(myFoods));
+}
+function generateMyPlan(){
+  const out=$('mpPlan');
+  if(!myFoods.length){ out.innerHTML='<div class="mp-err">⚠ 先把食材加进来，再点生成。</div>'; return; }
+  saveMyFoods();
+  localGenerateMyPlan();
+}
+function localGenerateMyPlan(){
+  const out=$('mpPlan');
+  const P=proteinGoal();
+  const carbGoal=Math.round(state.weight*(GOALS[state.goal].c[0]+GOALS[state.goal].c[1])/2);
+  const prot=myFoods.filter(x=>x.cat==='protein'||(x.p>=8&&x.cat!=='bad'&&x.cat!=='snack'));
+  const carb=myFoods.filter(x=>x.cat==='carb');
+  const veg=myFoods.filter(x=>x.cat==='veg'&&x.p<8);
+  const dairy=myFoods.filter(x=>['milk','yogurt','greek','almondmilk'].includes(x.id));
+  const fat=myFoods.filter(x=>x.cat==='fat');
+  if(!prot.length&&!carb.length){ out.innerHTML='<div class="mp-err">⚠ 这些食材排不出完整一天，至少加一种蛋白（肉/蛋/奶）或主食。</div>'; return; }
+
+  const slots=[
+    {k:'bk',name:'🌅 早餐',pw:.25},
+    {k:'lc',name:'🍱 午餐',pw:.30},
+    {k:'post',name:'⚡ 训后',pw:.25},
+    {k:'dn',name:'🍚 晚餐',pw:.20}
+  ];
+  const cw={bk:.25,lc:.30,post:.25,dn:.20};
+  let pi=0,ci=0;
+  const meals=slots.map(s=>{
+    const items=[];
+    let psrc=null;
+    if(prot.length){
+      psrc=prot[pi%prot.length]; pi++;
+      if(psrc)items.push({f:psrc,g:Math.max(30,Math.round(P*s.pw/(psrc.p/100)))});
+    }
+    if(cw[s.k]!==undefined&&carb.length){
+      const c=carb[ci%carb.length]; ci++;
+      items.push({f:c,g:Math.max(40,Math.round(carbGoal*cw[s.k]/(c.c/100)))});
+    }
+    if((s.k==='lc'||s.k==='dn')&&veg.length)items.push({f:veg[0],g:150});
+    if(s.k==='bk'&&dairy.length&&items.length<=2)items.push({f:dairy[0],g:250});
+    return {name:s.name,items};
+  });
+
+  let tp=0,tc=0,tk=0;
+  meals.forEach(m=>m.items.forEach(it=>{const k=it.g/100;tp+=it.f.p*k;tc+=it.f.c*k;tk+=it.f.kcal*k;}));
+
+  state.plan={meals,weight:state.weight,goal:state.goal,event:state.event};
+  store.set('plan',JSON.stringify(state.plan));
+  renderPlan(P,tp,tc,tk);
+}
+function renderPlan(P,tp,tc,tk){
+  const out=$('mpPlan');
+  if(!state.plan||!state.plan.meals.length){ out.innerHTML=''; return; }
+  const meals=state.plan.meals;
+  if(tp===undefined){
+    tp=0;tc=0;tk=0;
+    meals.forEach(m=>m.items.forEach(it=>{const k=it.g/100;tp+=it.f.p*k;tc+=it.f.c*k;tk+=it.f.kcal*k;}));
+    P=proteinGoal();
+  }
+  out.innerHTML='<div class="mp-plan-ttl">📅 你的食谱 · '+state.weight+'kg · '+GOALS[state.goal].n+(state.event?' · '+EVENTS[state.event]:'')+'</div>'
+    +meals.map((m,i)=>{
+        const mp=Math.round(m.items.reduce((s,it)=>s+it.f.p*it.g/100,0));
+        return '<div class="mp-meal"><span class="tm">'+m.name+'</span><div class="body">'
+          +m.items.map(it=>'<span class="mp-item">'+it.f.emoji+' '+it.f.name+' <em>'+it.g+'g</em></span>').join('　')
+          +'</div><span class="prot">≈蛋白 '+mp+'g</span>'
+          +'<button class="mp-edit" onclick="editMeal('+i+')">✎ 编辑</button></div>';
+      }).join('')
+    +'<div class="mp-total">全天合计 ≈ 蛋白 <b>'+Math.round(tp)+'g</b>（目标 '+P+'g · '+Math.round(tp/P*100)+'%）· 碳水 '+Math.round(tc)+'g · 热量 ≈ '+Math.round(tk)+' kcal</div>'
+    +'<div class="mp-actions" style="margin-top:10px">'
+    +'<button class="mp-btn" onclick="copyPlan()">📋 复制食谱文字</button>'
+    +'<button class="mp-btn ghost" onclick="savePlanBook()">💾 存为常用餐单</button>'
+    +'</div>'
+    +renderPlanBook()
+    +(state.event?'<div class="mp-tip">按 <b>'+EVENTS[state.event]+'</b> 的蛋白系数自动算。改项目 / 体重 / 目标后重新生成即可。</div>':'');
+}
+/* —— 常用餐单 —— */
+function savePlanBook(){
+  if(!state.plan||!state.plan.meals.length)return;
+  const label=prompt('给这个餐单起个名字：','常用餐单');
+  if(!label)return;
+  const books=planBooks();
+  books.unshift({label,plan:JSON.parse(JSON.stringify(state.plan))});
+  store.set('planBooks',JSON.stringify(books.slice(0,20)));
+  renderPlan();
+}
+function planBooks(){
+  try{const b=JSON.parse(store.get('planBooks','[]'));return Array.isArray(b)?b:[]}catch(e){return[]}
+}
+function loadPlanBook(i){
+  const b=planBooks()[i];if(!b)return;
+  state.plan=JSON.parse(JSON.stringify(b.plan));
+  store.set('plan',JSON.stringify(state.plan));
+  renderPlan();
+}
+function delPlanBook(i){
+  const books=planBooks();books.splice(i,1);store.set('planBooks',JSON.stringify(books));renderPlan();
+}
+function renderPlanBook(){
+  const books=planBooks();
+  if(!books.length)return '';
+  return '<div class="mp-book"><div class="mp-book-ttl">📚 我的常用餐单</div>'
+    +books.map((b,i)=>'<div class="mp-book-item"><button class="mp-book-load" onclick="loadPlanBook('+i+')">'+b.label+'</button><button class="mp-book-del" onclick="delPlanBook('+i+')">✕</button></div>').join('')
+    +'</div>';
+}
+function copyPlan(){
+  if(!state.plan||!state.plan.meals.length)return;
+  const lines=state.plan.meals.map(m=>{
+    const items=m.items.map(it=>it.f.name+' '+it.g+'g').join('、');
+    const mp=Math.round(m.items.reduce((s,it)=>s+it.f.p*it.g/100,0));
+    return m.name.replace(/^\S+\s/,'')+'：'+items+'（≈蛋白'+mp+'g）';
+  });
+  const txt=state.weight+'kg · '+GOALS[state.goal].n+' 一日食谱\n'+lines.join('\n');
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>flashCopy()).catch(()=>fallbackCopy(txt));
+  }else fallbackCopy(txt);
+}
+function fallbackCopy(txt){
+  const ta=document.createElement('textarea');
+  ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy')}catch(e){}
+  document.body.removeChild(ta);flashCopy();
+}
+function flashCopy(){
+  const b=document.querySelector('.mp-actions .mp-btn');
+  if(!b)return;
+  const old=b.textContent;
+  b.textContent='✓ 已复制';
+  setTimeout(()=>{b.textContent=old},1500);
+}
+/* —— 编辑某餐 —— */
+function editMeal(i){
+  state.plan.editing=i;
+  const m=state.plan.meals[i];
+  $('modal').innerHTML=
+    '<span class="close" onclick="closeModal()">✕</span>'
+    +'<div class="m-head"><span class="emoji">🍽️</span><div><b>编辑 · '+m.name+'</b><p class="p-sub">改克重或删食材，点下面"＋加食材"可从库中加料。</p></div></div>'
+    +'<div id="emItems">'
+    +m.items.map((it,j)=>'<div class="em-item">'
+      +'<span class="em-emoji">'+it.f.emoji+'</span>'
+      +'<span class="em-name">'+it.f.name+'</span>'
+      +'<input type="number" id="emg_'+j+'" value="'+it.g+'" min="5" max="1000" step="5" class="em-grams">'
+      +'<span class="em-g">g</span>'
+      +'<button class="em-del" onclick="delMealItem('+i+','+j+')">✕</button>'
+      +'</div>').join('')
+    +'</div>'
+    +'<div class="em-addbar">'
+    +'<input type="search" id="emSearch" placeholder="加食材…搜库" oninput="emSearchList(this.value)">'
+    +'<div id="emSearchResults" class="em-search-results"></div>'
+    +'</div>'
+    +'<div class="m-btns"><button class="m-btn" onclick="saveMealEdit('+i+')">✓ 保存修改</button><button class="m-btn ghost" onclick="closeModal()">取消</button></div>';
+  $('overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function delMealItem(i,j){
+  state.plan.meals[i].items.splice(j,1);
+  /* 重开编辑弹窗 */
+  const m=state.plan.meals[i];
+  const box=$('emItems');
+  box.innerHTML=m.items.map((it,jj)=>'<div class="em-item">'
+      +'<span class="em-emoji">'+it.f.emoji+'</span>'
+      +'<span class="em-name">'+it.f.name+'</span>'
+      +'<input type="number" id="emg_'+jj+'" value="'+it.g+'" min="5" max="1000" step="5" class="em-grams">'
+      +'<span class="em-g">g</span>'
+      +'<button class="em-del" onclick="delMealItem('+i+','+jj+')">✕</button>'
+      +'</div>').join('');
+  if(!m.items.length)box.innerHTML='<div class="em-empty">这餐没食材了，点下面搜着加。</div>';
+}
+function emSearchList(v){
+  const q=v.trim();
+  const box=$('emSearchResults');
+  if(!q){ box.innerHTML=''; return; }
+  const matches=FOODS.filter(f=>f.cat!=='bad'&&f.name.includes(q)).slice(0,6);
+  box.innerHTML=matches.length
+    ? matches.map(f=>'<button class="em-add" onclick="emAddFood(\''+f.id+'\')">'+f.emoji+' '+f.name+'</button>').join('')
+    : '<span class="em-nomatch">没有匹配，试试别的词</span>';
+}
+function emAddFood(id){
+  const f=FOODS.find(x=>x.id===id);if(!f)return;
+  const i=state.plan.editing;
+  state.plan.meals[i].items.push({f:{...f},g:Math.round(DEFAULTS[id]||100)});
+  $('emSearch').value='';emSearchList('');
+  editMeal(i);
+}
+function saveMealEdit(i){
+  const m=state.plan.meals[i];
+  m.items.forEach((it,j)=>{
+    const inp=$('emg_'+j);
+    if(inp){ const v=parseFloat(inp.value); if(v>=5)it.g=Math.round(v); }
+  });
+  state.plan.weight=state.weight;state.plan.goal=state.goal;state.plan.event=state.event;
+  store.set('plan',JSON.stringify(state.plan));
+  renderPlan();
+  closeModal();
+}
+/* ================= 初始化 ================= */
+renderChips();
+setEvent(state.event);
+setGoal(state.goal);
+setWeight(state.weight);
+renderRecipe();
+updateTrack();
+renderMySelected();
+if(state.plan&&state.plan.meals&&state.plan.meals.length)renderPlan();
+else if(myFoods.length)generateMyPlan();
+</script>
+</body>
+</html>
