@@ -481,6 +481,15 @@ footer small{display:block;margin-top:6px;color:#6b7484}
           <button data-sex="female" onclick="setSex('female')">♀ 女</button>
         </div>
       </div>
+      <div class="p-row" id="cycleRow" style="display:none">
+        <label>生理期</label>
+        <div class="seg" id="cycleSeg" style="flex-wrap:wrap">
+          <button data-cycle="menses" onclick="setCycle('menses')">🩸 经期</button>
+          <button data-cycle="follicular" onclick="setCycle('follicular')">🌸 卵泡期</button>
+          <button data-cycle="luteal" onclick="setCycle('luteal')">🌕 黄体期</button>
+          <button data-cycle="normal" onclick="setCycle('normal')">一般</button>
+        </div>
+      </div>
       <div class="p-row">
         <label>体重</label>
         <input type="number" id="weightIn" min="30" max="160" oninput="setWeight(this.value)" onfocus="this.select()">
@@ -846,6 +855,14 @@ const SEX_TIPS={
   male:'🧬 <b>男性专属提醒</b>：绝对能量消耗高于女性（肌肉量多、RMR 更高）。大训练量期注意热量吃够，别低估需求——低能量可用性（LEA）同样会拖累表现。',
   female:'🧬 <b>女性专属提醒</b>：铁（RDA 18mg/天，运动员缺铁率高）、钙（1000mg+/天）是重点；碳水别吃太少，警惕能量不足（女运动员三联征）。规律训练 + 低碳水 = 铁和骨都容易出问题。'
 };
+/* 生理周期营养（依据文献：精英女运动员各周期阶段能量/宏量摄入差异不显著，
+   核心是能量可用性≥45kcal/kg瘦体重 + 铁钙补充。故各阶段做"提醒"，不做大幅改动） */
+const CYCLE_TIPS={
+  menses:'🩸 <b>经期（第1-5天）</b>：此时段铁流失最大——多吃红肉/动物肝脏/深绿叶菜，配维C（橙子/番茄）促吸收。镁也可补（坚果/香蕉）。热量按正常，别刻意少吃，也别靠甜食硬扛。',
+  follicular:'🌸 <b>卵泡期（第6-14天）</b>：雌激素上升，此时力量/爆发训练状态通常较好。碳水正常摄入即可，练前保证糖原。',
+  luteal:'🌕 <b>黄体期（第15-28天）</b>：孕激素升高，食欲可能增强、体温略升。碳水可适当放宽（比平时多一小份主食），补水要更主动——黄体期更容易脱水。',
+  normal:'🗓 <b>一般</b>：不需要按周期调整。按上面"女性专属提醒"吃好铁和钙就行，别为周期焦虑。'
+};
 /* 建议级别：good=建议多吃, mod=适量吃, bad=不要吃 */
 function adviceOf(f){
   if(f.cat==='bad'||(f.cat==='dine'&&f.flag==='bad'))return 'bad';
@@ -1035,6 +1052,7 @@ let state={
   cat:'',
   search:'',
   sex:store.get('sex','male'),
+  cycle:store.get('cycle','normal'),
   goal:store.get('goal','maintain'),
   weight:parseFloat(store.get('weight',''))||65,
   eaten:(()=>{try{return JSON.parse(store.get('eaten','[]'))}catch(e){return []}})(),
@@ -1061,6 +1079,12 @@ function setEvent(ev){
 function setSex(s){
   state.sex=s;store.set('sex',s);
   document.querySelectorAll('#sexSeg button').forEach(b=>b.classList.toggle('on',b.dataset.sex===s));
+  $('cycleRow').style.display=s==='female'?'flex':'none';
+  updateTargets();
+}
+function setCycle(c){
+  state.cycle=c;store.set('cycle',c);
+  document.querySelectorAll('#cycleSeg button').forEach(b=>b.classList.toggle('on',b.dataset.cycle===c));
   updateTargets();
 }
 function setGoal(g){
@@ -1084,7 +1108,10 @@ function updateTargets(){
     +'<b>热量</b>'+rng(g.k[0],g.k[1])+' kcal/天　'
     +'<b>碳水</b>'+rng(g.c[0],g.c[1])+' g/天';
   const tip=$('sexTip');
-  tip.innerHTML=SEX_TIPS[state.sex]||'';
+  const cycleTxt=state.sex==='female'&&CYCLE_TIPS[state.cycle]
+    ? '<div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(177,151,252,.25)">'+CYCLE_TIPS[state.cycle]+'</div>'
+    : '';
+  tip.innerHTML=(SEX_TIPS[state.sex]||'')+cycleTxt;
   updateTrack();
 }
 
@@ -1540,6 +1567,7 @@ function saveMealEdit(i){
 renderChips();
 setEvent(state.event);
 setSex(state.sex);
+setCycle(state.cycle);
 setGoal(state.goal);
 setWeight(state.weight);
 renderRecipe();
