@@ -479,7 +479,7 @@ footer small{display:block;margin-top:6px;color:#6b7484}
       <span class="sec-num">2</span>
       <h2 class="sec-title">食物库</h2>
     </div>
-    <p class="sec-sub">129 种食物：队内常吃 + 外食攻略 + 消炎食材。点任意食物看 NRV 营养表，点 ＋ 记进今日餐盘。黄=适量，红=避雷。</p>
+    <p class="sec-sub">129 种食物：<span style="color:var(--green);font-weight:800">🟢 建议多吃</span>　<span style="color:var(--yellow);font-weight:800">🟡 适量吃</span>　<span style="color:var(--red);font-weight:800">🔴 不要吃</span>。点任意食物看 NRV 营养表，点 ＋ 记进今日餐盘。</p>
 
     <div class="toolbar">
       <div class="search">
@@ -815,15 +815,22 @@ const PCOEF={sprint:{maintain:1.7,gain:2.1,cut:2.2},
              throw:{maintain:1.8,gain:2.2,cut:2.2}};
 function pcoef(){return (PCOEF[state.event]||PCOEF.sprint)[state.goal]}
 function proteinGoal(){return Math.round(state.weight*pcoef())}
+/* 建议级别：good=建议多吃, mod=适量吃, bad=不要吃 */
+function adviceOf(f){
+  if(f.cat==='bad'||(f.cat==='dine'&&f.flag==='bad'))return 'bad';
+  if(f.cat==='snack'||(f.cat==='dine'&&f.flag==='mod'))return 'mod';
+  return 'good';
+}
 const CATS=[
   {id:'',name:'全部',cls:''},
+  {id:'good',name:'✅ 建议多吃',cls:'',match:f=>adviceOf(f)==='good'},
+  {id:'mod',name:'⚠️ 适量吃',cls:'yellow',match:f=>adviceOf(f)==='mod'},
+  {id:'bad',name:'🚫 不要吃',cls:'red',match:f=>adviceOf(f)==='bad'},
   {id:'dine',name:'🍜 外食·攻略',cls:''},
   {id:'carb',name:'🍚 碳水',cls:'orange'},
   {id:'protein',name:'🥚 蛋白',cls:''},
   {id:'fat',name:'🥑 脂肪',cls:'yellow'},
-  {id:'veg',name:'🥦 蔬果',cls:''},
-  {id:'snack',name:'🍿 零食·适量',cls:'yellow'},
-  {id:'bad',name:'🚫 零食·避雷',cls:'red'}
+  {id:'veg',name:'🥦 蔬果',cls:''}
 ];
 
 /* ================= 食物数据（99 种） ================= */
@@ -1053,22 +1060,25 @@ function cap(v){return Math.min(100,v)}
 
 function renderFoods(){
   const term=state.search;
+  const cat=CATS.find(x=>x.id===state.cat)||CATS[0];
   const list=FOODS.filter(f=>{
-    if(state.cat&&f.cat!==state.cat)return false;
+    if(state.cat){
+      if(cat.match){ if(!cat.match(f))return false; }
+      else if(f.cat!==state.cat)return false;
+    }
     if(term&&!f.name.includes(term)&&!f.tip.includes(term))return false;
     return true;
   });
   const fmt=f=>{
     const isPrio=state.event&&f.prio&&f.prio.includes(state.event);
     const eaten=state.eaten.some(x=>x.id===f.id);
-    const dine=f.cat==='dine';
-    const flagCls=dine?(f.flag==='bad'?' bad':f.flag==='mod'?' snack':' good'):f.cat==='bad'?' bad':f.cat==='snack'?' snack':'';
+    const adv=adviceOf(f);
     const badge=isPrio?'<span class="badge prio">★优先</span>'
-      :f.cat==='bad'?'<span class="badge bad">避雷</span>'
-      :f.cat==='snack'?'<span class="badge snack">适量</span>'
-      :dine?(f.flag==='bad'?'<span class="badge bad">避雷</span>':f.flag==='mod'?'<span class="badge snack">适量</span>':'<span class="badge good">可选</span>')
-      :'';
-    const cls=(isPrio?' prio':'')+flagCls+(eaten?' eaten':'');
+      :adv==='bad'?'<span class="badge bad">不吃</span>'
+      :adv==='mod'?'<span class="badge snack">适量</span>'
+      :'<span class="badge good">多吃</span>';
+    const advCls=isPrio?'prio':adv==='bad'?'bad':adv==='mod'?'snack':'good';
+    const cls=(isPrio?' prio':'')+' '+advCls+(eaten?' eaten':'');
     return '<div class="food'+cls+'" onclick="openFood(\''+f.id+'\')">'
       +'<span class="emoji">'+f.emoji+'</span>'
       +'<b>'+f.name+badge+'</b>'
@@ -1077,7 +1087,9 @@ function renderFoods(){
       +'</div>';
   };
   $('foodGrid').innerHTML=list.map(fmt).join('');
-  $('foodCount').textContent='共 '+FOODS.length+' 种 · 当前显示 '+list.length+' 种'+(state.event?' · 橙色边框=你的项目优先吃够':'');
+  $('foodCount').textContent='共 '+FOODS.length+' 种 · 当前显示 '+list.length+' 种'
+    +(state.cat==='good'?'（绿=建议多吃）':state.cat==='mod'?'（黄=适量吃）':state.cat==='bad'?'（红=不要吃）':'')
+    +(state.event?' · 橙色边框=你的项目优先吃够':'');
 }
 
 const DEFAULTS={rice:150,brownrice:150,oats:45,quinoa:150,millet:150,sweetpotato:150,purplepotato:150,yam:150,taro:150,corn:150,potato:150,pumpkin:150,banana:120,bread:50,mantou:100,pasta:180,buckwheat:180,noodles:250,egg:50,eggwhite:80,chicken:150,chickenleg:150,beef:150,beefshank:150,porkloin:150,duckbreast:150,salmon:150,cod:150,sole:150,tuna:100,shrimp:120,tofu:150,milk:250,yogurt:200,greek:150,whey:30,edamame:100,chickpea:100,tofudry:100,walnut:20,almond:20,cashew:20,peanuts:20,pb:20,avocado:80,oliveoil:10,darkchoc:20,broccoli:150,spinach:150,carrot:100,tomato:150,cherrytomato:100,cucumber:150,lettuce:100,cabbage:150,celery:100,mushroom:100,woodear:100,asparagus:100,greenpepper:100,orange:150,apple:150,blueberry:80,strawberry:100,kiwi:80,grape:100,watermelon:200,cherry:100,pear:150,pomelo:150,sardine:60,flaxseed:10,turmeric:2,ginger:10,garlic:10,greentea:400,pineapple:150,papaya:150,dailynuts:25,proteinbar:50,seaweed:10,beefjerky:30,ricecrack:30,sparkling:350,raisins:20,driedstraw:30,almondmilk:250,chips:50,latiao:30,cupnoodle:75,soda:330,milktea:500,preserved:20,whitechoc:30,yandanpai:30,waffle:30,icecream:100,friedchicken:150,fries:100,sausage:100,mooncake:100,creamcake:100,softcandy:20,yutiao:60,friedchop:100,shaqima:50,cookie:30,lrbeef:400,malatang:400,shaxian:250,changfen:150,huangmenji:300,boileddumpling:250,baozai:300,gaijiao:400,bibimbap:300,guoqiao:350,luosifen:350,chongqing:250,curryrice:350,bbqrice:350,roujiamo:180,grillburger:180,malaxiangguo:300,maocai:300,kaolengmian:200,chinesefriedrice:300,jiangxiangbing:200,choufu:200};
@@ -1162,8 +1174,8 @@ function openFood(id){
   if(nrv(f.kcal,NRV.kcal)>=15)tags.push(['高能量','var(--accent)']);
   const eaten=state.eaten.some(x=>x.id===f.id);
   const tagHtml=tags.map(t=>'<span class="m-tag" style="color:'+t[1]+';border:1px solid '+t[1]+'">'+t[0]+'</span>').join('');
-  const isBad=f.cat==='bad'||(f.cat==='dine'&&f.flag==='bad');
-  const isMod=f.cat==='snack'||(f.cat==='dine'&&f.flag==='mod');
+  const isBad=adviceOf(f)==='bad';
+  const isMod=adviceOf(f)==='mod';
   const warn=isBad
     ?'<div class="m-warn"><b>🚫 避雷食物</b><p style="color:var(--dim);font-size:12.5px;margin-top:3px">这类吃了不涨成绩，只涨负担。偶尔解馋可以，别当日常。</p></div>'
     :isMod
