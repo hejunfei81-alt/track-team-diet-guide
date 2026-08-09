@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a0c10">
-<title>高校田径队 · 队内饮食指导手册</title>
+<title>高校田径队 · 队内训练与饮食指导手册</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -56,8 +56,10 @@ body{
 
 /* ---------- 顶部导航 ---------- */
 .nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1040px;margin:0 auto;padding:9px 14px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
-.nav-inner::-webkit-scrollbar{display:none}
+.nav-inner{max-width:1040px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:8px}
+.nav-group{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.nav-group::-webkit-scrollbar{display:none}
+.nav-group.hide{display:none}
 .nav a{flex-shrink:0;padding:4px 13px;border:1px solid var(--border);border-radius:999px;color:var(--dim);font-size:12.5px;text-decoration:none;transition:.2s}
 .nav a:hover{color:#fff;border-color:var(--accent)}
 
@@ -473,6 +475,95 @@ footer small{display:block;margin-top:6px;color:#6b7484}
 /* 强制横屏兑底：旋转90°显示 */
 html.landscape-rotated{transform:rotate(90deg);transform-origin:top left;
   width:100vh;height:100vw;position:fixed;top:0;left:0;overflow:auto;}
+
+/* ================= 训练模块 ================= */
+/* 饮食|运动 一级 Tab */
+.tabbar{position:sticky;top:46px;z-index:95;display:flex;gap:10px;margin:0 -16px 20px;padding:6px 16px;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.tab{flex:1;padding:11px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--dim);font-size:15px;font-weight:900;cursor:pointer;transition:.2s;text-align:center;letter-spacing:3px}
+.tab:hover{color:var(--text);border-color:var(--dim)}
+.tab.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:var(--accent);color:#0a0c10}
+.tabpane{display:block}
+.tabpane.hide{display:none}
+/* 训练页顶部工具条 */
+.train-top{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:18px}
+.tt-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.tt-row:last-child{margin-bottom:0}
+.tt-row .lbl{font-size:13px;font-weight:800;color:var(--dim);flex-shrink:0;min-width:56px}
+.evchip-row{display:flex;gap:8px;flex-wrap:wrap;flex:1;min-width:220px}
+.evchip{flex:1;min-width:118px;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer;transition:.2s;text-align:center;font-size:13.5px;font-weight:800;color:var(--dim)}
+.evchip:hover{border-color:var(--dim);color:var(--text)}
+.evchip.sel{border-color:var(--accent);color:var(--accent);background:linear-gradient(180deg,rgba(255,106,26,.10),var(--card2))}
+.evchip .s{display:block;font-size:10.5px;font-weight:400;margin-top:1px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);align-items:center}
+.legend i{font-style:normal;font-weight:800;border-radius:5px;padding:1px 7px;color:#0a0c10;font-size:11px}
+.legend .lg-d1{background:var(--green)}
+.legend .lg-d2{background:var(--yellow)}
+.legend .lg-d3{background:var(--accent)}
+.legend .lg-d4{background:linear-gradient(135deg,#c026d3,#7c3aed);color:#fff}
+.legend small{font-size:11px}
+.tm-hint{margin:0 0 16px;background:linear-gradient(90deg,rgba(42,214,195,.08),transparent);border:1px solid rgba(42,214,195,.3);border-radius:10px;padding:10px 14px;font-size:13px}
+.tm-hint b{color:var(--cyan)}
+/* 训练 accent 色 */
+.t1{--accent:#ff8c3a}
+.t2{--accent:var(--cyan)}
+.t3{--accent:var(--red)}
+.t4{--accent:#5ea8ff}
+.t5{--accent:var(--green)}
+.t6{--accent:#34d399}
+.t7{--accent:#b197fc}
+.t8{--accent:var(--cyan)}
+.t9{--accent:var(--red)}
+.t10{--accent:#ffa94d}
+/* 训练卡片 */
+.tm-grid{display:grid;gap:12px;margin-bottom:4px}
+@media(min-width:820px){.tm-grid{grid-template-columns:repeat(2,1fr)}}
+.tm-card{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:.2s}
+.tm-card:hover{border-color:var(--dim);transform:translateY(-1px)}
+.tm-card .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tm-card .head .emoji{font-size:25px;line-height:1}
+.tm-card .head b{font-size:15px;font-weight:900}
+.tm-card .tagline{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.diff{font-size:10.5px;font-weight:900;border-radius:5px;padding:2px 7px;color:#0a0c10;white-space:nowrap}
+.diff-1{background:var(--green)}
+.diff-2{background:var(--yellow)}
+.diff-3{background:var(--accent)}
+.diff-4{background:linear-gradient(135deg,#c026d3,#7c3aed);color:#fff}
+.ven{font-size:10.5px;font-weight:800;border-radius:5px;padding:2px 7px;border:1px solid var(--border);color:var(--dim);white-space:nowrap}
+.tm-param{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 10px}
+.tm-param b{color:var(--cyan);font-weight:800}
+.tm-tip{font-size:13px;color:var(--text);line-height:1.55}
+.tm-tip::before{content:"▸ ";color:var(--accent);font-weight:900}
+.tm-inj{font-size:12px;color:var(--red);background:var(--red-bg);border:1px solid rgba(255,93,93,.25);border-radius:8px;padding:6px 10px}
+.tm-inj b{color:var(--red)}
+.tm-diet{margin-top:auto;font-size:12px;color:var(--green);background:var(--green-bg);border:1px solid rgba(47,215,122,.25);border-radius:8px;padding:6px 10px;cursor:pointer;transition:.2s}
+.tm-diet:hover{border-color:var(--green);color:var(--text)}
+.tm-empty{color:var(--dim);font-size:13px;padding:14px;border:1px dashed var(--border);border-radius:10px;text-align:center;margin-bottom:4px}
+.group-label.t{color:var(--accent)}
+/* 周计划 */
+.phase-tabs{display:flex;gap:8px;margin-bottom:12px}
+.phase-tab{padding:8px 18px;border-radius:9px;border:1px solid var(--border);background:var(--card2);color:var(--dim);font-size:13.5px;font-weight:800;cursor:pointer;transition:.2s}
+.phase-tab:hover{color:var(--text)}
+.phase-tab.on{background:var(--accent);border-color:var(--accent);color:#0a0c10}
+.week{display:grid;grid-template-columns:repeat(7,minmax(128px,1fr));gap:8px;overflow-x:auto;padding-bottom:4px}
+.day{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-height:108px;display:flex;flex-direction:column;gap:4px}
+.day h5{font-size:12.5px;font-weight:900;color:var(--accent);display:flex;justify-content:space-between;align-items:center}
+.day .dow{font-size:10px;color:var(--dim);font-weight:700}
+.day .r{font-size:12px;color:var(--text);line-height:1.5}
+.day .r em{color:var(--dim);font-size:11.5px;font-style:normal}
+.day.rest{background:var(--bg)}
+.day.rest h5{color:var(--green)}
+/* 技术要点 */
+.tech{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.tech h4{font-size:14px;font-weight:800;margin-bottom:6px;color:var(--accent)}
+.tech ul{list-style:none}
+.tech li{font-size:13px;padding:4px 0;padding-left:16px;position:relative;color:var(--text)}
+.tech li::before{content:"·";position:absolute;left:0;color:var(--accent);font-weight:900}
+/* 饮食联动卡 */
+.linkcard{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:13px 15px;display:flex;flex-direction:column;gap:6px}
+.linkcard b{font-size:14px;display:flex;align-items:center;gap:6px}
+.linkcard p{color:var(--dim);font-size:12.5px;margin-top:2px}
+.linkcard button{margin-top:6px;align-self:flex-start;background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:800;cursor:pointer;transition:.2s}
+.linkcard button:hover{background:var(--accent);color:#0a0c10}
 </style>
 </head>
 <body>
@@ -489,15 +580,29 @@ html.landscape-rotated{transform:rotate(90deg);transform-origin:top left;
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#sec1">项目侧重</a>
-    <a href="#sec2">食物库</a>
-    <a href="#sec3">尽量少吃</a>
-    <a href="#sec4">禁止食用</a>
-    <a href="#sec5">分时段</a>
-    <a href="#sec6">目标食谱</a>
-    <a href="#sec7">消炎恢复</a>
-    <a href="#sec8">补剂</a>
-    <a href="#sec9">误区</a>
+    <div class="nav-group" id="dietNav">
+      <a href="#sec1" onclick="return go('diet','sec1')">项目侧重</a>
+      <a href="#sec2" onclick="return go('diet','sec2')">食物库</a>
+      <a href="#sec3" onclick="return go('diet','sec3')">尽量少吃</a>
+      <a href="#sec4" onclick="return go('diet','sec4')">禁止食用</a>
+      <a href="#sec5" onclick="return go('diet','sec5')">分时段</a>
+      <a href="#sec6" onclick="return go('diet','sec6')">目标食谱</a>
+      <a href="#sec7" onclick="return go('diet','sec7')">消炎恢复</a>
+      <a href="#sec8" onclick="return go('diet','sec8')">补剂</a>
+      <a href="#sec9" onclick="return go('diet','sec9')">误区</a>
+    </div>
+    <div class="nav-group hide" id="trainNav">
+      <a href="#tsec1" onclick="return go('train','tsec1')">力量</a>
+      <a href="#tsec2" onclick="return go('train','tsec2')">速度</a>
+      <a href="#tsec3" onclick="return go('train','tsec3')">速耐</a>
+      <a href="#tsec4" onclick="return go('train','tsec4')">耐力</a>
+      <a href="#tsec5" onclick="return go('train','tsec5')">柔韧体能</a>
+      <a href="#tsec6" onclick="return go('train','tsec6')">恢复再生</a>
+      <a href="#tsec7" onclick="return go('train','tsec7')">一周安排</a>
+      <a href="#tsec8" onclick="return go('train','tsec8')">技术要点</a>
+      <a href="#tsec9" onclick="return go('train','tsec9')">误区·伤病</a>
+      <a href="#tsec10" onclick="return go('train','tsec10')">饮食联动</a>
+    </div>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ 白日模式</button>
   </div>
 </nav>
@@ -506,10 +611,16 @@ html.landscape-rotated{transform:rotate(90deg);transform-origin:top left;
 
   <header class="hero">
     <h1>把每一餐，<br>当成一次训练</h1>
-    <span class="tag">高校田径队 · 队内官方饮食指导手册</span>
-    <p class="meta">覆盖 速度爆发组（短跑·跳跃·跨栏）/ 耐力组（中长跑·长跑）/ 力量组（投掷）· 全体队员强制阅读</p>
+    <span class="tag">高校田径队 · 队内训练 + 饮食指导手册</span>
+    <p class="meta">覆盖 速度爆发组（短跨跳）/ 耐力组（中长跑）/ 力量组（投掷）· 训练 + 营养 · 全体队员强制阅读</p>
   </header>
 
+  <div class="tabbar">
+    <button class="tab on" data-tab="diet" onclick="switchTab('diet')">🍽 饮食板块</button>
+    <button class="tab" data-tab="train" onclick="switchTab('train')">🏋️ 运动板块</button>
+  </div>
+
+  <div class="tabpane" id="tabDiet">
   <section class="intro">
     <p><strong>饮食不是后勤问题，是训练的一部分。</strong><br>
     吃对：爆发力更狠、恢复更快、伤病更少、成绩更稳。<br>
@@ -909,16 +1020,178 @@ html.landscape-rotated{transform:rotate(90deg);transform-origin:top left;
       <div class="myth"><span class="badge wrong">✗</span><div><b>"零食热量不高，多吃没事"</b><p>零食是热量+糖+盐的空包，吃零食会挤占训练餐的份额。</p></div></div>
     </div>
   </section>
+  </div><!-- /tabDiet -->
+
+  <div class="tabpane hide" id="tabTrain">
+
+  <!-- 训练页工具条：项目 + 场地 + 难度说明 -->
+  <div class="train-top">
+    <div class="tt-row">
+      <span class="lbl">🎯 项目</span>
+      <div class="evchip-row">
+        <div class="evchip" data-ev="sprint" onclick="setTrainEvent('sprint')">⚡ 短跨跳<span class="s">速度爆发组</span></div>
+        <div class="evchip" data-ev="endurance" onclick="setTrainEvent('endurance')">🏃 中长跑<span class="s">耐力组</span></div>
+        <div class="evchip" data-ev="throw" onclick="setTrainEvent('throw')">🏋️ 投掷<span class="s">力量组</span></div>
+        <div class="evchip" data-ev="low" onclick="setTrainEvent('low')">🧘 低运动量<span class="s">基础 + 恢复</span></div>
+      </div>
+    </div>
+    <div class="tt-row">
+      <span class="lbl">📍 场地</span>
+      <div class="chips" id="venueChips"></div>
+    </div>
+    <div class="tt-row">
+      <span class="lbl">🪜 难度</span>
+      <div class="legend">
+        <i class="lg-d1">基础</i><i class="lg-d2">进阶</i><i class="lg-d3">挑战</i><i class="lg-d4">💀 变态·慎用</i>
+        <small style="color:var(--dim)">场地 = 硬约束，达不到就过滤掉；难度 = 量力而行的标注。</small>
+      </div>
+    </div>
+  </div>
+  <p class="tm-hint" id="trainHint"></p>
+
+  <!-- 板块 1：力量训练 -->
+  <section class="sec t1" id="tsec1">
+    <div class="sec-head"><span class="sec-num">1</span><h2 class="sec-title">力量训练</h2></div>
+    <p class="sec-sub">最大力量 → 爆发力 · 快速力量 → 核心 / 踝髋 / 小肌群。投掷的根基、速度的引擎、耐力的省能器。注意：小肌群不是只练小腿——核心、踝、髋、腘绳才是重点。</p>
+    <div id="tmGrid-strength"></div>
+  </section>
+
+  <!-- 板块 2：速度训练 -->
+  <section class="sec t2" id="tsec2">
+    <div class="sec-head"><span class="sec-num">2</span><h2 class="sec-title">速度训练</h2></div>
+    <p class="sec-sub">位移速度是短跨跳的核心，中长跑需要的是"最后冲刺能力"，投掷不需要位移速度但极其需要"出手速度"——三种需求自动适配，别拿一套练三组人。</p>
+    <div id="tmGrid-speed"></div>
+  </section>
+
+  <!-- 板块 3：速耐训练 -->
+  <section class="sec t3" id="tsec3">
+    <div class="sec-head"><span class="sec-num">3</span><h2 class="sec-title">速耐训练</h2></div>
+    <p class="sec-sub">糖酵解供能：短跨跳的"后程不掉速"，中长跑的"乳酸耐受 + 速度保持"。强度高，恢复更要跟上。</p>
+    <div id="tmGrid-speedend"></div>
+  </section>
+
+  <!-- 板块 4：耐力训练 -->
+  <section class="sec t4" id="tsec4">
+    <div class="sec-head"><span class="sec-num">4</span><h2 class="sec-title">耐力训练</h2></div>
+    <p class="sec-sub">有氧氧化供能：中长跑的主干，短跨跳 / 投掷的供能基础。别把短跑运动员练成马拉松选手——强度分层，各取所需。</p>
+    <div id="tmGrid-endurance"></div>
+  </section>
+
+  <!-- 板块 5：柔韧·灵敏·基础体能 -->
+  <section class="sec t5" id="tsec5">
+    <div class="sec-head"><span class="sec-num">5</span><h2 class="sec-title">柔韧 · 灵敏 · 基础体能</h2></div>
+    <p class="sec-sub">训练的热身与收尾，伤病的第一道防线。动态拉伸放练前、静态拉伸放练后，别搞反。</p>
+    <div id="tmGrid-flex"></div>
+  </section>
+
+  <!-- 板块 6：恢复与再生 -->
+  <section class="sec t6" id="tsec6">
+    <div class="sec-head"><span class="sec-num">6</span><h2 class="sec-title">恢复与再生</h2></div>
+    <p class="sec-sub">训练给刺激，恢复给成绩。没有恢复就没有超量恢复——练得再狠，睡不够等于白练。</p>
+    <div class="grid grid-2" style="gap:10px">
+      <div class="sup"><h4>🚶 主动恢复</h4><p><b style="color:var(--green)">恢复日别躺平</b><br>20–30min 慢走 / 游泳 / 单车，促进血流带走代谢废物。躺着恢复反而更慢。</p></div>
+      <div class="sup"><h4>🧊 冷身</h4><p><b style="color:var(--green)">练完别立刻坐下</b><br>5–10min 慢跑 + 拉伸过渡，让心率平缓、乳酸排掉，是训练的一部分。</p></div>
+      <div class="sup"><h4>😴 睡眠</h4><p><b style="color:var(--green)">7–9h 是恢复主力</b><br>深睡期生长激素释放，肌肉修复就靠它。熬夜 = 今天的训练白练一半。</p></div>
+      <div class="sup"><h4>🧊 冷热交替 / 冰敷</h4><p><b style="color:var(--green)">大强度课后用</b><br>冰敷 5–10min 降炎症；日常冷热交替促循环。别把冰敷当日常水疗。</p></div>
+      <div class="sup"><h4>🧘 拉伸时机</h4><p><b style="color:var(--green)">动态练前、静态练后</b><br>训练前做静态拉伸会泄力；训练后静态拉伸放松。顺序别搞反。</p></div>
+      <div class="sup"><h4>🪨 泡沫轴 / 筋膜放松</h4><p><b style="color:var(--green)">滚大肌群 10min</b><br>大腿前后、臀部、背阔肌。比不滚强，但别指望它替代睡觉。</p></div>
+      <div class="sup"><h4>📈 疲劳监控</h4><p><b style="color:var(--green)">晨脉 + 主观疲劳感</b><br>连续几天晨脉偏高、身体发沉，说明负荷过载，该主动降量了。</p></div>
+    </div>
+  </section>
+
+  <!-- 板块 7：一周训练安排（周期化） -->
+  <section class="sec t7" id="tsec7">
+    <div class="sec-head"><span class="sec-num">7</span><h2 class="sec-title">一周训练安排（周期化）</h2></div>
+    <p class="sec-sub">按 准备期 / 竞赛期 给各组项目排一周微周期。先选上方项目，再切阶段。正式计划以教练安排为准，这只是参考骨架。</p>
+    <div class="phase-tabs">
+      <button class="phase-tab on" data-p="prep" onclick="setWeekPhase('prep')">📈 准备期</button>
+      <button class="phase-tab" data-p="comp" onclick="setWeekPhase('comp')">🏁 竞赛期</button>
+    </div>
+    <div class="week" id="weekGrid"></div>
+    <p class="hint" id="weekNote" style="margin-top:12px"></p>
+  </section>
+
+  <!-- 板块 8：技术训练要点 -->
+  <section class="sec t8" id="tsec8">
+    <div class="sec-head"><span class="sec-num">8</span><h2 class="sec-title">技术训练要点</h2></div>
+    <p class="sec-sub">体能是发动机，技术是变速箱。再强的力量，发不出力等于白搭。</p>
+    <div class="group-label t">⚡ 短跨跳</div>
+    <div class="tech" style="margin-bottom:12px"><h4>起跑 / 途中跑 / 跳跃</h4><ul>
+      <li>起跑三要素：听到信号 → 蹬离起跑器 → 第一脚落地，前 10m 是决胜关键</li>
+      <li>途中跑：摆动腿主动前摆下压，前脚掌落在重心投影下方</li>
+      <li>跨栏：栏间步幅节奏固定，摆动腿膝盖领先、折叠过栏</li>
+      <li>跳远踏跳：最后两步自然加速，踏跳脚全脚掌向前上方起跳</li>
+      <li>跳高助跑：弧线助跑，起跳腿蹬伸充分、摆臂带起</li>
+    </ul></div>
+    <div class="group-label t">🏃 中长跑</div>
+    <div class="tech" style="margin-bottom:12px"><h4>配速 / 摆臂 / 冲刺</h4><ul>
+      <li>配速：起步压住、后半程发力，负分段是最高效跑法</li>
+      <li>摆臂：前后摆、肘约 90°，别横摆浪费能量</li>
+      <li>步频步幅：小步快频省能，最后冲刺才拉大步幅</li>
+      <li>呼吸：2 步一吸、2 步一呼，节奏乱则配速崩</li>
+      <li>最后冲刺：前 80% 稳住，把力气留给最后 200m</li>
+    </ul></div>
+    <div class="group-label t">🏋️ 投掷</div>
+    <div class="tech"><h4>出手角度 / 发力顺序 / 鞭打链</h4><ul>
+      <li>出手角度：铅球约 38–42°，标枪更平更低</li>
+      <li>发力顺序：脚下蹬转 → 髋 → 躯干 → 肩 → 手，从下往上传导</li>
+      <li>旋转 / 滑步：先慢后快，出手瞬间才是最快</li>
+      <li>鞭打链：手腕最后发力，整条链像甩鞭子</li>
+      <li>下肢为先：投掷靠腿不靠手，力量从地面借上来</li>
+    </ul></div>
+  </section>
+
+  <!-- 板块 9：训练误区 & 伤病预防 -->
+  <section class="sec t9" id="tsec9">
+    <div class="sec-head"><span class="sec-num">9</span><h2 class="sec-title">训练误区 & 伤病预防</h2></div>
+    <p class="sec-sub">纠正认知，比多练一次更重要；预防伤病，比治疗伤病更划算。</p>
+    <div style="margin:6px 0 10px;font-size:14px;font-weight:800;color:var(--accent)">🧠 训练误区</div>
+    <div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"天天练最大速度 = 越快"</b><p>速度靠强度不靠量，组间恢复不足反而越练越慢。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"力量训练会把跑者练笨练慢"</b><p>正确配比的力量让速度更快、伤病更少，不是对手。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"小肌群训练 = 只练小腿"</b><p>核心、踝、髋、腘绳才是重点，小腿只是其中一环。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"中长跑不需要力量训练"</b><p>核心 + 下肢力量帮你省能、防伤，最后冲刺更有力。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"投掷练得越重越好"</b><p>技术 + 爆发力优先，大重量只是原料，出手速度才是产品。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"大强度天天上 = 进步快"</b><p>没有恢复就没有超量恢复，只会越练越废。</p></div></div>
+      <div class="myth"><span class="badge wrong">✗</span><div><b>"恢复 = 躺床上就行"</b><p>主动恢复（慢走 / 游泳）+ 睡眠，效果远好于干躺着。</p></div></div>
+      <div class="myth"><span class="badge right">✓</span><div><b>"组间休息要够"</b><p>速度课、力量课组间歇足 2–3min，别怕"歇太久"——这是训练的一部分。</p></div></div>
+    </div>
+    <div style="margin:16px 0 10px;font-size:14px;font-weight:800;color:var(--accent)">🩹 伤病预防</div>
+    <div class="grid grid-2" style="gap:10px">
+      <div class="sup"><h4>🦵 腘绳肌拉伤</h4><p><b style="color:var(--red)">练北欧弯举 + 离心</b><br>短跑 / 中长跑高发。每周 1–2 次北欧弯举，充分热身，疲劳态别冲大速度。</p></div>
+      <div class="sup"><h4>🦶 踝扭伤</h4><p><b style="color:var(--red)">踝泵 + 单腿平衡 + 落地技术</b><br>弹力带踝内外翻、闭眼单腿站，落地收紧踝关节，疲劳时别乱跳。</p></div>
+      <div class="sup"><h4>🦴 膝盖疼痛</h4><p><b style="color:var(--red)">股四头肌离心 + 力量渐进</b><br>保加利亚分腿蹲、靠墙静蹲；每周负荷别猛加（+10% 以内）。</p></div>
+      <div class="sup"><h4>🗼 下背不适</h4><p><b style="color:var(--red)">核心稳定 + 硬拉技术</b><br>深蹲硬拉全程收核心，重量一点点加，腰疼马上停。</p></div>
+      <div class="sup"><h4>🦴 应力性骨折</h4><p><b style="color:var(--red)">负荷渐进 + 疼痛即停</b><br>跑量每周增加不超过 10%，骨痛是警告信号，别硬扛。</p></div>
+      <div class="sup"><h4>🏃 跑者膝</h4><p><b style="color:var(--red)">臀中肌激活 + 髂胫束放松</b><br>弹力带髋外展、泡沫轴滚大腿外侧，改善跑姿。</p></div>
+    </div>
+  </section>
+
+  <!-- 板块 10：训练 × 饮食联动 -->
+  <section class="sec t10" id="tsec10">
+    <div class="sec-head"><span class="sec-num">10</span><h2 class="sec-title">训练 × 饮食联动</h2></div>
+    <p class="sec-sub">训练方案定下来，怎么吃就是配套工程。点按钮直接跳到饮食板块对应位置。</p>
+    <div class="grid grid-2" style="gap:10px">
+      <div class="linkcard"><b>⚡ 高强度速度 / 速耐课</b><p>练前 1–2h 补碳水、练后 30min 蛋白 + 碳水，供能恢复两不误。</p><button onclick="goDiet('sec5')">去「分时段」规则 →</button></div>
+      <div class="linkcard"><b>🏋️ 力量课</b><p>练后 30–60min 蛋白窗口，肌肉合成峰值，肌酸可作为辅助。</p><button onclick="goDiet('sec6')">去「目标食谱」增肌餐 →</button></div>
+      <div class="linkcard"><b>🏃 耐力课（&gt;60min）</b><p>跑后补碳水 + 电解质，长距离人群注意补铁防贫血。</p><button onclick="goDiet('sec5')">去「分时段」补给 →</button></div>
+      <div class="linkcard"><b>🏁 赛前</b><p>赛前 3 天逐步加碳水、比赛日饮食清淡，肠道也是赛场的一部分。</p><button onclick="goDiet('sec5')">去「分时段」赛前规则 →</button></div>
+      <div class="linkcard"><b>🔥 减脂期训练</b><p>蛋白只增不减、训练前后不断碳——减脂减的是脂肪不是成绩。</p><button onclick="goDiet('sec6')">去「目标食谱」减脂餐 →</button></div>
+      <div class="linkcard"><b>😴 恢复日</b><p>蛋白照吃别断、碳水适量。休息日不是放纵日，肌肉修复全靠它。</p><button onclick="goDiet('sec5')">去「分时段」休息日规则 →</button></div>
+    </div>
+  </section>
+
+  </div><!-- /tabTrain -->
 
   <footer>
-    高校田径队 · 队内饮食指导手册<br>
-    先吃好饭，再谈成绩。
-    <small>营养数据参考《中国食物成分表》· 项目营养参考运动生理学（第6版）· NSCA / ACSM 运动营养指南 · ISSN 运动营养立场声明 · IOC 运动员补剂共识。按每 100g 可食部计算，克重请按实际份量折算。本地页面，无需联网。</small>
+    高校田径队 · 队内训练与饮食指导手册<br>
+    先把饭吃好，把训练练对，再谈成绩。
+    <small>营养数据参考《中国食物成分表》· 项目营养参考运动生理学（第6版）· NSCA / ACSM 运动营养指南 · ISSN 运动营养立场声明 · IOC 运动员补剂共识。训练内容参考 田麦久《运动训练学（第二版）》· Bompa《周期化训练理论与方法》· NSCA《体能训练基础理论》· McArdle《运动生理学（第6版）》· Magness《跑步科学》。按每 100g 可食部计算，克重请按实际份量折算。本地页面，无需联网。</small>
   </footer>
 </div>
 
 <!-- 底部餐盘栏 -->
-<div class="trackbar">
+<div class="trackbar" id="trackbar">
   <div class="track-inner">
     <div class="t">今日餐盘 · <span id="tCount">0</span> 样<em>　蛋白 <span id="tP">0</span>/<span id="tGoal">0</span>g · 热量 <span id="tK">0</span> kcal</em></div>
     <div class="pbar"><i id="pFill" style="width:0%"></i><span id="pPct">0%</span></div>
@@ -932,6 +1205,32 @@ html.landscape-rotated{transform:rotate(90deg);transform-origin:top left;
 </div>
 
 <script>
+/* ================= file:// 协议检测：部分浏览器安全限制会白屏，给提示 ================= */
+(function(){
+  try{
+    if(location.protocol==='file:'){
+      var d=document.createElement('div');
+      d.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#fff7e0;color:#8a5a00;font:13px/1.6 sans-serif;padding:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer;text-align:center';
+      d.innerHTML='ℹ️ 当前浏览器限制了本地文件，页面可能显示不全。<b style="color:#b02626">请用 Chrome / Edge 浏览器打开本文件</b>，或用右键→打开方式→选择 Chrome / Edge。点此关闭提示。';
+      d.onclick=function(){d.style.display='none'};
+      document.body.appendChild(d);
+    }
+  }catch(e){}
+})();
+/* ================= 全局错误捕获（出错时显示红色提示，不黑屏） ================= */
+window.onerror=function(msg,src,line,col){
+  try{
+    var b=document.getElementById('errbar');
+    if(!b){
+      b=document.createElement('div');
+      b.id='errbar';
+      b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#ff5d5d;color:#fff;font:13px/1.6 sans-serif;padding:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,.3)';
+      document.body.appendChild(b);
+    }
+    b.textContent='⚠ 页面脚本出错：'+msg+'（第 '+line+' 行第 '+col+' 列）。请截图这行红字发给管理员；或用 Chrome / Edge 浏览器打开本文件。';
+  }catch(e){}
+  return false;
+};
 /* ================= 常量 ================= */
 const NRV={kcal:2000,p:60,c:300,f:60};
 const EVENTS={sprint:"短跑/跳跃/跨栏（速度爆发组）",endurance:"中长跑/长跑（耐力组）",throw:"投掷（力量组）",low:"低运动量人群（一般活动）"};
@@ -1717,6 +2016,213 @@ updateTrack();
 renderMySelected();
 if(state.plan&&state.plan.meals&&state.plan.meals.length)renderPlan();
 else if(myFoods.length)generateMyPlan();
+
+/* ================= 训练模块 ================= */
+const VENUES=[
+  {id:'', rank:0, name:'📍 全部'},
+  {id:'lim', rank:1, name:'🪑 受限空间'},
+  {id:'body', rank:2, name:'👟 操场+自重'},
+  {id:'field', rank:3, name:'🏟️ 田径场+器械'},
+  {id:'gym', rank:4, name:'🏋️ 器械健身房'}
+];
+const VEN_LBL={1:'🪑 受限',2:'👟 操场',3:'🏟️ 田径场',4:'🏋️ 器械'};
+const DIFFS={1:['🟢 基础','diff-1'],2:['🟡 进阶','diff-2'],3:['🔴 挑战','diff-3'],4:['💀 变态','diff-4']};
+/* 场地层级：受限(1) < 操场自重(2) < 田径场器械(3) < 器械健身房(4)；训练手段 ven=最低场地要求 */
+const TRAIN_SUBS={
+  strength:[['max','最大力量'],['pow','爆发力 · 快速力量'],['core','核心 · 踝髋 · 小肌群'],['end','力量耐力']],
+  speed:[['acc','加速 · 启动'],['top','最大速度'],['rea','反应 · 起跑'],['mid','中长跑冲刺能力'],['throw','投掷出手速度']],
+  speedend:[['hold','保持速度能力'],['mix','混氧 · 乳酸耐受']],
+  endurance:[['base','有氧基础'],['thr','乳酸阈值'],['vo2','VO2max 间歇'],['x','交叉恢复']],
+  flex:[['dyn','动态拉伸 · 神经激活'],['agil','灵敏 · 协调'],['base','基础体能'],['fascia','筋膜放松']]
+};
+/* 某些项目下整类不适用：投掷没有速耐，低运动量只留柔韧体能 */
+const HIDE_Q={throw:['speedend'], low:['strength','speed','speedend','endurance']};
+
+/* —— 训练手段数据（ev=null 表示全部项目适用） —— */
+const TRAININGS=[
+{q:'strength',sub:'max',id:'back-squat',name:'杠铃深蹲',emoji:'🏋️',ven:4,diff:2,ev:null,set:'4–6×3–5',rep:'80–90% 1RM',rest:'2–3min',tip:'最大力量基石。站距同肩，蹲到大腿平行，膝盖和脚尖同向。',inj:'下背收紧别弓腰；蹲不下去别用半程糊弄',diet:'练后 30–60min 补蛋白+碳水',dietTo:'sec5'},
+{q:'strength',sub:'max',id:'deadlift',name:'杠铃硬拉',emoji:'🏋️',ven:4,diff:3,ev:['sprint','throw'],set:'5×3–5',rep:'85–90% 1RM',rest:'2–3min',tip:'后链（腘绳+臀大肌）主力，短跨/投掷爆发的地基。',inj:'每一下都重新收紧；腰别塌',diet:'练后补蛋白',dietTo:'sec5'},
+{q:'strength',sub:'max',id:'bench-press',name:'卧推',emoji:'🏋️',ven:4,diff:2,ev:['throw','sprint'],set:'5×4–6',rep:'80–85%',rest:'2min',tip:'上肢推力，投掷出手相关。',inj:'肩胛收拢别耸肩',diet:'练后补蛋白',dietTo:'sec5'},
+{q:'strength',sub:'max',id:'front-squat',name:'前蹲',emoji:'🏋️',ven:4,diff:3,ev:['sprint','throw'],set:'4×3–5',rep:'80–85%',rest:'2–3min',tip:'躯干更直立，更贴起跑蹬伸和投掷发力。',inj:'手腕不舒服可用交叉握法'},
+{q:'strength',sub:'max',id:'pistol',name:'手枪蹲（单腿深蹲）',emoji:'🦵',ven:1,diff:3,ev:null,set:'3×5/腿',rep:'自重',rest:'60–90s',tip:'无器械单腿力量。蹲起不晃，才谈得上爆发。',inj:'膝盖有旧伤先退阶成椅子蹲'},
+{q:'strength',sub:'max',id:'lunge',name:'弓步蹲（徒手→负重）',emoji:'🚶',ven:1,diff:1,ev:null,set:'3×10/腿',rep:'自重或轻负重',rest:'60s',tip:'受限空间也能练的下肢力量入门。',inj:'前膝别超过脚尖'},
+{q:'strength',sub:'pow',id:'clean',name:'高翻',emoji:'🏋️',ven:4,diff:4,ev:['sprint','throw'],set:'5×3',rep:'75–85% 冲爆发',rest:'2–3min',tip:'下肢爆发传导到全身的标杆动作。先磨技术再用大重量。',inj:'全程锁核心，先小重量磨动作',diet:'练前 1–2h 补碳水',dietTo:'sec5'},
+{q:'strength',sub:'pow',id:'snatchpull',name:'悬垂抓举 / 高抓',emoji:'🏋️',ven:4,diff:4,ev:['throw'],set:'5×3',rep:'75–85%',rest:'2–3min',tip:'髋部爆发三要素最直接的训练，投掷专项。',inj:'技术不熟别加重量'},
+{q:'strength',sub:'pow',id:'medball',name:'实心球前抛 / 后抛',emoji:'🏀',ven:3,diff:1,ev:['throw','sprint'],set:'4×6',rep:'全力',rest:'60s',tip:'投掷出手速度的核心手段：后抛练伸髋，前抛练胸肩。',diet:'练前垫口碳水',dietTo:'sec5'},
+{q:'strength',sub:'pow',id:'depthjump',name:'跳深（深度跳跃）',emoji:'🦘',ven:3,diff:3,ev:['sprint'],set:'4×5',rep:'30–40cm 跳箱跳下即弹',rest:'90s',tip:'落地即弹的反向力量，短跑专属的弹性训练。',inj:'落地下蹲角度别太大'},
+{q:'strength',sub:'pow',id:'boxjump',name:'跳箱',emoji:'📦',ven:3,diff:1,ev:null,set:'4×6',rep:'轻快跳上',rest:'60s',tip:'下肢爆发入门，安全上限高。',inj:'落点站稳别跳摔'},
+{q:'strength',sub:'pow',id:'standingjump',name:'立定跳 / 连续蛙跳',emoji:'🦵',ven:2,diff:2,ev:['sprint'],set:'3×5',rep:'全力',rest:'90s',tip:'远度 = 下肢爆发 + 技术，短跨跳专项基础。'},
+{q:'strength',sub:'core',id:'plank',name:'平板支撑 / 侧桥',emoji:'🧘',ven:1,diff:1,ev:null,set:'3×45–60s',rep:'静态',rest:'30s',tip:'核心稳定地基，所有项目都要。',inj:'塌腰马上停，别硬撑'},
+{q:'strength',sub:'core',id:'hipbridge',name:'臀桥 / 单腿臀桥',emoji:'🍑',ven:1,diff:1,ev:null,set:'3×12–15',rep:'自重',rest:'45s',tip:'激活臀大肌，改善跑步蹬伸无力。'},
+{q:'strength',sub:'core',id:'hangleg',name:'悬垂举腿 / 龙旗',emoji:'🤸',ven:3,diff:2,ev:null,set:'3×10–15',rep:'自重',rest:'60s',tip:'下腹 + 髋屈肌，跑动、跨栏都受益。'},
+{q:'strength',sub:'core',id:'calfraise',name:'提踵 / 台阶踝泵',emoji:'🦶',ven:1,diff:1,ev:null,set:'4×20',rep:'自重',rest:'30s',tip:'踝关节和小腿肌群，落地稳、跟腱健康。'},
+{q:'strength',sub:'core',id:'nordic',name:'北欧弯举（腘绳肌离心）',emoji:'🧎',ven:3,diff:3,ev:['sprint','endurance'],set:'3×5–6',rep:'离心为主',rest:'90s',tip:'防腘绳肌拉伤的王牌动作，短跑和中长跑都要。',inj:'先从徒手后仰开始'},
+{q:'strength',sub:'core',id:'ankleband',name:'弹力带踝内外翻',emoji:'🦶',ven:1,diff:1,ev:null,set:'3×15/方向',rep:'轻阻力',rest:'30s',tip:'踝周小肌群，防崴脚、落地稳。',inj:'动作慢，别甩'},
+{q:'strength',sub:'end',id:'farmer',name:'农夫行走',emoji:'🧳',ven:3,diff:1,ev:['throw'],set:'4×30m',rep:'适中负重',rest:'60s',tip:'握力 + 躯干稳定，投掷有用。'},
+{q:'strength',sub:'end',id:'pushup',name:'俯卧撑 / 折刀俯卧撑',emoji:'💪',ven:1,diff:1,ev:null,set:'3×15–20',rep:'自重',rest:'45s',tip:'上肢 + 核心自重力量，受限空间也能练。'},
+{q:'speed',sub:'acc',id:'crouch',name:'蹲踞式起跑 30m',emoji:'🏁',ven:2,diff:2,ev:['sprint'],set:'6×30m',rep:'全力加速',rest:'2–3min',tip:'反应 + 加速起跑一体，短跑第一课。',inj:'起跑器调好再压',diet:'练前 1–2h 补碳水',dietTo:'sec5'},
+{q:'speed',sub:'acc',id:'fly',name:'行进间加速 20–40m',emoji:'🏃',ven:2,diff:2,ev:['sprint'],set:'5×40m',rep:'85–95%',rest:'2min',tip:'跑中加速，练步频步幅衔接。'},
+{q:'speed',sub:'acc',id:'hill',name:'上坡 / 下坡跑',emoji:'⛰️',ven:2,diff:3,ev:['sprint'],set:'6×30–60m',rep:'全力上坡 / 控制下坡',rest:'2min',tip:'上坡练力量输出，下坡练步频。'},
+{q:'speed',sub:'acc',id:'resist',name:'阻力跑（弹力带 / 拖拽）',emoji:'🎗️',ven:2,diff:2,ev:['sprint'],set:'5×20m',rep:'90%',rest:'2min',tip:'抗阻加速，末端冲刺推出去。'},
+{q:'speed',sub:'top',id:'maxv',name:'最大速度跑 60–80m',emoji:'⚡',ven:2,diff:3,ev:['sprint'],set:'4×70m',rep:'95%+，别顶满',rest:'3–4min',tip:'跑到身体自然减速点为止，多跑无益。',inj:'疲劳就跑不动了，宁少毋烂'},
+{q:'speed',sub:'rea',id:'reac',name:'反应起跑（听信号）',emoji:'🔊',ven:2,diff:2,ev:['sprint'],set:'8×10m',rep:'全力',rest:'90s',tip:'起跑反应，练注意力 + 第一脚。'},
+{q:'speed',sub:'rea',id:'spring',name:'弹簧步 / 弹跳跑',emoji:'🦘',ven:1,diff:1,ev:null,set:'3×30m',rep:'轻快弹性',rest:'60s',tip:'落地弹性热身，跑前激活。'},
+{q:'speed',sub:'mid',id:'midspurt',name:'快速节奏跑 150–300m',emoji:'🏃',ven:2,diff:2,ev:['endurance'],set:'4×200m',rep:'85–90%',rest:'3min',tip:'中长跑冲刺能力——800/1500 最后 200m 就靠它。',diet:'练前补碳水',dietTo:'sec5'},
+{q:'speed',sub:'throw',id:'medthrow',name:'实心球快甩 / 胸前平抛',emoji:'🏀',ven:3,diff:2,ev:['throw'],set:'4×8',rep:'越快越好',rest:'60s',tip:'上肢出手速度，推掷类专项。'},
+{q:'speed',sub:'throw',id:'pushpress',name:'借力推 / 快挺',emoji:'🏋️',ven:4,diff:3,ev:['throw'],set:'4×5',rep:'70–80% 快推',rest:'2min',tip:'下肢力量转上肢出手，投掷链条核心。',inj:'杠铃过头先稳核心'},
+{q:'speedend',sub:'hold',id:'se150',name:'150–300m 高强度跑',emoji:'🏟️',ven:2,diff:3,ev:['sprint'],set:'4×250m',rep:'85–90%',rest:'3–5min',tip:'保持速度能力，短跑后程不掉速。',inj:'量别加太快，酸是正常的',diet:'练后 30min 补蛋白',dietTo:'sec5'},
+{q:'speedend',sub:'hold',id:'se10x30',name:'10×30m 短间歇冲刺',emoji:'⚡',ven:2,diff:3,ev:['sprint'],set:'10×30m',rep:'全力',rest:'60–90s',tip:'乳酸堆积下保持技术，练神经抗疲劳。'},
+{q:'speedend',sub:'hold',id:'se200x6',name:'200m×6 递减间歇',emoji:'🥵',ven:2,diff:4,ev:['sprint'],set:'6×200m',rep:'约 85%',rest:'5–6min',tip:'赛前阶段的"变态"课，量力而行。',inj:'状态差就减组，别硬顶'},
+{q:'speedend',sub:'mix',id:'se400',name:'400m 重复跑',emoji:'🏃',ven:2,diff:2,ev:['endurance'],set:'5×400m',rep:'目标赛速±5%',rest:'3–4min',tip:'中长跑乳酸耐受 + 速度保持。',diet:'练后补蛋白碳水',dietTo:'sec5'},
+{q:'speedend',sub:'mix',id:'mixrun',name:'混氧组合 400+300+200+100',emoji:'🌪️',ven:2,diff:3,ev:['endurance'],set:'3 组',rep:'递减距离、递增强度',rest:'组间 5min',tip:'混氧能力，800/1500 最贴近实战。'},
+{q:'speedend',sub:'mix',id:'fartlek-speed',name:'变速跑（快 200m / 慢 200m）',emoji:'🎢',ven:2,diff:2,ev:['endurance'],set:'8–10 次',rep:'快慢交替',rest:'快走恢复',tip:'练身体从乳酸中恢复的能力。'},
+{q:'endurance',sub:'base',id:'longrun',name:'长距离慢跑 30–60min',emoji:'🌅',ven:2,diff:1,ev:['endurance'],set:'1 次',rep:'轻松（能说话）',rest:'—',tip:'有氧地基，一周 2–3 次。',inj:'别天天加量',diet:'跑后补碳水',dietTo:'sec5'},
+{q:'endurance',sub:'base',id:'easyrun',name:'轻松基础跑 20–25min',emoji:'🌿',ven:2,diff:1,ev:['sprint','throw'],set:'20–25min',rep:'很轻松',rest:'—',tip:'短跨/投掷的供能基础，别跑成马拉松。'},
+{q:'endurance',sub:'thr',id:'threshold',name:'阈值跑 20–30min',emoji:'📈',ven:2,diff:2,ev:['endurance'],set:'20–30min',rep:'乳酸阈值配速',rest:'—',tip:'提"乳酸清除"能力，成绩提升主力。'},
+{q:'endurance',sub:'vo2',id:'vo2',name:'5×800m / 6×3min 间歇',emoji:'🔥',ven:2,diff:3,ev:['endurance'],set:'5×800m',rep:'VO2max 区间',rest:'2–3min',tip:'冲摄氧上限，赛前阶段用。'},
+{q:'endurance',sub:'vo2',id:'fartlek',name:'法特莱克（随意变速）',emoji:'🎢',ven:2,diff:2,ev:['endurance'],set:'40min',rep:'灵活变速',rest:'按感觉',tip:'灵活度高的变速跑，体能 + 趣味。'},
+{q:'endurance',sub:'x',id:'cross',name:'游泳 / 单车交叉',emoji:'🏊',ven:2,diff:1,ev:null,set:'20–40min',rep:'中低强度',rest:'—',tip:'低冲击有氧，恢复日可用。'},
+{q:'flex',sub:'dyn',id:'dyn',name:'动态拉伸热身 10–15min',emoji:'🤸',ven:1,diff:1,ev:null,set:'15min',rep:'高抬腿/踢腿/弓步转体/摆髋',rest:'—',tip:'训练前必做，激活关节和肌肉。',diet:'晨训先垫两口碳水',dietTo:'sec5'},
+{q:'flex',sub:'dyn',id:'activate',name:'神经激活（原地高频 / 踝弹跳）',emoji:'⚡',ven:1,diff:1,ev:null,set:'2×20s×3',rep:'越快越好',rest:'30s',tip:'唤醒快肌纤维，起跑前、力量前做。'},
+{q:'flex',sub:'agil',id:'ladder',name:'绳梯步法',emoji:'🪜',ven:1,diff:1,ev:['sprint'],set:'8–10 组',rep:'不同步法',rest:'30s',tip:'步频 + 协调，短跨跳节奏感。'},
+{q:'flex',sub:'agil',id:'hurdle-swing',name:'跨栏架摆腿 / 跨越',emoji:'🏃',ven:3,diff:2,ev:['sprint'],set:'3×10/腿',rep:'控制幅度',rest:'60s',tip:'髋关节活动度 + 跨栏技术关联。'},
+{q:'flex',sub:'agil',id:'agility',name:'折返跑 / 变向敏捷',emoji:'🔀',ven:2,diff:2,ev:['sprint','throw'],set:'4×3 方向',rep:'快速变向',rest:'60s',tip:'急停变向，落地稳、防扭伤。'},
+{q:'flex',sub:'base',id:'burpee',name:'波比跳',emoji:'🥵',ven:1,diff:2,ev:null,set:'3×10–15',rep:'全力',rest:'60s',tip:'全身基础体能，开课或收尾。'},
+{q:'flex',sub:'base',id:'bandabd',name:'弹力带髋外展（臀中肌激活）',emoji:'🎗️',ven:1,diff:1,ev:null,set:'3×15/侧',rep:'轻阻力',rest:'30s',tip:'激活臀中肌，防跑步膝、踝外翻。'},
+{q:'flex',sub:'fascia',id:'foam',name:'泡沫轴放松',emoji:'🪨',ven:1,diff:1,ev:null,set:'10min',rep:'大腿/臀/背',rest:'—',tip:'训练后滚大肌群，比不滚强。'},
+{q:'flex',sub:'fascia',id:'static',name:'静态拉伸（训练后）',emoji:'🧘',ven:1,diff:1,ev:null,set:'10min',rep:'每部位 20–30s',rest:'—',tip:'练后静态拉伸放松，别在训练前做（会泄力）。'}
+];
+
+/* —— 一周训练安排（周期化微周期） —— */
+const WEEKS={
+sprint:{
+ prep:{label:'📈 准备期 · 打地基',note:'准备期 = 量大、强度适中：先把力量基础、技术、弹性磨出来，别急着上最大速度。',
+  days:[['周一','技术 + 起跑','起跑反应 + 蹲踞式 30m×6 + 途中跑技术'],['周二','最大力量','深蹲 6×3–5 · 硬拉 5×3 · 卧推'],['周三','恢复日','主动恢复 20–30min + 拉伸，低强度'],['周四','速耐','150–300m 高强度 ×4–6，充分间歇'],['周五','爆发力 + 速度','高翻 / 跳深 + 行进加速 40m×5'],['周六','核心 + 小肌群 + 技术','核心 15min + 踝髋小肌群 + 栏间/踏跳技术'],['周日','完全休息','睡够，拉伸放松']]},
+ comp:{label:'🏁 竞赛期 · 保强度降量',note:'竞赛期 = 降量不减强度：赛前 1–2 周开始减量，赛前 3 天碳水储备。',
+  days:[['周一','起跑 + 最大速度','反应起跑 + 60–70m 最大速度 ×4'],['周二','力量保持','中低强度力量（80% 以下），动作不变形'],['周三','恢复','主动恢复 + 泡沫轴'],['周四','速耐维持','200m×4–6，强度保持别冲'],['周五','赛前微调','技术 + 起跑反应，短而快，不疲劳'],['周六','休息 / 轻度','散步 + 拉伸'],['周日','比赛','预赛 + 决赛，按赛前饮食方案']]}
+},
+endurance:{
+ prep:{label:'📈 准备期 · 打地基',note:'准备期 = 有氧量优先：先把有氧地基铺厚，再上阈值和间歇。',
+  days:[['周一','有氧基础','30–45min 轻松跑（能说话）'],['周二','阈值跑','20–30min 乳酸阈值配速'],['周三','恢复','主动恢复 20min + 拉伸'],['周四','间歇','5×800m / 混氧组合，充分间歇'],['周五','有氧','25min 轻松跑 + 技术'],['周六','长距离','60–90min 慢跑，控制配速'],['周日','休息','完全恢复']]},
+ comp:{label:'🏁 竞赛期 · 保强度降量',note:'竞赛期 = 减量不减强度：赛前一周阈值/间歇减量，赛前 3 天碳水储备。',
+  days:[['周一','阈值（短）','15–20min 阈值配速'],['周二','速度保持','200m×4 快跑，练冲刺能力'],['周三','恢复','轻松 20min + 拉伸'],['周四','间歇（短而强）','4×600m / 300m×6'],['周五','配速跑','40min，感受比赛配速'],['周六','休息','碳水储备日'],['周日','比赛','按赛前饮食方案']]}
+},
+throw:{
+ prep:{label:'📈 准备期 · 打地基',note:'准备期 = 大重量为主：先把最大力量堆起来，技术贯穿始终。',
+  days:[['周一','最大力量','卧推 5×4 · 深蹲 5×3 · 硬拉'],['周二','技术 + 爆发','滑步/旋转技术 + 实心球抛掷 + 快挺'],['周三','恢复','主动恢复 + 拉伸'],['周四','力量','深蹲 + 核心 + 上肢辅助'],['周五','出手速度','实心球快甩 + 借力推 + 技术'],['周六','核心 + 小肌群','核心 15min + 握力 + 肩稳定性'],['周日','休息','完全恢复']]},
+ comp:{label:'🏁 竞赛期 · 保强度降量',note:'竞赛期 = 爆发为主、重量为辅：赛前一周只保留中低强度力量保持。',
+  days:[['周一','技术 + 爆发（轻）','技术反复 + 轻重量爆发'],['周二','力量保持','中低强度，保持力量不掉'],['周三','恢复','主动恢复 + 泡沫轴'],['周四','出手速度','快甩 + 快挺，追求速度不追重量'],['周五','技术微调','完整投掷动作，短时高质量'],['周六','休息','恢复日'],['周日','比赛','赛前充分热身后上场']]}
+},
+low:{
+ prep:{label:'📈 基础阶段',note:'低运动量人群：以轻松、愉快、不疲劳为原则，每周 4–5 天即可。',
+  days:[['周一','轻松走 / 慢跑','20–30min 快走或慢跑'],['周二','全身基础','拉伸 + 平板 + 徒手深蹲 ×2 组'],['周三','休息','—'],['周四','慢跑 + 拉伸','20min 慢跑 + 全身拉伸'],['周五','基础力量','弓步 + 俯卧撑 + 臀桥'],['周六','户外活动','散步 / 骑行，愉快为主'],['周日','休息','—']]},
+ comp:{label:'🏁 保持阶段',note:'保持体能的温和阶段，别追求强度。',
+  days:[['周一','轻松走 / 慢跑','20–30min 快走或慢跑'],['周二','全身基础','拉伸 + 平板 + 徒手深蹲 ×2 组'],['周三','休息','—'],['周四','慢跑 + 拉伸','20min 慢跑 + 全身拉伸'],['周五','基础力量','弓步 + 俯卧撑 + 臀桥'],['周六','户外活动','散步 / 骑行，愉快为主'],['周日','休息','—']]}
+}
+};
+
+let activeTab=['diet','train'].includes(store.get('tab','diet'))?store.get('tab','diet'):'diet';
+let trainVenue=parseInt(store.get('trainVenue','0'),10)||0;
+let weekPhase=store.get('weekPhase','prep')==='comp'?'comp':'prep';
+
+/* —— Tab 切换 —— */
+function switchTab(t){
+  activeTab=t; store.set('tab',t);
+  $('tabDiet').style.display=t==='diet'?'':'none';
+  $('tabTrain').style.display=t==='train'?'':'none';
+  $('dietNav').classList.toggle('hide',t!=='diet');
+  $('trainNav').classList.toggle('hide',t!=='train');
+  document.querySelectorAll('.tabbar .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  const tb=$('trackbar'); if(tb)tb.style.display=t==='train'?'none':'';
+  if(t==='train')setTrainEvent(state.event);
+}
+function go(t,anchor){
+  switchTab(t);
+  setTimeout(()=>{const el=$(anchor); if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},40);
+  return false;
+}
+function goDiet(anchor){ go('diet',anchor); }
+
+/* —— 项目 / 场地 / 渲染 —— */
+function setTrainEvent(ev){
+  if(ev!==state.event)setEvent(ev);
+  document.querySelectorAll('.evchip').forEach(c=>c.classList.toggle('sel',c.dataset.ev===state.event));
+  renderTrainings(); renderWeek(); renderTrainHint();
+}
+function renderVenueChips(){
+  $('venueChips').innerHTML=VENUES.map(v=>
+    '<span class="chip'+(trainVenue===v.rank?' on':'')+'" onclick="setVenue('+v.rank+')">'+v.name+'</span>').join('');
+}
+function setVenue(r){
+  trainVenue=r; store.set('trainVenue',String(r));
+  renderVenueChips(); renderTrainings(); renderTrainHint();
+}
+function tmCard(m){
+  const diff=DIFFS[m.diff]||DIFFS[1];
+  const diet=m.diet?'<div class="tm-diet" onclick="goDiet(\''+(m.dietTo||'sec5')+'\')">🍽 '+m.diet+' →</div>':'';
+  const inj=m.inj?'<div class="tm-inj"><b>⚠ 注意</b> '+m.inj+'</div>':'';
+  return '<div class="tm-card">'
+    +'<div class="head"><span class="emoji">'+m.emoji+'</span><b>'+m.name+'</b>'
+    +'<span class="tagline"><span class="diff '+diff[1]+'">'+diff[0]+'</span><span class="ven">'+VEN_LBL[m.ven]+'</span></span></div>'
+    +'<div class="tm-param"><span><b>组×次</b> '+m.set+'</span><span><b>强度</b> '+m.rep+'</span><span><b>间歇</b> '+m.rest+'</span></div>'
+    +'<div class="tm-tip">'+m.tip+'</div>'
+    +inj+diet
+    +'</div>';
+}
+function renderTrainings(){
+  const hidden=HIDE_Q[state.event]||[];
+  const qname={strength:'力量',speed:'速度',speedend:'速耐',endurance:'耐力',flex:'柔韧体能'};
+  Object.keys(TRAIN_SUBS).forEach(q=>{
+    const box=$('tmGrid-'+q); if(!box)return;
+    const sec=box.closest('.sec');
+    if(hidden.includes(q)){ sec.style.display='none'; return; }
+    sec.style.display='';
+    let list=TRAININGS.filter(m=>m.q===q);
+    if(trainVenue)list=list.filter(m=>m.ven<=trainVenue);
+    if(state.event)list=list.filter(m=>m.ev===null||m.ev.includes(state.event));
+    if(!list.length){
+      box.innerHTML='<div class="tm-empty">当前场地 / 项目下没有可练的'+qname[q]+'手段——试试放宽场地条件，或换个项目。</div>';
+      return;
+    }
+    let html='';
+    TRAIN_SUBS[q].forEach(pair=>{
+      const group=list.filter(m=>m.sub===pair[0]).sort((a,b)=>a.diff-b.diff);
+      if(!group.length)return;
+      html+='<div class="group-label t">'+pair[1]+'</div><div class="tm-grid">'+group.map(tmCard).join('')+'</div>';
+    });
+    box.innerHTML=html;
+  });
+}
+function renderTrainHint(){
+  const box=$('trainHint'); if(!box)return;
+  const evName=state.event?EVENTS[state.event]:'未选项目（默认显示全部）';
+  const ven=VENUES.find(v=>v.rank===trainVenue)||VENUES[0];
+  let extra='';
+  if(state.event==='sprint')extra='短跨跳：速度 / 速耐主打，五素质全练。';
+  else if(state.event==='endurance')extra='中长跑：耐力主打，速度类只保留冲刺能力，力量练基础 + 核心。';
+  else if(state.event==='throw')extra='投掷：力量 + 爆发主打，已自动过滤位移速度，只留出手速度。';
+  else if(state.event==='low')extra='低运动量：只展示基础体能 + 恢复，别上强度。';
+  box.innerHTML='已选 <b>'+evName+'</b> · '+ven.name+'　'+extra;
+}
+
+/* —— 一周安排 —— */
+function setWeekPhase(p){ weekPhase=p; store.set('weekPhase',p); renderWeek(); }
+function renderWeek(){
+  document.querySelectorAll('.phase-tab').forEach(b=>b.classList.toggle('on',b.dataset.p===weekPhase));
+  const ev=state.event&&WEEKS[state.event]?state.event:'sprint';
+  const w=WEEKS[ev][weekPhase];
+  $('weekGrid').innerHTML=w.days.map((d,i)=>{
+    const rest=d[1].indexOf('休息')>=0;
+    return '<div class="day'+(rest?' rest':'')+'"><h5>'+d[0]+'<span class="dow">D'+(i+1)+'</span></h5>'
+      +'<div class="r">'+d[1]+'<br><em>'+d[2]+'</em></div></div>';
+  }).join('');
+  $('weekNote').innerHTML='<b style="color:var(--green)">'+w.label+'</b>　'+w.note;
+}
+
+/* ================= 训练模块初始化 ================= */
+renderVenueChips();
+setTrainEvent(state.event);
+switchTab(activeTab);
 </script>
 </body>
 </html>
