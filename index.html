@@ -1041,9 +1041,13 @@ html.landscape-rotated{transform:rotate(90deg);transform-origin:top left;
     </div>
     <div class="tt-row">
       <span class="lbl">🪜 难度</span>
+      <div class="chips" id="diffChips"></div>
+    </div>
+    <div class="tt-row">
+      <span class="lbl">图例</span>
       <div class="legend">
         <i class="lg-d1">基础</i><i class="lg-d2">进阶</i><i class="lg-d3">挑战</i><i class="lg-d4">💀 变态·慎用</i>
-        <small style="color:var(--dim)">场地 = 硬约束，达不到就过滤掉；难度 = 量力而行的标注。</small>
+        <small style="color:var(--dim)">场地 = 硬约束（达不到就过滤掉）；难度 = 想看多难（选"进阶"只显示 基础+进阶，选"变态"显示全部）。</small>
       </div>
     </div>
   </div>
@@ -2027,6 +2031,14 @@ const VENUES=[
 ];
 const VEN_LBL={1:'🪑 受限',2:'👟 操场',3:'🏟️ 田径场',4:'🏋️ 器械'};
 const DIFFS={1:['🟢 基础','diff-1'],2:['🟡 进阶','diff-2'],3:['🔴 挑战','diff-3'],4:['💀 变态','diff-4']};
+/* 难度筛选（层级）：选 r 显示 diff<=r（选"进阶"=基础+进阶，选"变态"=全部） */
+const DIFF_FILTERS=[
+  {id:0, name:'全部'},
+  {id:1, name:'🟢 基础'},
+  {id:2, name:'🟡 进阶'},
+  {id:3, name:'🔴 挑战'},
+  {id:4, name:'💀 变态'}
+];
 /* 场地层级：受限(1) < 操场自重(2) < 田径场器械(3) < 器械健身房(4)；训练手段 ven=最低场地要求 */
 const TRAIN_SUBS={
   strength:[['max','最大力量'],['pow','爆发力 · 快速力量'],['core','核心 · 踝髋 · 小肌群'],['end','力量耐力']],
@@ -2123,6 +2135,7 @@ low:{
 
 let activeTab=['diet','train'].includes(store.get('tab','diet'))?store.get('tab','diet'):'diet';
 let trainVenue=parseInt(store.get('trainVenue','0'),10)||0;
+let trainDiff=parseInt(store.get('trainDiff','0'),10)||0;
 let weekPhase=store.get('weekPhase','prep')==='comp'?'comp':'prep';
 
 /* —— Tab 切换 —— */
@@ -2157,6 +2170,14 @@ function setVenue(r){
   trainVenue=r; store.set('trainVenue',String(r));
   renderVenueChips(); renderTrainings(); renderTrainHint();
 }
+function renderDiffChips(){
+  $('diffChips').innerHTML=DIFF_FILTERS.map(d=>
+    '<span class="chip'+(trainDiff===d.id?' on':'')+'" onclick="setDiff('+d.id+')">'+d.name+'</span>').join('');
+}
+function setDiff(d){
+  trainDiff=d; store.set('trainDiff',String(d));
+  renderDiffChips(); renderTrainings(); renderTrainHint();
+}
 function tmCard(m){
   const diff=DIFFS[m.diff]||DIFFS[1];
   const diet=m.diet?'<div class="tm-diet" onclick="goDiet(\''+(m.dietTo||'sec5')+'\')">🍽 '+m.diet+' →</div>':'';
@@ -2179,9 +2200,10 @@ function renderTrainings(){
     sec.style.display='';
     let list=TRAININGS.filter(m=>m.q===q);
     if(trainVenue)list=list.filter(m=>m.ven<=trainVenue);
+    if(trainDiff)list=list.filter(m=>m.diff<=trainDiff);
     if(state.event)list=list.filter(m=>m.ev===null||m.ev.includes(state.event));
     if(!list.length){
-      box.innerHTML='<div class="tm-empty">当前场地 / 项目下没有可练的'+qname[q]+'手段——试试放宽场地条件，或换个项目。</div>';
+      box.innerHTML='<div class="tm-empty">当前 场地 / 难度 / 项目 下没有可练的'+qname[q]+'手段——试试放宽筛选条件，或换个项目。</div>';
       return;
     }
     let html='';
@@ -2197,12 +2219,13 @@ function renderTrainHint(){
   const box=$('trainHint'); if(!box)return;
   const evName=state.event?EVENTS[state.event]:'未选项目（默认显示全部）';
   const ven=VENUES.find(v=>v.rank===trainVenue)||VENUES[0];
+  const diff=DIFF_FILTERS.find(d=>d.id===trainDiff)||DIFF_FILTERS[0];
   let extra='';
   if(state.event==='sprint')extra='短跨跳：速度 / 速耐主打，五素质全练。';
   else if(state.event==='endurance')extra='中长跑：耐力主打，速度类只保留冲刺能力，力量练基础 + 核心。';
   else if(state.event==='throw')extra='投掷：力量 + 爆发主打，已自动过滤位移速度，只留出手速度。';
   else if(state.event==='low')extra='低运动量：只展示基础体能 + 恢复，别上强度。';
-  box.innerHTML='已选 <b>'+evName+'</b> · '+ven.name+'　'+extra;
+  box.innerHTML='已选 <b>'+evName+'</b> · '+ven.name+' · 难度 '+diff.name+'　'+extra;
 }
 
 /* —— 一周安排 —— */
@@ -2221,6 +2244,7 @@ function renderWeek(){
 
 /* ================= 训练模块初始化 ================= */
 renderVenueChips();
+renderDiffChips();
 setTrainEvent(state.event);
 switchTab(activeTab);
 </script>
