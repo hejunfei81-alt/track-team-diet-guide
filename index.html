@@ -437,9 +437,55 @@ footer small{display:block;margin-top:6px;color:#6b7484}
 @media (orientation:landscape) and (min-width:901px){
   .container{max-width:1100px}
 }
+
+/* ---------- 手机横屏引导遮罩 ---------- */
+.rotate-mask{
+  position:fixed;inset:0;z-index:999;
+  background:var(--bg);
+  display:none;align-items:center;justify-content:center;
+  flex-direction:column;padding:30px;text-align:center;
+}
+.rotate-mask.show{display:flex}
+.rotate-inner{max-width:340px}
+.rotate-phone{
+  position:relative;width:120px;height:70px;margin:0 auto 26px;
+  border:3px solid var(--accent);border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  animation:rotate-hint 1.4s ease-in-out infinite;
+}
+.rotate-phone span{font-size:34px}
+.rotate-phone i{
+  position:absolute;right:-3px;top:-3px;bottom:-3px;width:26px;
+  border:3px solid var(--accent);border-left:none;border-radius:0 14px 14px 0;
+}
+@keyframes rotate-hint{
+  0%,100%{transform:rotate(0deg)}
+  50%{transform:rotate(90deg)}
+}
+.rotate-title{font-size:20px;font-weight:900;color:var(--text);margin-bottom:10px}
+.rotate-sub{color:var(--dim);font-size:14px;line-height:1.6;margin-bottom:26px}
+.rotate-btn{
+  background:transparent;border:1px solid var(--border);color:var(--dim);
+  border-radius:999px;padding:8px 18px;font-size:13px;cursor:pointer;
+}
+.rotate-btn:hover{color:var(--text);border-color:var(--accent)}
+
+/* 强制横屏兑底：旋转90°显示 */
+html.landscape-rotated{transform:rotate(90deg);transform-origin:top left;
+  width:100vh;height:100vw;position:fixed;top:0;left:0;overflow:auto;}
 </style>
 </head>
 <body>
+
+<!-- 手机横屏引导遮罩（仅小屏竖屏显示） -->
+<div class="rotate-mask" id="rotateMask">
+  <div class="rotate-inner">
+    <div class="rotate-phone"><span>📱</span><i></i></div>
+    <p class="rotate-title">请将手机横过来</p>
+    <p class="rotate-sub">本页面为横屏优化设计，横过来浏览体验最佳</p>
+    <button class="rotate-btn" onclick="forceLandscape()">我没法旋转 · 点此继续</button>
+  </div>
+</div>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -1618,6 +1664,33 @@ function saveMealEdit(i){
   renderPlan();
   closeModal();
 }
+/* ================= 手机强制横屏 ================= */
+function isPortraitMobile(){
+  /* 仅手机小屏竖屏触发（竖屏宽≤600，如 375/414/430）；平板/桌面不干扰 */
+  return window.innerWidth<=600 && window.innerHeight>window.innerWidth;
+}
+function refreshRotateMask(){
+  const mask=$('rotateMask');
+  if(!mask)return;
+  if(isPortraitMobile()){
+    mask.classList.add('show');
+    document.body.style.overflow='hidden';
+  }else{
+    mask.classList.remove('show');
+    document.body.style.overflow='';
+  }
+}
+function forceLandscape(){
+  /* 兑底：CSS 旋转 90°，竖屏也能看横版 */
+  document.documentElement.classList.add('landscape-rotated');
+  const mask=$('rotateMask');
+  if(mask)mask.classList.remove('show');
+  document.body.style.overflow='';
+}
+/* 监听旋转/尺寸变化 */
+window.addEventListener('resize',refreshRotateMask);
+window.addEventListener('orientationchange',()=>setTimeout(refreshRotateMask,200));
+
 /* ================= 主题切换 ================= */
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
@@ -1632,6 +1705,7 @@ function toggleTheme(){
 
 /* ================= 初始化 ================= */
 applyTheme(store.get('theme','dark'));
+refreshRotateMask();
 renderChips();
 setEvent(state.event);
 setSex(state.sex);
