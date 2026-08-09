@@ -21,6 +21,31 @@
   --yellow:#f0c04c; --yellow-bg:rgba(240,192,76,.07);
   --red:#ff5d5d;    --red-bg:rgba(255,93,93,.08);
   --radius:14px;
+  --nav-bg:rgba(10,12,16,.92);
+  --track-bg:rgba(12,14,19,.94);
+  --overlay-bg:rgba(4,6,9,.7);
+  --hero-grad:rgba(255,106,26,.15);
+  --nrv-val:#fff;
+}
+/* 白日模式（浅色主题）——切换后覆盖上方变量 */
+html[data-theme="light"]{
+  --bg:#f4f6fa;
+  --card:#ffffff;
+  --card2:#eef1f6;
+  --border:#d5dbe5;
+  --text:#1a2130;
+  --dim:#5c6a80;
+  --accent:#e05e12;
+  --accent2:#e8920c;
+  --cyan:#0ea98f;
+  --green:#1ba55d;  --green-bg:rgba(27,165,93,.08);
+  --yellow:#c8860a; --yellow-bg:rgba(200,134,10,.08);
+  --red:#e04343;    --red-bg:rgba(224,67,67,.08);
+  --nav-bg:rgba(255,255,255,.94);
+  --track-bg:rgba(255,255,255,.96);
+  --overlay-bg:rgba(20,26,38,.45);
+  --hero-grad:rgba(224,94,18,.10);
+  --nrv-val:#1a2130;
 }
 html{scroll-behavior:smooth}
 body{
@@ -30,7 +55,7 @@ body{
 }
 
 /* ---------- 顶部导航 ---------- */
-.nav{position:sticky;top:0;z-index:100;background:rgba(10,12,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
 .nav-inner{max-width:1040px;margin:0 auto;padding:9px 14px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
 .nav-inner::-webkit-scrollbar{display:none}
 .nav a{flex-shrink:0;padding:4px 13px;border:1px solid var(--border);border-radius:999px;color:var(--dim);font-size:12.5px;text-decoration:none;transition:.2s}
@@ -42,11 +67,11 @@ body{
 .hero{
   position:relative;overflow:hidden;padding:46px 0 32px;
   background:
-    radial-gradient(900px 300px at 15% -80px, rgba(255,106,26,.15), transparent 60%),
+    radial-gradient(900px 300px at 15% -80px, var(--hero-grad), transparent 60%),
     radial-gradient(700px 260px at 90% -60px, rgba(42,214,195,.08), transparent 60%);
 }
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:14px;opacity:.8;background:repeating-linear-gradient(45deg, rgba(255,106,26,.35) 0 18px, transparent 18px 36px);-webkit-mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);mask:linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent)}
-.hero h1{font-size:clamp(30px,6vw,46px);font-weight:900;letter-spacing:.5px;line-height:1.15;background:linear-gradient(90deg,#fff 30%,var(--accent) 70%,var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1{font-size:clamp(30px,6vw,46px);font-weight:900;letter-spacing:.5px;line-height:1.15;background:linear-gradient(90deg,var(--text) 30%,var(--accent) 70%,var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero .tag{margin-top:14px;display:inline-block;color:#0a0c10;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:900;font-size:13.5px;padding:4px 12px;border-radius:6px;letter-spacing:1px}
 .hero .meta{margin-top:10px;color:var(--dim);font-size:13px}
 
@@ -312,7 +337,7 @@ footer{text-align:center;color:var(--dim);font-size:12.5px;padding:24px 0 10px;b
 footer small{display:block;margin-top:6px;color:#6b7484}
 
 /* ---------- 底部打卡栏 ---------- */
-.trackbar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:rgba(12,14,19,.94);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
+.trackbar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:var(--track-bg);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:9px 16px calc(9px + env(safe-area-inset-bottom))}
 .track-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .track-inner .t{font-size:13px;font-weight:800}
 .track-inner .t span{color:var(--green)}
@@ -324,7 +349,7 @@ footer small{display:block;margin-top:6px;color:#6b7484}
 .track-inner button:hover{color:#fff;border-color:var(--dim)}
 
 /* ---------- 弹窗 ---------- */
-.overlay{position:fixed;inset:0;z-index:200;background:rgba(4,6,9,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.overlay{position:fixed;inset:0;z-index:200;background:var(--overlay-bg);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
 .overlay.show{display:flex}
 .modal{width:100%;max-width:480px;max-height:86vh;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 20px;position:relative;animation:pop .22s ease}
 @keyframes pop{from{transform:translateY(14px) scale(.98);opacity:0}to{transform:none;opacity:1}}
@@ -342,7 +367,7 @@ footer small{display:block;margin-top:6px;color:#6b7484}
 .nrv-row .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
 .nrv-row .top b{font-size:14px}
 .nrv-row .top i{font-style:normal;color:var(--dim)}
-.nrv-row .top i em{color:#fff;font-style:normal;font-weight:800;font-size:13px}
+.nrv-row .top i em{color:var(--nrv-val);font-style:normal;font-weight:800;font-size:13px}
 .nrv-bar{height:7px;background:var(--border);border-radius:99px;overflow:hidden}
 .nrv-bar i{display:block;height:100%;border-radius:99px;width:0;transition:width .5s ease}
 .c-energy i{background:var(--accent)}
@@ -387,6 +412,31 @@ footer small{display:block;margin-top:6px;color:#6b7484}
   background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);outline:none;
 }
 .p-stepper input:focus{border-color:var(--accent)}
+
+/* ---------- 主题切换按钮 ---------- */
+.theme-btn{
+  flex-shrink:0;margin-left:auto;padding:4px 12px;border-radius:999px;
+  border:1px solid var(--border);background:var(--card2);color:var(--dim);
+  font-size:12.5px;cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.theme-btn:hover{color:var(--text);border-color:var(--accent)}
+
+/* ---------- 横屏优化 ----------
+   手机横屏（宽>高但仍是小屏）：四张项目卡 2×2，食物卡 2 列，弹窗加宽 */
+@media (orientation:landscape) and (max-width:900px){
+  .container{max-width:none;padding:22px 20px 44px}
+  .sec{padding:24px 22px}
+  .ev-grid{grid-template-columns:repeat(2,1fr)}
+  .food-grid{grid-template-columns:repeat(2,1fr)}
+  .modal{max-width:560px;max-height:82vh}
+  .nav-inner{padding:9px 16px}
+  .sec-sub{margin-left:46px}
+  .p-row .seg{margin-left:0}
+}
+/* 平板/更大横屏：保持桌面多列 */
+@media (orientation:landscape) and (min-width:901px){
+  .container{max-width:1100px}
+}
 </style>
 </head>
 <body>
@@ -402,6 +452,7 @@ footer small{display:block;margin-top:6px;color:#6b7484}
     <a href="#sec7">消炎恢复</a>
     <a href="#sec8">补剂</a>
     <a href="#sec9">误区</a>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☀️ 白日模式</button>
   </div>
 </nav>
 
@@ -1567,7 +1618,20 @@ function saveMealEdit(i){
   renderPlan();
   closeModal();
 }
+/* ================= 主题切换 ================= */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  const btn=$('themeBtn');
+  if(btn)btn.textContent=t==='light'?'🌙 夜间模式':'☀️ 白日模式';
+  store.set('theme',t);
+}
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme')||'dark';
+  applyTheme(cur==='light'?'dark':'light');
+}
+
 /* ================= 初始化 ================= */
+applyTheme(store.get('theme','dark'));
 renderChips();
 setEvent(state.event);
 setSex(state.sex);
