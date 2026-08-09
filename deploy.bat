@@ -28,6 +28,6 @@ if %errorlevel%==0 (
 )
 
 echo.
-echo  🌐 https://hejunfei81-alt.github.io/track-team-diet-guide/
+echo  🌐 https://hejunfei81-alt.github.io/sports-diet/
 echo.
 pause
