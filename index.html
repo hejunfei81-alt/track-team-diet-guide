@@ -2207,22 +2207,32 @@ function setTrainEvent(ev){
   renderTrainings(); renderWeek(); renderTrainHint();
 }
 function renderVenueChips(){
-  $('venueChips').innerHTML=VENUES.map(v=>
-    '<span class="chip'+(trainVenue.includes(v.rank)?' on':'')+'" onclick="toggleVenue('+v.rank+')">'+v.name+'</span>').join('');
+  $('venueChips').innerHTML=VENUES.map(v=>{
+    const on=trainVenue.length===0?(v.rank===0):trainVenue.includes(v.rank);
+    return '<span class="chip'+(on?' on':'')+'" onclick="toggleVenue('+v.rank+')">'+v.name+'</span>';
+  }).join('');
 }
 function toggleVenue(r){
-  const i=trainVenue.indexOf(r);
-  i>=0?trainVenue.splice(i,1):trainVenue.push(r);
+  if(r===0){ trainVenue=[]; }          /* 点"全部"= 清空该维度，显示全部 */
+  else{
+    const i=trainVenue.indexOf(r);
+    i>=0?trainVenue.splice(i,1):trainVenue.push(r);
+  }
   store.set('trainVenue',JSON.stringify(trainVenue));
   renderVenueChips(); renderTrainings(); renderTrainHint();
 }
 function renderDiffChips(){
-  $('diffChips').innerHTML=DIFF_FILTERS.map(d=>
-    '<span class="chip'+(trainDiff.includes(d.id)?' on':'')+'" onclick="toggleDiff('+d.id+')">'+d.name+'</span>').join('');
+  $('diffChips').innerHTML=DIFF_FILTERS.map(d=>{
+    const on=trainDiff.length===0?(d.id===0):trainDiff.includes(d.id);
+    return '<span class="chip'+(on?' on':'')+'" onclick="toggleDiff('+d.id+')">'+d.name+'</span>';
+  }).join('');
 }
 function toggleDiff(d){
-  const i=trainDiff.indexOf(d);
-  i>=0?trainDiff.splice(i,1):trainDiff.push(d);
+  if(d===0){ trainDiff=[]; }          /* 点"全部"= 清空该维度，显示全部 */
+  else{
+    const i=trainDiff.indexOf(d);
+    i>=0?trainDiff.splice(i,1):trainDiff.push(d);
+  }
   store.set('trainDiff',JSON.stringify(trainDiff));
   renderDiffChips(); renderTrainings(); renderTrainHint();
 }
