@@ -2128,8 +2128,8 @@ let weekPhase=store.get('weekPhase','prep')==='comp'?'comp':'prep';
 /* —— Tab 切换 —— */
 function switchTab(t){
   activeTab=t; store.set('tab',t);
-  $('tabDiet').style.display=t==='diet'?'':'none';
-  $('tabTrain').style.display=t==='train'?'':'none';
+  $('tabDiet').classList.toggle('hide',t!=='diet');
+  $('tabTrain').classList.toggle('hide',t!=='train');
   $('dietNav').classList.toggle('hide',t!=='diet');
   $('trainNav').classList.toggle('hide',t!=='train');
   document.querySelectorAll('.tabbar .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
