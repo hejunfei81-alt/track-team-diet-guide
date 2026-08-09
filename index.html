@@ -2134,8 +2134,8 @@ low:{
 };
 
 let activeTab=['diet','train'].includes(store.get('tab','diet'))?store.get('tab','diet'):'diet';
-let trainVenue=parseInt(store.get('trainVenue','0'),10)||0;
-let trainDiff=parseInt(store.get('trainDiff','0'),10)||0;
+let trainVenue=(()=>{try{const v=JSON.parse(store.get('trainVenue','[]'));return Array.isArray(v)?v:[]}catch(e){return []}})();
+let trainDiff=(()=>{try{const v=JSON.parse(store.get('trainDiff','[]'));return Array.isArray(v)?v:[]}catch(e){return []}})();
 let weekPhase=store.get('weekPhase','prep')==='comp'?'comp':'prep';
 
 /* —— Tab 切换 —— */
@@ -2164,18 +2164,22 @@ function setTrainEvent(ev){
 }
 function renderVenueChips(){
   $('venueChips').innerHTML=VENUES.map(v=>
-    '<span class="chip'+(trainVenue===v.rank?' on':'')+'" onclick="setVenue('+v.rank+')">'+v.name+'</span>').join('');
+    '<span class="chip'+(trainVenue.includes(v.rank)?' on':'')+'" onclick="toggleVenue('+v.rank+')">'+v.name+'</span>').join('');
 }
-function setVenue(r){
-  trainVenue=r; store.set('trainVenue',String(r));
+function toggleVenue(r){
+  const i=trainVenue.indexOf(r);
+  i>=0?trainVenue.splice(i,1):trainVenue.push(r);
+  store.set('trainVenue',JSON.stringify(trainVenue));
   renderVenueChips(); renderTrainings(); renderTrainHint();
 }
 function renderDiffChips(){
   $('diffChips').innerHTML=DIFF_FILTERS.map(d=>
-    '<span class="chip'+(trainDiff===d.id?' on':'')+'" onclick="setDiff('+d.id+')">'+d.name+'</span>').join('');
+    '<span class="chip'+(trainDiff.includes(d.id)?' on':'')+'" onclick="toggleDiff('+d.id+')">'+d.name+'</span>').join('');
 }
-function setDiff(d){
-  trainDiff=d; store.set('trainDiff',String(d));
+function toggleDiff(d){
+  const i=trainDiff.indexOf(d);
+  i>=0?trainDiff.splice(i,1):trainDiff.push(d);
+  store.set('trainDiff',JSON.stringify(trainDiff));
   renderDiffChips(); renderTrainings(); renderTrainHint();
 }
 function tmCard(m){
@@ -2199,8 +2203,8 @@ function renderTrainings(){
     if(hidden.includes(q)){ sec.style.display='none'; return; }
     sec.style.display='';
     let list=TRAININGS.filter(m=>m.q===q);
-    if(trainVenue)list=list.filter(m=>m.ven<=trainVenue);
-    if(trainDiff)list=list.filter(m=>m.diff<=trainDiff);
+    if(trainVenue.length)list=list.filter(m=>trainVenue.includes(m.ven));
+    if(trainDiff.length)list=list.filter(m=>trainDiff.includes(m.diff));
     if(state.event)list=list.filter(m=>m.ev===null||m.ev.includes(state.event));
     if(!list.length){
       box.innerHTML='<div class="tm-empty">当前 场地 / 难度 / 项目 下没有可练的'+qname[q]+'手段——试试放宽筛选条件，或换个项目。</div>';
@@ -2218,14 +2222,14 @@ function renderTrainings(){
 function renderTrainHint(){
   const box=$('trainHint'); if(!box)return;
   const evName=state.event?EVENTS[state.event]:'未选项目（默认显示全部）';
-  const ven=VENUES.find(v=>v.rank===trainVenue)||VENUES[0];
-  const diff=DIFF_FILTERS.find(d=>d.id===trainDiff)||DIFF_FILTERS[0];
+  const venTxt=trainVenue.length?VENUES.filter(v=>trainVenue.includes(v.rank)).map(v=>v.name.replace(/^[^\s]+\s/,'')).join('、'):'全部';
+  const diffTxt=trainDiff.length?DIFF_FILTERS.filter(d=>trainDiff.includes(d.id)).map(d=>d.name.replace(/^[^\s]+\s/,'')).join('、'):'全部';
   let extra='';
   if(state.event==='sprint')extra='短跨跳：速度 / 速耐主打，五素质全练。';
   else if(state.event==='endurance')extra='中长跑：耐力主打，速度类只保留冲刺能力，力量练基础 + 核心。';
   else if(state.event==='throw')extra='投掷：力量 + 爆发主打，已自动过滤位移速度，只留出手速度。';
   else if(state.event==='low')extra='低运动量：只展示基础体能 + 恢复，别上强度。';
-  box.innerHTML='已选 <b>'+evName+'</b> · '+ven.name+' · 难度 '+diff.name+'　'+extra;
+  box.innerHTML='已选 <b>'+evName+'</b> · 场地 '+venTxt+' · 难度 '+diffTxt+'　'+extra;
 }
 
 /* —— 一周安排 —— */
