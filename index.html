@@ -1974,7 +1974,9 @@ function toggleTheme(){
 }
 
 /* ================= 初始化 ================= */
-applyTheme(store.get('theme','dark'));
+/* 默认日间模式：清除旧的主题偏好，新访客打开即为日间；点按钮切换后仍会记住 */
+try{localStorage.removeItem('theme')}catch(e){}
+applyTheme(store.get('theme','light'));
 renderChips();
 setEvent(state.event);
 setSex(state.sex);
@@ -2275,7 +2277,7 @@ switchTab(activeTab);
 /* ================= 数据一致性自检（开发期防笔误：改数据后刷新看控制台） ================= */
 function selfCheck(){
   const errs=[];
-  /* 1) 页面所有 openFood('xxx') 引用必须存在于 FOODS */
+  /* 1) 页面所有 openFood(...) 引用必须存在于 FOODS */
   const re=/openFood\('([^']+)'\)/g;let m;const seen={};
   while(m=re.exec(document.body.innerHTML))seen[m[1]]=1;
   Object.keys(seen).forEach(id=>{if(!FOODS.find(f=>f.id===id))errs.push('页面引用了不存在的食物 id: '+id)});
